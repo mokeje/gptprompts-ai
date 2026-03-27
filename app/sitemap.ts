@@ -1,0 +1,265 @@
+import type { MetadataRoute } from "next"
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const baseUrl = "https://gptprompts.ai"
+  const lastModified = new Date()
+
+  // Core pages
+  const corePages = ["", "/careers", "/journal-guide"]
+
+  // AI Model Prompt Pages
+  const aiModelPages = [
+    "/chatgpt-prompts",
+    "/claude-prompts",
+    "/gemini-prompts",
+    "/perplexity-prompts",
+    "/midjourney-prompts",
+    "/stable-diffusion-prompts",
+    "/kimi-ai-prompts",
+  ]
+
+  const advancedAIPages = [
+    "/viggle-ai-prompts",
+    "/gemini-ai-guide",
+    "/janitor-ai-guide",
+    "/google-ai-studio",
+    "/blackbox-ai",
+    "/pixverse-ai",
+    "/hailuo-ai",
+    "/leonardo-ai",
+    "/gamma-ai",
+    "/krea-ai",
+    "/welcome-ai",
+    "/suno-ai",
+  ]
+
+  // Career & Writing Prompt Pages
+  const careerWritingPages = [
+    "/resume-prompts",
+    "/essay-prompts",
+    "/cover-letter-prompts",
+    "/writing-prompts",
+    "/story-prompts",
+  ]
+
+  // Specialized Prompt Pages
+  const specializedPages = ["/image-prompts", "/sql-prompts"]
+
+  // University Admission Pages
+  const universityPages = [
+    "/nyu-essay-prompts",
+    "/uc-essay-prompts",
+    "/stanford-essay-prompts",
+    "/ut-essay-prompts",
+    "/umich-essay-prompts",
+    "/uw-essay-prompts",
+    "/umd-essays",
+    "/uchicago-essays",
+    "/penn-state-essays",
+    "/virginia-tech-essays",
+    "/wisconsin-essays",
+    "/princeton-essays",
+    "/uga-essays",
+    "/common-app-essays",
+    "/scholarship-essays",
+  ]
+
+  // Standardized Test Pages
+  const testPages = ["/ielts-prompts", "/toefl-prompts", "/gmat-prompts", "/gre-prompts", "/sat-prompts"]
+
+  const resourcePages = ["/free-ai-prompts", "/coolest-chatgpt-prompts", "/good-ai-prompts"]
+
+  const newResourcePages = [
+    "/virtual-assistant-prompts",
+    "/creative-writing-prompts-beginners",
+    "/photo-editing-prompts",
+    "/social-media-marketing-prompts",
+    "/human-like-prompts",
+    "/linkedin-professional-headshots",
+    "/perfect-resume-ai",
+    "/prompt-best-practices",
+    "/prompt-engineering-fundamentals",
+    "/ai-prompt-generators",
+    "/chatgpt-prompts-library",
+    "/midjourney-guide",
+    "/write-ai-prompts-techniques",
+  ]
+
+  // SEO-optimized pages
+  const newSEOPages = [
+    "/human-sound-prompts",
+    "/prompthero-promptbase-prompt-hunt",
+    "/prompt-engineering-jobs-2026",
+    "/stable-diffusion-guide",
+    "/ai-writing-prompts",
+    "/best-chatgpt-marketing-prompts",
+    "/dalle-3-guide",
+    "/story-prompts-creative",
+    "/chatgpt-json-prompting",
+    "/leonardo-ai-prompts",
+    "/chatgpt-use-cases-2026",
+  ]
+
+  // Photo Guide Pages
+  const photoGuidePages = ["/trending-ai-photo-prompts-2026", "/ai-birthday-photoshoot-prompts"]
+
+  // ChatGPT Guide Pages
+  const chatgptGuidePages = [
+    "/chatgpt-business-productivity",
+    "/chatgpt-custom-instructions",
+    "/avoiding-hallucinations",
+    "/few-shot-prompting",
+    "/gpt-o1-guide",
+  ]
+
+  const chatgptAIGuidePages = [
+    "/chatgpt-role-based-prompting",
+    "/chatgpt-creative-writing",
+    "/chatgpt-data-analysis",
+    "/claude-artifacts-guide",
+    "/chatgpt-api-prompting",
+    "/chatgpt-code-generation",
+  ]
+
+  // Education and Test Prep Pages
+  const educationTestPrepPages = [
+    "/sat-act-prep",
+    "/college-application-essays",
+    "/ap-exam-study-guides",
+    "/internship-job-preparation",
+    "/gpa-optimization",
+    "/gcse-revision",
+    "/a-level-success",
+    "/ucas-personal-statement",
+  ]
+
+  // Business and Creator Pages
+  const businessCreatorPages = [
+    "/etsy-sellers-prompts",
+    "/youtube-thumbnails-titles",
+    "/chatgpt-course-creators",
+    "/agency-owners-prompts",
+    "/gemini-vs-chatgpt-bloggers",
+    "/tiktok-prompts-creators",
+  ]
+
+  // Professional and Healthcare Pages
+  const professionalHealthcarePages = [
+    "/therapist-counselor-prompts",
+    "/chatgpt-for-nurses",
+    "/real-estate-market-analysis",
+    "/property-description-prompts",
+    "/real-estate-lead-generation",
+    "/medical-education-prompts",
+  ]
+
+  // Nonprofit and Real Estate Social Media Pages
+  const nonprofitRealEstatePages = ["/nonprofit-grant-writing", "/real-estate-social-media"]
+
+  // Professional Legal and Nonprofit Pages
+  const legalNonprofitPages = [
+    "/legal-brief-prompts",
+    "/paralegal-prompts",
+    "/legal-research-prompts",
+    "/contract-review-prompts",
+    "/nonprofit-marketing-prompts",
+    "/fundraising-email-prompts",
+    "/volunteer-recruitment-prompts",
+    "/volunteer-recruitment-nonprofits",
+  ]
+
+  // SEO and LLM Pages
+  const seoLLMPages = [
+    "/llm-seo-prompt-library",
+    "/instagram-reels-hooks",
+    "/freelance-client-acquisition",
+    "/long-tail-keyword-clusters",
+  ]
+
+  // Foundational Prompting Guide Pages
+  const foundationalPromptingPages = [
+    "/how-to-write-effective-ai-prompts",
+    "/common-ai-prompt-mistakes",
+    "/ai-prompts-ecommerce",
+  ]
+
+  // New Data Analysis and Research Pages
+  const dataAnalysisResearchPages = ["/prompt-engineering-data-analysis", "/prompt-engineering-researchers"]
+
+  const websiteLinks = ["/website-links"]
+
+  const advancedPromptPages = [] // Declare the missing variable
+
+  const aiToolsPages = ["/ai-tools-list"]
+
+  const aiToolPromptPages = [
+    "/chatgpt-prompts-midjourney",
+    "/runway-ml-prompts",
+    "/dalle-3-prompts",
+    "/playground-ai-prompts",
+    "/adobe-firefly-prompts",
+    "/leonardo-ai-prompts",
+    "/canva-ai-prompts",
+    "/midjourney-prompts-guide",
+    "/stable-diffusion-advanced",
+  ]
+
+  // New AI tool prompting pages
+  const aiToolVideoVoicePages = [
+    "/ai-prompts-synthesia",
+    "/ai-prompts-lovo",
+    "/ai-prompts-invideo",
+    "/ai-prompts-murf",
+    "/ai-prompts-descript",
+    "/ai-prompts-heygen",
+    "/ai-prompts-elevenlabs",
+  ]
+
+  const aiToolProductivityPages = ["/ai-prompts-notion-ai", "/ai-prompts-clickup"]
+
+  // Professional AI Prompting Guide Pages
+  const professionalPromptingPages = [
+    "/ai-prompts-coding",
+    "/ai-prompts-education",
+    "/ai-prompts-finance",
+    "/ai-prompts-health-wellness-coaches",
+  ]
+
+  const allPages = [
+    ...corePages,
+    ...aiModelPages,
+    ...advancedAIPages,
+    ...careerWritingPages,
+    ...specializedPages,
+    ...universityPages,
+    ...testPages,
+    ...resourcePages,
+    ...newResourcePages,
+    ...newSEOPages,
+    ...photoGuidePages,
+    ...chatgptGuidePages,
+    ...chatgptAIGuidePages,
+    ...advancedPromptPages,
+    ...educationTestPrepPages,
+    ...professionalHealthcarePages,
+    ...nonprofitRealEstatePages,
+    ...legalNonprofitPages,
+    ...seoLLMPages,
+    ...businessCreatorPages,
+    ...foundationalPromptingPages,
+    ...dataAnalysisResearchPages,
+    ...aiToolPromptPages,
+    ...aiToolVideoVoicePages,
+    ...aiToolProductivityPages,
+    ...professionalPromptingPages,
+    ...aiToolsPages,
+    ...websiteLinks,
+  ]
+
+  return allPages.map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified,
+    changeFrequency: "weekly",
+    priority: route === "" ? 1 : 0.8,
+  }))
+}
