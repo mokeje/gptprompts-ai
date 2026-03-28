@@ -249,6 +249,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/chatgpt-social-media-manager-prompts",
   ]
 
+  const march2026Batch2Pages = [
+    "/grok-prompts",
+    "/chatgpt-image-generation-prompts",
+    "/cursor-ai-prompts",
+    "/github-copilot-prompts",
+    "/napkin-ai-prompts",
+    "/ai-prompts-for-marketers",
+    "/ai-prompts-for-data-analysts",
+    "/ai-prompts-for-developers",
+    "/ai-prompts-for-ux-designers",
+    "/ai-prompts-for-journalists",
+    "/ai-prompts-for-consultants",
+    "/ai-prompts-for-photographers",
+    "/chatgpt-prompts-excel",
+    "/chatgpt-prompts-business-plans",
+    "/ai-prompts-customer-service",
+    "/ai-prompts-presentations",
+    "/ai-prompts-brainstorming",
+    "/ai-prompts-meeting-notes",
+    "/ai-prompts-personal-finance",
+    "/chatgpt-prompts-meal-planning",
+  ]
+
   const allPages = [
     ...corePages,
     ...aiModelPages,
@@ -281,6 +304,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // New Pages (March 2026)
     ...march2026Pages,
+    ...march2026Batch2Pages,
   ]
 
   return allPages.map((route) => ({

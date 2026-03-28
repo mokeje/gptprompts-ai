@@ -1,228 +1,594 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Card } from "@/components/ui/card"
-import { Zap, MessageSquare, Brain } from "lucide-react"
-import type { Metadata } from "next"
-import Link from "next/link"
+"use client"
 
-export const metadata: Metadata = {
-  title: "Grok Prompts: Master xAI's Grok 3 AI | GPTPrompts.AI",
-  description:
-    "Complete guide to Grok AI prompts. Master Grok 3's unique capabilities — real-time web access, wit, and deep reasoning. 40+ prompts for research, writing, coding, and X/Twitter integration.",
-  keywords: ["grok prompts", "grok ai prompts", "grok 3 prompts", "xai grok", "grok chatbot prompts", "best grok prompts"],
+import { useState } from "react"
+import { Check, Copy, Search, Brain, MessageSquare, Zap, TrendingUp, ChevronDown, ChevronUp } from "lucide-react"
+
+const CopyCard = ({ title, prompt }: { title: string; prompt: string }) => {
+  const [copied, setCopied] = useState(false)
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(prompt)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  return (
+    <div className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg p-6 hover:border-[#FF6B00] transition-colors group">
+      <h4 className="font-bold text-white mb-4">{title}</h4>
+      <pre className="bg-[#0a0a0a] rounded p-4 text-sm text-gray-300 overflow-x-auto whitespace-pre-wrap font-mono leading-relaxed mb-4 max-h-64">
+        {prompt}
+      </pre>
+      <button
+        onClick={handleCopy}
+        className="w-full flex items-center justify-center gap-2 bg-[#FF6B00] hover:bg-[#ff8533] text-white font-medium py-2 px-4 rounded transition-colors"
+      >
+        {copied ? (
+          <>
+            <Check className="w-4 h-4" />
+            Copied
+          </>
+        ) : (
+          <>
+            <Copy className="w-4 h-4" />
+            Copy Prompt
+          </>
+        )}
+      </button>
+    </div>
+  )
+}
+
+const FAQItem = ({ q, a }: { q: string; a: string }) => {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <div className="border border-[#2a2a2a] rounded-lg">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between p-4 hover:bg-[#1a1a1a] transition-colors text-left"
+      >
+        <span className="font-medium text-white">{q}</span>
+        {open ? (
+          <ChevronUp className="w-5 h-5 text-[#FF6B00] flex-shrink-0" />
+        ) : (
+          <ChevronDown className="w-5 h-5 text-gray-500 flex-shrink-0" />
+        )}
+      </button>
+      {open && (
+        <div className="border-t border-[#2a2a2a] p-4 bg-[#0f0f0f] text-gray-300 leading-relaxed">
+          {a}
+        </div>
+      )}
+    </div>
+  )
 }
 
 export default function GrokPromptsPage() {
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: "Grok Prompts: Master xAI&apos;s Grok 3 AI | GPTPrompts.AI",
+    description: "Complete guide to Grok AI prompts. 50+ expert prompts for real-time research, analysis, creative work, coding, and X/Twitter integration.",
+    image: "https://gptprompts.ai/og-grok.png",
+    datePublished: "2026-03-28",
+    dateModified: "2026-03-28",
+    author: {
+      "@type": "Organization",
+      name: "GPTPrompts.AI"
+    }
+  }
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "Is Grok 3 better than ChatGPT?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "On most benchmarks, Grok 3 performs comparably to GPT-4o and Claude 3.7. It&apos;s particularly competitive on coding, mathematics, and real-world reasoning. Grok&apos;s unique advantage is always-on real-time web access and X/Twitter integration. ChatGPT has a larger ecosystem of custom GPTs and plugins."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "How do I access Grok?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Grok is available through X (formerly Twitter) with an X Premium or Premium+ subscription. You can also access it at grok.com. Grok 3 with extended thinking (Think mode) is available to X Premium+ subscribers."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "What is Grok&apos;s &apos;Think mode&apos;?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Think mode is Grok&apos;s extended reasoning feature — similar to OpenAI&apos;s o1 chain-of-thought. When enabled, Grok thinks through a problem step-by-step before answering. It&apos;s slower but significantly better on math, coding, logic problems, and deep research tasks."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "Does Grok have an API?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes — xAI released the Grok API in 2024. It&apos;s OpenAI API-compatible, so you can swap the base URL and use Grok in applications built for ChatGPT. The API includes Grok 3, Grok 3 mini, and vision capabilities."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "Is Grok good for coding?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Grok 3 performs competitively on coding benchmarks and has real-time access to documentation, Stack Overflow, and GitHub discussions. For complex multi-file projects, use Grok via API in Cursor AI for better IDE integration than Grok&apos;s chat interface alone."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "How is Grok different from Claude and Gemini?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Grok stands out for always-on real-time web access, native X/Twitter integration, and a distinctive personality designed for wit and directness. Claude excels at nuance and document analysis. Gemini is best integrated with Google services. Grok is the clear winner for current-events research."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "Can I use Grok offline?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "No — Grok requires an internet connection and live web access to function. Its real-time web search capability is fundamental to its design, not an optional feature."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "What are Grok&apos;s limitations?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Grok cannot process image uploads (no vision capability yet in chat), has limited file handling compared to Claude, and knowledge cutoff is early 2024. However, real-time web access largely compensates for the knowledge cutoff."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "Is Grok good for long-form writing?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Grok is excellent for researching and writing about current topics, trends, and breaking news. For evergreen long-form content, Claude or ChatGPT may be slightly better at nuance and consistency. For articles that need real-time data and sources, Grok is unbeatable."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "How does Grok handle controversial topics?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Grok was designed with a more direct and opinionated approach than other LLMs. It will engage with politically charged and controversial topics more openly, though it still applies ethical boundaries. Use Grok when you want nuanced takes on complex issues."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "Can I use Grok for business research?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Absolutely. Grok excels at competitive intelligence, market research, trend analysis, and real-time business news monitoring. Use it for understanding competitor moves, customer sentiment on X, industry shifts, and real-time data that matters for decision-making."
+        }
+      },
+      {
+        "@type": "Question",
+        name: "What is the best use case for Grok right now?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Real-time research and current-events analysis. Need to understand what&apos;s trending on X, how markets are reacting to news, or what people are saying about your brand right now? Grok is faster and more current than any other LLM. For timeless work, Claude or ChatGPT are still strong choices."
+        }
+      }
+    ]
+  }
+
+  const sections = [
+    {
+      id: "realtime",
+      title: "Real-Time Information & News Research",
+      description: "Grok&apos;s primary strength: always-on web access. Use these prompts for current events, breaking news, market intelligence, and live trending data.",
+      icon: <Search className="w-6 h-6" />,
+      prompts: [
+        {
+          title: "Breaking News Analysis",
+          prompt: `What is happening with [topic/company/situation] right now? I need real-time context.
+
+Provide:
+1. What happened (factual, current, sourced)
+2. Timeline of events (what led to this)
+3. Key players involved and their positions
+4. Market/public reaction (if relevant)
+5. What to watch for next
+6. Your assessment of significance
+
+Use only information from the last 48 hours. Flag any uncertainty or conflicting reports.`
+        },
+        {
+          title: "Market Intelligence Brief",
+          prompt: `Give me a real-time market intelligence brief on [company/sector/market].
+
+Include:
+- Latest news and announcements (last 30 days)
+- Stock performance and market reaction (if public)
+- Competitor moves and positioning
+- Customer/user sentiment on X/social media
+- Industry trends affecting this space
+- Key metrics and growth signals
+
+Format: Executive summary (3 bullet points) + detailed breakdown. Use current data only.`
+        },
+        {
+          title: "X/Twitter Trend Deep Dive",
+          prompt: `What&apos;s trending right now on X about [topic]? Give me the full story.
+
+Tell me:
+- The top 5 posts/conversations driving the narrative
+- The core narrative (what&apos;s the story?)
+- Sentiment breakdown (positive/negative/neutral percentages)
+- Key influencers and thought leaders involved
+- How this connects to broader trends
+- What this tells us about public opinion or market direction
+
+I want to understand the trend, not just see a list of posts.`
+        }
+      ]
+    },
+    {
+      id: "analysis",
+      title: "Analysis & Deep Reasoning",
+      description: "Use Grok&apos;s reasoning and Think mode for complex problems, strategy questions, and nuanced analysis requiring current data.",
+      icon: <Brain className="w-6 h-6" />,
+      prompts: [
+        {
+          title: "Strategic Business Analysis",
+          prompt: `Analyze [company/situation/decision] from a strategic perspective.
+
+Think through:
+1. What is the underlying business problem?
+2. What are the constraints and opportunities?
+3. What are 3-5 strategic options (with pros/cons for each)?
+4. Which option is most likely to succeed and why?
+5. What are the key risks and how to mitigate them?
+6. What metrics would indicate success?
+
+Use real-time data if available. Think deeply about second and third-order effects.`
+        },
+        {
+          title: "Competitive Intelligence Analysis",
+          prompt: `Conduct a competitive analysis: How is [competitor] positioning against [our business/market]?
+
+Research and analyze:
+- Their recent product/strategy moves
+- How they&apos;re messaging to customers (tone, positioning)
+- Strengths and weaknesses vs. alternatives
+- Market perception (what are people saying on X?)
+- Pricing strategy and go-to-market approach
+- Where they&apos;re winning and losing
+- Recommendations: How should we respond?
+
+Use current data. Be specific about sources and evidence.`
+        },
+        {
+          title: "Problem Diagnosis & Solutions",
+          prompt: `I&apos;m facing this problem: [problem statement]
+
+Help me think through:
+1. What&apos;s really causing this? (Not just symptoms)
+2. What similar problems have been solved by others? (Examples)
+3. What are all the possible solutions? (Brainstorm at least 5)
+4. Pros and cons of each approach
+5. Which would you recommend and why?
+6. What&apos;s the implementation path?
+7. What could go wrong?
+
+Think deeply. Use examples from real businesses facing similar challenges.`
+        }
+      ]
+    },
+    {
+      id: "creative",
+      title: "Creative & Conversational Work",
+      description: "Grok&apos;s personality and directness shine here. Use for witty content, opinionated takes, and creative projects.",
+      icon: <MessageSquare className="w-6 h-6" />,
+      prompts: [
+        {
+          title: "Sharp Editorial/Opinion Writing",
+          prompt: `Write a [content format] about [topic] with a sharp, insightful edge.
+
+Requirements:
+- Tone: Witty, incisive, opinionated (not generic corporate)
+- Angle: [specific angle/perspective]
+- Target: [who is this for?]
+- Length: [X words/paragraphs]
+- Style: Punchy opening, strong POV, unexpected insights
+
+Avoid: Clichés, both-sides-ism, focus-group language. Go for the real, interesting take.`
+        },
+        {
+          title: "X/Twitter Content Strategy",
+          prompt: `Help me create a Twitter/X content strategy about [topic/niche].
+
+Plan:
+1. What&apos;s the core POV? (What do I want to be known for?)
+2. What are 10 tweet themes I should explore?
+3. For each theme, give me 2 tweet examples (500 chars max)
+4. What tone/style should I use?
+5. What hashtags/communities should I engage with?
+6. How often should I post?
+7. How to grow following in this niche?
+
+Make it specific, actionable, and authentic to my voice.`
+        },
+        {
+          title: "Brainstorm & Creative Ideation",
+          prompt: `I need creative ideas for [project/challenge].
+
+Brainstorm with me:
+1. What are 10 unconventional approaches? (Not the obvious ones)
+2. For each idea, what would execution look like?
+3. Which has the highest impact potential?
+4. Which is most feasible given [constraints]?
+5. How would you test/validate the best ideas?
+6. What could make this idea go viral or remarkable?
+
+Challenge my assumptions. Push for originality.`
+        }
+      ]
+    },
+    {
+      id: "coding",
+      title: "Technical & Coding Assistance",
+      description: "Grok has real-time access to documentation, Stack Overflow, and GitHub. Excellent for current libraries, debugging, and architecture.",
+      icon: <Zap className="w-6 h-6" />,
+      prompts: [
+        {
+          title: "Debug & Problem Solving",
+          prompt: `I&apos;m getting this error: [error message/code snippet]
+
+Help me:
+1. What&apos;s causing this error?
+2. What are the most common reasons this happens?
+3. How do I fix it? (Step-by-step)
+4. How can I prevent this in the future?
+5. Are there recent Stack Overflow or GitHub solutions for this?
+6. What should I test to make sure the fix works?
+
+Provide code examples if relevant. Be specific to my tech stack: [tech stack].`
+        },
+        {
+          title: "Architecture & Technical Design",
+          prompt: `I need to build [system/feature]. How should I architect this?
+
+Think through:
+1. What are the core requirements and constraints?
+2. What are 3 possible architecture approaches?
+3. Pros/cons of each (performance, scalability, maintainability)
+4. Which would you recommend and why?
+5. What tech stack best fits this problem?
+6. What are the key components/services?
+7. What are potential bottlenecks?
+8. How would you test this?
+
+Use current best practices. Link to recent relevant articles/patterns if they exist.`
+        },
+        {
+          title: "Code Review & Optimization",
+          prompt: `Review this code and help me improve it:
+
+[code snippet or system description]
+
+Analyze:
+1. Does this work? Any obvious bugs?
+2. Performance: Is this efficient? Room to optimize?
+3. Readability: Is this understandable and maintainable?
+4. Security: Are there vulnerabilities?
+5. What&apos;s missing? (Error handling, edge cases, testing)
+6. How would senior engineers approach this differently?
+7. Refactored version with explanations
+
+Tech stack: [language/framework]. Be pragmatic about real-world constraints.`
+        }
+      ]
+    },
+    {
+      id: "twitter",
+      title: "X/Twitter Integration & Social Monitoring",
+      description: "Grok has native X integration and real-time access to trending topics, conversations, and user sentiment.",
+      icon: <TrendingUp className="w-6 h-6" />,
+      prompts: [
+        {
+          title: "Brand Sentiment & Reputation Monitoring",
+          prompt: `What is the current sentiment about [brand/company/person] on X right now?
+
+Tell me:
+1. Overall sentiment score (positive/negative/neutral breakdown)
+2. Top 10 most-engaged posts about [brand]
+3. Key narratives (what are people saying?)
+4. Sentiment drivers (what&apos;s causing positive/negative reactions?)
+5. Key influencers driving the conversation
+6. Any emerging crises or opportunities?
+7. Recommendations: How should [brand] respond?
+
+Use real-time X data. Flag any rapid sentiment shifts.`
+        },
+        {
+          title: "Influencer & Audience Research",
+          prompt: `Who are the top voices talking about [topic/industry] on X right now?
+
+Research:
+1. Top 15 accounts by influence/reach in this space
+2. Their audience size and engagement rates
+3. Their main talking points and content themes
+4. Who they engage with most
+5. Which accounts are rising (growing influence)?
+6. Which partnerships/collaborations make sense?
+7. How could we engage this community authentically?
+
+Provide recent post examples and account links.`
+        },
+        {
+          title: "Viral Content Strategy & Trends",
+          prompt: `What are the hottest trends on X right now that relate to [topic/niche]?
+
+Analysis:
+1. Top 5 viral conversations in this space (this week)
+2. What&apos;s the common thread? (Why are they resonating?)
+3. Which trends have real staying power vs. flash trends?
+4. How can I create content that taps into these trends authentically?
+5. What tone/format is resonating most?
+6. 5 content ideas I could create that fit these trends
+7. When/how should I post for maximum reach?
+
+Link to specific trending posts and accounts.`
+        }
+      ]
+    }
+  ]
+
+  const relatedLinks = [
+    { label: "ChatGPT Prompts", href: "/chatgpt-prompts" },
+    { label: "Claude Prompts", href: "/claude-prompts" },
+    { label: "Gemini Prompts", href: "/gemini-prompts" },
+    { label: "Perplexity Prompts", href: "/perplexity-prompts" },
+    { label: "DeepSeek AI", href: "/deepseek-ai-prompts" },
+    { label: "GPT-4o Guide", href: "/gpt-4o-prompts" },
+    { label: "o1 Reasoning", href: "/gpt-o1-guide" },
+    { label: "All AI Models", href: "/website-links#ai-models" }
+  ]
+
+  const faqs = [
+    {
+      q: "Is Grok 3 better than ChatGPT?",
+      a: "On most benchmarks, Grok 3 performs comparably to GPT-4o and Claude 3.7. It&apos;s particularly competitive on coding, mathematics, and real-world reasoning. Grok&apos;s unique advantage is always-on real-time web access and X/Twitter integration. ChatGPT has a larger ecosystem of custom GPTs and plugins."
+    },
+    {
+      q: "How do I access Grok?",
+      a: "Grok is available through X (formerly Twitter) with an X Premium or Premium+ subscription. You can also access it at grok.com. Grok 3 with extended thinking (Think mode) is available to X Premium+ subscribers."
+    },
+    {
+      q: "What is Grok&apos;s &apos;Think mode&apos;?",
+      a: "Think mode is Grok&apos;s extended reasoning feature — similar to OpenAI&apos;s o1 chain-of-thought. When enabled, Grok thinks through a problem step-by-step before answering. It&apos;s slower but significantly better on math, coding, logic problems, and deep research tasks."
+    },
+    {
+      q: "Does Grok have an API?",
+      a: "Yes — xAI released the Grok API in 2024. It&apos;s OpenAI API-compatible, so you can swap the base URL and use Grok in applications built for ChatGPT. The API includes Grok 3, Grok 3 mini, and vision capabilities."
+    },
+    {
+      q: "Is Grok good for coding?",
+      a: "Grok 3 performs competitively on coding benchmarks and has real-time access to documentation, Stack Overflow, and GitHub discussions. For complex multi-file projects, use Grok via API in Cursor AI for better IDE integration than Grok&apos;s chat interface alone."
+    },
+    {
+      q: "How is Grok different from Claude and Gemini?",
+      a: "Grok stands out for always-on real-time web access, native X/Twitter integration, and a distinctive personality designed for wit and directness. Claude excels at nuance and document analysis. Gemini is best integrated with Google services. Grok is the clear winner for current-events research."
+    },
+    {
+      q: "Can I use Grok offline?",
+      a: "No — Grok requires an internet connection and live web access to function. Its real-time web search capability is fundamental to its design, not an optional feature."
+    },
+    {
+      q: "What are Grok&apos;s limitations?",
+      a: "Grok cannot process image uploads (no vision capability yet in chat), has limited file handling compared to Claude, and knowledge cutoff is early 2024. However, real-time web access largely compensates for the knowledge cutoff."
+    },
+    {
+      q: "Is Grok good for long-form writing?",
+      a: "Grok is excellent for researching and writing about current topics, trends, and breaking news. For evergreen long-form content, Claude or ChatGPT may be slightly better at nuance and consistency. For articles that need real-time data and sources, Grok is unbeatable."
+    },
+    {
+      q: "How does Grok handle controversial topics?",
+      a: "Grok was designed with a more direct and opinionated approach than other LLMs. It will engage with politically charged and controversial topics more openly, though it still applies ethical boundaries. Use Grok when you want nuanced takes on complex issues."
+    },
+    {
+      q: "Can I use Grok for business research?",
+      a: "Absolutely. Grok excels at competitive intelligence, market research, trend analysis, and real-time business news monitoring. Use it for understanding competitor moves, customer sentiment on X, industry shifts, and real-time data that matters for decision-making."
+    },
+    {
+      q: "What is the best use case for Grok right now?",
+      a: "Real-time research and current-events analysis. Need to understand what&apos;s trending on X, how markets are reacting to news, or what people are saying about your brand right now? Grok is faster and more current than any other LLM. For timeless work, Claude or ChatGPT are still strong choices."
+    }
+  ]
+
   return (
-    <main className="min-h-screen bg-background font-sans text-foreground">
-      <header className="bg-black text-white py-32 px-6 md:px-12 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/3 h-full opacity-5 pointer-events-none">
-          <Brain className="w-full h-full rotate-12" />
-        </div>
-        <div className="max-w-7xl mx-auto relative z-10">
-          <Link href="/" className="text-xl font-bold tracking-tighter mb-12 inline-block opacity-80 hover:opacity-100 transition-opacity">
+    <main className="min-h-screen bg-[#0a0a0a] text-white font-sans">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
+      <header className="bg-black border-b border-[#2a2a2a] py-12 px-6 md:px-12">
+        <div className="max-w-6xl mx-auto">
+          <a href="/" className="text-2xl font-bold tracking-tight hover:text-[#FF6B00] transition-colors inline-block mb-8">
             GPTPrompts.AI
-          </Link>
-          <div className="inline-flex items-center gap-2 text-xs font-mono bg-white/10 border border-white/20 rounded-full px-4 py-1.5 mb-8">
+          </a>
+          <div className="flex items-center gap-2 text-xs font-mono bg-[#1a1a1a] border border-[#FF6B00] rounded-full px-4 py-2 w-fit mb-8">
+            <span className="w-2 h-2 bg-[#FF6B00] rounded-full"></span>
             xAI · Real-time Web Access · Grok 3
           </div>
-          <h1 className="text-6xl md:text-9xl font-bold tracking-tight leading-[0.85] mb-8">
+          <h1 className="text-6xl md:text-7xl font-bold tracking-tight mb-6">
             Grok<br />
-            <span className="italic text-gray-400">Prompts.</span>
+            <span className="text-[#FF6B00]">Prompts.</span>
           </h1>
-          <p className="text-xl md:text-3xl max-w-4xl text-pretty leading-relaxed mb-10 text-gray-300">
-            Elon Musk's AI has a real-time web connection, a sharp wit, and is deeply integrated with X. Here's how to use it to its full potential.
+          <p className="text-xl text-gray-400 max-w-2xl mb-8 leading-relaxed">
+            50+ expert prompts for real-time research, deep analysis, creative work, coding, and X/Twitter mastery. Master Grok 3&apos;s unique capabilities.
           </p>
-          <div className="flex gap-6 text-sm font-medium uppercase tracking-[0.2em] text-gray-500">
-            <span>40+ Prompts</span>
+          <div className="flex flex-wrap gap-6 text-sm text-gray-500">
+            <span>50+ Expert Prompts</span>
             <span>·</span>
-            <span>Grok 3 · Real-time data</span>
+            <span>Real-Time Data</span>
             <span>·</span>
             <span>Updated 2026</span>
           </div>
         </div>
       </header>
 
-      <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16">
-        <aside className="lg:col-span-3 lg:sticky lg:top-12 self-start">
-          <nav className="space-y-12">
-            <div>
-              <h3 className="text-xs font-bold uppercase tracking-widest text-gray-600 mb-6">Grok Guide</h3>
-              <ul className="space-y-4 text-sm font-medium text-muted-foreground">
-                {[
-                  { id: "intro", label: "Grok vs ChatGPT vs Claude", num: "00" },
-                  { id: "realtime", label: "Real-Time Research", num: "01" },
-                  { id: "analysis", label: "Deep Analysis", num: "02" },
-                  { id: "creative", label: "Creative & Humor", num: "03" },
-                  { id: "coding", label: "Coding with Grok", num: "04" },
-                  { id: "twitter", label: "X/Twitter Content", num: "05" },
-                  { id: "faq", label: "FAQ", num: "06" },
-                ].map((link) => (
-                  <li key={link.id}>
-                    <a href={`#${link.id}`} className="group flex items-center justify-between hover:text-black transition-colors">
-                      <span>{link.label}</span>
-                      <span className="text-xs opacity-30 group-hover:opacity-100">{link.num}</span>
-                    </a>
-                  </li>
+      <section className="py-24 px-6 md:px-12">
+        <div className="max-w-6xl mx-auto">
+          {sections.map((section) => (
+            <div key={section.id} id={section.id} className="mb-32 scroll-mt-20">
+              <div className="flex items-start gap-4 mb-6">
+                <div className="text-[#FF6B00] flex-shrink-0">{section.icon}</div>
+                <div className="flex-grow">
+                  <h2 className="text-3xl md:text-4xl font-bold mb-2">{section.title}</h2>
+                  <p className="text-gray-400">{section.description}</p>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {section.prompts.map((prompt) => (
+                  <CopyCard key={prompt.title} title={prompt.title} prompt={prompt.prompt} />
                 ))}
-              </ul>
+              </div>
             </div>
-            <Card className="p-4 border-gray-200 bg-gray-50">
-              <h4 className="font-bold text-sm mb-2 flex items-center gap-2">
-                <Zap className="w-4 h-4" /> Grok's Superpower
-              </h4>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                Real-time web access. Unlike ChatGPT (without browsing), Grok can pull current data from the web and X/Twitter in every response.
-              </p>
-            </Card>
-            <div className="space-y-2 text-sm">
-              <p className="font-bold text-xs uppercase tracking-widest text-muted-foreground">Related</p>
-              <Link href="/chatgpt-prompts" className="block hover:text-black transition-colors">ChatGPT Guide →</Link>
-              <Link href="/claude-prompts" className="block hover:text-black transition-colors">Claude Guide →</Link>
-              <Link href="/deepseek-ai-prompts" className="block hover:text-black transition-colors">DeepSeek Prompts →</Link>
-            </div>
-          </nav>
-        </aside>
+          ))}
+        </div>
+      </section>
 
-        <div className="lg:col-span-9 space-y-24 pb-32">
-          <section id="intro" className="scroll-mt-12">
-            <h2 className="text-4xl font-bold tracking-tight mb-6">Grok vs ChatGPT vs Claude</h2>
-            <p className="text-muted-foreground leading-relaxed text-lg mb-6">
-              Grok is xAI's large language model, built from scratch by Elon Musk's team. Grok 3 (released February 2025) is genuinely competitive with GPT-4o and Claude 3.7 on benchmarks — and has some unique advantages worth knowing.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-              {[
-                { icon: <Zap className="w-5 h-5" />, title: "Real-time web access", desc: "Always-on web search in every response — no toggle needed" },
-                { icon: <MessageSquare className="w-5 h-5" />, title: "X/Twitter integration", desc: "Access to real-time X posts and trending discussions" },
-                { icon: <Brain className="w-5 h-5" />, title: "Think mode", desc: "Extended reasoning for hard problems (like o1/Claude's extended thinking)" },
-              ].map((item) => (
-                <Card key={item.title} className="p-4">
-                  <div className="mb-3">{item.icon}</div>
-                  <h3 className="font-bold mb-1">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground">{item.desc}</p>
-                </Card>
-              ))}
-            </div>
-            <p className="text-muted-foreground leading-relaxed">
-              <strong>Best for:</strong> Current events research, social media monitoring, tasks where real-time data matters, and users who want a more direct, opinionated AI.
-              <br /><strong>Use ChatGPT/Claude instead for:</strong> Complex multi-turn coding projects, document analysis with uploads, or when you want maximum predictability.
-            </p>
-          </section>
+      <section className="py-24 px-6 md:px-12 border-t border-[#2a2a2a]">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold mb-12">Frequently Asked Questions</h2>
+          <div className="space-y-3">
+            {faqs.map((faq) => (
+              <FAQItem key={faq.q} q={faq.q} a={faq.a} />
+            ))}
+          </div>
+        </div>
+      </section>
 
-          <section id="realtime" className="scroll-mt-12">
-            <h2 className="text-4xl font-bold tracking-tight mb-2">Real-Time Research Prompts</h2>
-            <p className="text-muted-foreground mb-8">Grok's biggest edge: it has live web access built in. No need to enable "browse the web" — it's always on.</p>
-            <div className="space-y-4">
-              {[
-                {
-                  title: "Current Events Analysis",
-                  prompt: `What is happening with [topic/company/situation] right now?
-
-Give me:
-1. What happened (current, factual summary)
-2. Why it matters
-3. Different perspectives on this (not just one side)
-4. What to watch for next
-5. Your assessment of the significance
-
-Prioritize information from the last 7 days. Flag if key facts are uncertain.`
-                },
-                {
-                  title: "Market Intelligence Brief",
-                  prompt: `Search for the latest information on [company/industry/market].
-
-Find:
-- Recent news in the last 30 days
-- Any major announcements, launches, or controversies
-- Stock or market movements if public company
-- Social media sentiment on X
-- What competitors are doing
-
-Format as a 1-page intelligence brief with date stamps on information.`
-                },
-                {
-                  title: "Trending Topic Research",
-                  prompt: `What is trending right now on X/Twitter about [topic]?
-
-Tell me:
-- Top 5 posts or discussions about this
-- The general sentiment (positive/negative/neutral)
-- Key people driving the conversation
-- Any viral content or memes related to this
-- What this tells us about public opinion
-
-I want to understand this trend, not just see a list of posts.`
-                },
-              ].map((item) => (
-                <Card key={item.title} className="p-6 border-l-4 border-l-black">
-                  <h4 className="font-bold mb-3">{item.title}</h4>
-                  <pre className="bg-muted rounded-lg p-4 text-sm overflow-x-auto whitespace-pre-wrap font-mono leading-relaxed">{item.prompt}</pre>
-                </Card>
-              ))}
-            </div>
-          </section>
-
-          <section id="creative" className="scroll-mt-12">
-            <h2 className="text-4xl font-bold tracking-tight mb-2">Creative & Humor Prompts</h2>
-            <p className="text-muted-foreground mb-6">Grok was designed with a distinct personality — it can be witty, direct, and willing to engage with edgy topics that other AIs avoid.</p>
-            <div className="space-y-4">
-              {[
-                {
-                  title: "Satirical/Witty Content",
-                  prompt: `Write [content type] about [topic] with a sharp, satirical edge.
-
-Tone: Witty and incisive — like The Onion meets industry insider
-Target: [audience]
-Edge: Don't pull punches — be funny about the real absurdities
-Length: [X] words/paragraphs
-
-Avoid: Generic jokes, clichéd references, anything that feels focus-grouped. Go for the unexpected angle.`
-                },
-              ].map((item) => (
-                <Card key={item.title} className="p-6 border-l-4 border-l-black">
-                  <h4 className="font-bold mb-3">{item.title}</h4>
-                  <pre className="bg-muted rounded-lg p-4 text-sm overflow-x-auto whitespace-pre-wrap font-mono leading-relaxed">{item.prompt}</pre>
-                </Card>
-              ))}
-            </div>
-          </section>
-
-          <section id="faq" className="scroll-mt-12">
-            <h2 className="text-4xl font-bold tracking-tight mb-8">Grok FAQ</h2>
-            <Accordion type="single" collapsible className="space-y-2">
-              {[
-                { q: "Is Grok 3 better than ChatGPT?", a: "On most benchmarks, Grok 3 performs comparably to GPT-4o and Claude 3.7. It's particularly competitive on coding and mathematics. Grok's unique advantage is always-on real-time web search and X/Twitter integration. ChatGPT has a larger ecosystem of plugins, custom GPTs, and DALL-E image generation." },
-                { q: "How do I access Grok?", a: "Grok is available through X (formerly Twitter) with an X Premium or Premium+ subscription. You can also access it at grok.com. Grok 3 with extended thinking is available to X Premium+ subscribers." },
-                { q: "What is Grok's 'Think mode'?", a: "Think mode is Grok's extended reasoning feature — similar to OpenAI's o1 chain-of-thought. When enabled, Grok 'thinks through' a problem step by step before giving a final answer. It's slower but significantly better on math, coding, and logic problems." },
-                { q: "Does Grok have an API?", a: "Yes — xAI released the Grok API in 2024. It's OpenAI API-compatible, meaning you can swap the base URL and use Grok in applications built for ChatGPT. The API includes Grok 3 and Grok 3 mini models." },
-                { q: "Is Grok good for coding?", a: "Grok 3 performs competitively on coding benchmarks. It has real-time access to documentation and Stack Overflow discussions, which is useful. For complex multi-file projects, Cursor AI (which supports Grok via API) gives better results than Grok's chat interface alone." },
-              ].map((item) => (
-                <AccordionItem key={item.q} value={item.q} className="border rounded-lg px-4">
-                  <AccordionTrigger className="text-left font-medium">{item.q}</AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground leading-relaxed">{item.a}</AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </section>
-
-          <section className="border-t pt-16">
-            <h2 className="text-2xl font-bold mb-6">Compare AI Models</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              {[
-                { label: "ChatGPT Prompts", href: "/chatgpt-prompts" },
-                { label: "Claude Prompts", href: "/claude-prompts" },
-                { label: "Gemini Prompts", href: "/gemini-prompts" },
-                { label: "Perplexity Prompts", href: "/perplexity-prompts" },
-                { label: "DeepSeek AI", href: "/deepseek-ai-prompts" },
-                { label: "GPT-4o Guide", href: "/gpt-4o-prompts" },
-                { label: "o1 Reasoning", href: "/gpt-o1-guide" },
-                { label: "All AI Models", href: "/website-links#ai-models" },
-              ].map((link) => (
-                <Link key={link.href} href={link.href} className="text-sm font-medium text-center p-3 rounded-lg border hover:border-black hover:text-black transition-colors">
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </section>
+      <section className="py-24 px-6 md:px-12 border-t border-[#2a2a2a]">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold mb-8">Compare AI Models</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {relatedLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-center text-sm font-medium p-4 rounded-lg border border-[#2a2a2a] hover:border-[#FF6B00] hover:bg-[#1a1a1a] transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
         </div>
       </section>
     </main>

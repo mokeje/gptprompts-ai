@@ -1,413 +1,412 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Card } from "@/components/ui/card"
-import { Code2, Terminal, Zap } from "lucide-react"
-import type { Metadata } from "next"
+"use client"
 import Link from "next/link"
+import { useState } from "react"
+import { Copy, Check, ChevronDown, ChevronUp, Code, Terminal, GitBranch, Cpu, Layers } from "lucide-react"
 
-export const metadata: Metadata = {
-  title: "Cursor AI Prompts: The Complete 2026 Guide to AI-Powered Coding | GPTPrompts.AI",
-  description:
-    "Master Cursor AI with expert prompts and techniques. Learn how to use Cursor's AI Composer, Chat, and inline edits to write code 10x faster. Includes 50+ copy-paste prompts for every coding task.",
-  keywords: ["cursor ai prompts", "cursor ai", "cursor composer prompts", "cursor chat prompts", "ai coding prompts", "cursor ai guide"],
-  openGraph: {
-    title: "Cursor AI Prompts: The Complete 2026 Guide",
-    description: "50+ expert Cursor AI prompts for coding, debugging, refactoring, and building full apps with AI.",
-    type: "article",
+const accent = "#7C3AED"
+
+function CopyCard({ title, prompt, tag }: { title: string; prompt: string; tag?: string }) {
+  const [copied, setCopied] = useState(false)
+  return (
+    <div className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-xl p-5 hover:border-[#7C3AED]/40 transition-all">
+      <div className="flex items-start justify-between gap-3 mb-3">
+        <div>
+          {tag && <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-[#7C3AED]/10 text-[#7C3AED] mb-2 inline-block">{tag}</span>}
+          <h3 className="font-semibold text-white text-sm">{title}</h3>
+        </div>
+        <button onClick={() => { navigator.clipboard.writeText(prompt); setCopied(true); setTimeout(() => setCopied(false), 2000) }} className="shrink-0 p-2 rounded-lg bg-[#2a2a2a] hover:bg-[#7C3AED]/20 transition-colors" aria-label="Copy prompt">
+          {copied ? <Check size={14} className="text-green-400" /> : <Copy size={14} className="text-gray-400" />}
+        </button>
+      </div>
+      <p className="text-gray-400 text-sm leading-relaxed font-mono whitespace-pre-wrap">{prompt}</p>
+    </div>
+  )
+}
+
+function FAQ({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <div className="border border-[#2a2a2a] rounded-xl overflow-hidden">
+      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between p-5 text-left hover:bg-[#1a1a1a] transition-colors">
+        <span className="font-medium text-white pr-4">{q}</span>
+        {open ? <ChevronUp size={16} className="text-gray-400 shrink-0" /> : <ChevronDown size={16} className="text-gray-400 shrink-0" />}
+      </button>
+      {open && <div className="px-5 pb-5 text-gray-400 text-sm leading-relaxed border-t border-[#2a2a2a] pt-4">{a}</div>}
+    </div>
+  )
+}
+
+const faqItems = [
+  {
+    q: "What is Cursor AI and how is it different from VS Code?",
+    a: "Cursor is an AI-native code editor built on top of VS Code. It shares the same extensions, keybindings, and settings, but adds deep AI integration: Composer for multi-file code generation, Chat for codebase-aware conversations, and inline editing with Cmd+K. Unlike VS Code with Copilot, Cursor understands your entire project context."
   },
+  {
+    q: "Which AI model should I use in Cursor?",
+    a: "For complex tasks like architecture, full features, and multi-file generation, use Claude Sonnet or GPT-4o. For quick edits and autocomplete, cursor-small is fastest and cheapest. GPT-4o is strong for debugging. Claude excels at TypeScript, React, and modern frameworks. You can switch models per conversation."
+  },
+  {
+    q: "How do I use Cursor Composer effectively?",
+    a: "Always reference relevant files with @file, describe the goal before the implementation, specify which patterns to follow from your codebase, and tell Composer what NOT to change. Think of it like briefing a senior developer. The more context you provide, the better the output."
+  },
+  {
+    q: "What are the @ symbols in Cursor and how do I use them?",
+    a: "The @ symbol lets you reference context: @file brings in a specific file, @codebase searches your entire project, @docs references documentation, @web searches the internet, and @git accesses your git history. Always add relevant @ references before complex prompts for dramatically better results."
+  },
+  {
+    q: "Can Cursor generate code across multiple files at once?",
+    a: "Yes. Composer is specifically designed for multi-file generation. Describe the feature you want, reference the relevant files with @, and Composer will create or modify multiple files simultaneously. It handles imports, type definitions, and cross-file dependencies automatically."
+  },
+  {
+    q: "How do I get better autocomplete suggestions from Cursor?",
+    a: "Keep related files open in tabs so Cursor has more context. Write clear comments describing what you want before the code. Use descriptive variable and function names. The autocomplete learns from your codebase patterns, so consistent coding style improves suggestions."
+  },
+  {
+    q: "Is Cursor worth the subscription cost?",
+    a: "Most developers report saving 2 to 4 hours per day with Cursor. The Pro plan includes 500 fast requests per month with premium models. If you code professionally, the productivity gain typically pays for itself within the first week. The free tier includes limited AI requests to try it out."
+  },
+  {
+    q: "How do I use Cursor for debugging?",
+    a: "Paste the error message or stack trace into Chat with @file referencing the problematic file. Describe what you expected versus what happened. Cursor will analyze the error in context of your actual code, not generic examples. For complex bugs, use @codebase to let it search for related issues across your project."
+  },
+  {
+    q: "Can I use Cursor with any programming language?",
+    a: "Cursor works with every language VS Code supports. It performs best with TypeScript, JavaScript, Python, Rust, and Go because these have the most training data. For less common languages, provide more context and examples in your prompts. The @ references work regardless of language."
+  },
+  {
+    q: "How does Cursor handle large codebases?",
+    a: "Cursor indexes your entire codebase for semantic search via @codebase. For very large projects, be specific about which files and directories are relevant. Use .cursorignore to exclude build artifacts, node_modules, and generated files from indexing. This keeps the AI focused on your actual source code."
+  },
+  {
+    q: "What is the difference between Cursor Chat and Composer?",
+    a: "Chat is for conversations: asking questions, exploring ideas, understanding code, and getting explanations. Composer is for action: generating, editing, and creating code across multiple files. Use Chat when you need to think, use Composer when you need to build."
+  },
+  {
+    q: "How do I migrate from VS Code to Cursor?",
+    a: "Cursor imports your VS Code extensions, settings, keybindings, and themes automatically on first launch. Your workflow stays identical, with AI capabilities added on top. You can run both side by side during the transition. Most developers switch fully within a day or two."
+  },
+]
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "Cursor AI Prompts: The Complete Guide to AI-Powered Coding in 2026",
+  description: "Master Cursor AI with expert prompts for Composer, Chat, and inline editing. Code generation, debugging, testing, and architecture prompts for developers.",
+  image: "https://gptprompts.ai/cursor-ai-prompts.jpg",
+  author: { "@type": "Organization", name: "GPTPrompts.AI" },
+  publisher: { "@type": "Organization", name: "GPTPrompts.AI" },
+  datePublished: "2026-03-28",
+  dateModified: "2026-03-28",
+}
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqItems.map(item => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
 }
 
 export default function CursorAIPromptsPage() {
   return (
-    <main className="min-h-screen bg-background font-sans text-foreground">
+    <div className="min-h-screen bg-[#0a0a0a] text-white">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+
       {/* Hero */}
-      <header className="bg-[#6c47ff] text-white py-32 px-6 md:px-12 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/3 h-full opacity-10 pointer-events-none">
-          <Terminal className="w-full h-full rotate-12" />
-        </div>
-        <div className="max-w-7xl mx-auto relative z-10">
-          <Link href="/" className="text-xl font-bold tracking-tighter mb-12 inline-block opacity-80 hover:opacity-100 transition-opacity">
-            GPTPrompts.AI
-          </Link>
-          <h1 className="text-6xl md:text-9xl font-bold tracking-tight leading-[0.85] mb-8">
-            Cursor AI<br />
-            <span className="italic opacity-90">Prompts.</span>
-          </h1>
-          <p className="text-xl md:text-3xl max-w-4xl text-pretty leading-relaxed mb-10 opacity-90">
-            The complete guide to prompting Cursor AI. Master Composer, Chat, and inline edits to build entire features, debug complex bugs, and write production-quality code with AI.
+      <section className="border-b border-[#1a1a1a] py-16 px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-center gap-2 mb-4">
+            <span className="text-xs font-medium px-3 py-1 rounded-full border border-[#7C3AED]/30 text-[#7C3AED]">AI Tools</span>
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">Cursor AI Prompts: The Complete<br />Guide to AI-Powered Coding</h1>
+          <p className="text-xl text-gray-400 mb-6 leading-relaxed">
+            Cursor is the AI code editor that understands your entire codebase. These prompts help you master Composer, Chat, and inline editing to write better code faster than ever.
           </p>
-          <div className="flex gap-6 text-sm font-medium uppercase tracking-[0.2em] opacity-70">
-            <span>50+ Prompts</span>
-            <span>·</span>
-            <span>Cursor 0.45+</span>
-            <span>·</span>
-            <span>Updated 2026</span>
+          <div className="flex flex-wrap gap-3">
+            {["Composer", "Chat", "Inline Edits", "Multi-File Generation", "Debugging"].map(b => (
+              <span key={b} className="text-sm px-3 py-1.5 bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg text-gray-300">{b}</span>
+            ))}
           </div>
         </div>
-      </header>
+      </section>
 
-      <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16">
-        {/* Sticky Nav */}
-        <aside className="lg:col-span-3 lg:sticky lg:top-12 self-start">
-          <nav className="space-y-12">
-            <div>
-              <h3 className="text-xs font-bold uppercase tracking-widest text-[#6c47ff] mb-6">Cursor Mastery</h3>
-              <ul className="space-y-4 text-sm font-medium text-muted-foreground">
-                {[
-                  { id: "intro", label: "Why Cursor Changes Everything", num: "00" },
-                  { id: "composer", label: "Composer Prompts", num: "01" },
-                  { id: "chat", label: "AI Chat Prompts", num: "02" },
-                  { id: "inline", label: "Inline Edit (⌘K)", num: "03" },
-                  { id: "debugging", label: "Debugging Prompts", num: "04" },
-                  { id: "refactoring", label: "Refactoring Prompts", num: "05" },
-                  { id: "context", label: "@ Context Mastery", num: "06" },
-                  { id: "rules", label: ".cursorrules Guide", num: "07" },
-                  { id: "faq", label: "FAQ", num: "08" },
-                ].map((link) => (
-                  <li key={link.id}>
-                    <a href={`#${link.id}`} className="group flex items-center justify-between hover:text-[#6c47ff] transition-colors">
-                      <span>{link.label}</span>
-                      <span className="text-xs opacity-30 group-hover:opacity-100">{link.num}</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <Card className="p-4 border-[#6c47ff]/20 bg-[#6c47ff]/5">
-              <h4 className="font-bold text-sm mb-2 flex items-center gap-2">
-                <Zap className="w-4 h-4 text-[#6c47ff]" /> Pro Tip
-              </h4>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                Always add context with @file, @codebase, or @docs before complex prompts. Cursor's AI performs 3x better with relevant context.
-              </p>
-            </Card>
-            <div className="space-y-2 text-sm">
-              <p className="font-bold text-xs uppercase tracking-widest text-muted-foreground">Related</p>
-              <Link href="/ai-prompts-coding" className="block hover:text-[#6c47ff] transition-colors">AI Coding Prompts →</Link>
-              <Link href="/vibe-coding-prompts" className="block hover:text-[#6c47ff] transition-colors">Vibe Coding Guide →</Link>
-              <Link href="/chatgpt-code-generation" className="block hover:text-[#6c47ff] transition-colors">ChatGPT Code Generation →</Link>
-              <Link href="/claude-prompts" className="block hover:text-[#6c47ff] transition-colors">Claude for Coding →</Link>
-            </div>
-          </nav>
-        </aside>
+      {/* Code Generation & Scaffolding */}
+      <section className="py-14 px-4 border-b border-[#1a1a1a]">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-center gap-3 mb-2">
+            <Code size={20} className="text-[#7C3AED]" />
+            <h2 className="text-2xl font-bold">Code Generation and Scaffolding</h2>
+          </div>
+          <p className="text-gray-400 mb-6">Generate complete features, components, and modules with Cursor Composer. Always reference existing files for consistent patterns.</p>
+          <div className="grid gap-4">
+            <CopyCard tag="Composer" title="Full Feature Generation with Context" prompt={`@file:src/types/user.ts @file:src/components/Dashboard.tsx @file:src/lib/api.ts
 
-        {/* Content */}
-        <div className="lg:col-span-9 space-y-24 pb-32">
+Build a complete user settings page with the following requirements:
 
-          {/* Intro */}
-          <section id="intro" className="scroll-mt-12">
-            <h2 className="text-4xl font-bold tracking-tight mb-6">Why Cursor Changes Everything</h2>
-            <p className="text-muted-foreground leading-relaxed text-lg mb-6">
-              Cursor is not just an AI-powered code editor — it's a fundamentally different way of building software. Unlike GitHub Copilot's autocomplete approach, Cursor understands your entire codebase and can generate, edit, and reason about thousands of lines of code simultaneously.
-            </p>
-            <p className="text-muted-foreground leading-relaxed mb-8">
-              But Cursor is only as powerful as the prompts you give it. Vague instructions produce mediocre code. Precise, context-rich prompts produce production-ready features in minutes. This guide teaches you exactly how to communicate with Cursor to get the best results.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {[
-                { icon: <Code2 className="w-5 h-5" />, title: "Composer", desc: "Full-feature generation across multiple files simultaneously" },
-                { icon: <Terminal className="w-5 h-5" />, title: "Chat (⌘L)", desc: "Ask questions about your codebase and get explanations" },
-                { icon: <Zap className="w-5 h-5" />, title: "Inline Edit (⌘K)", desc: "Edit specific lines or functions with natural language" },
-              ].map((item) => (
-                <Card key={item.title} className="p-4">
-                  <div className="text-[#6c47ff] mb-3">{item.icon}</div>
-                  <h3 className="font-bold mb-1">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground">{item.desc}</p>
-                </Card>
-              ))}
-            </div>
-          </section>
+1. Create a new SettingsPage component following the same patterns as Dashboard.tsx
+2. Include sections for: profile info, notification preferences, and account security
+3. Use the User type from types/user.ts for all data
+4. Use the API client patterns from lib/api.ts for data fetching
+5. Add form validation with error states
+6. Include loading and error states matching our existing patterns
+7. Add TypeScript types for all form data
 
-          {/* Composer Prompts */}
-          <section id="composer" className="scroll-mt-12">
-            <h2 className="text-4xl font-bold tracking-tight mb-2">Composer Prompts (⌘I)</h2>
-            <p className="text-muted-foreground mb-8">Composer is Cursor's most powerful feature — it writes code across multiple files and understands your full project structure. Use these prompts for building complete features.</p>
+Follow our existing file structure and naming conventions. Do not modify any existing files.`} />
 
-            <h3 className="text-xl font-bold mb-4">🏗️ Building New Features</h3>
-            <div className="space-y-4 mb-10">
-              {[
-                {
-                  title: "Full CRUD Feature",
-                  prompt: `Create a complete CRUD API for [Resource] using [framework]. Include:
-- TypeScript interfaces/types for the model
-- Database schema (Prisma/Drizzle)
-- API routes: GET /[resource], GET /[resource]/:id, POST /[resource], PUT /[resource]/:id, DELETE /[resource]/:id
-- Input validation with Zod
-- Error handling with proper HTTP status codes
-- Unit tests for each endpoint
-Follow the patterns used in @[existing-similar-file]`
-                },
-                {
-                  title: "React Component with State",
-                  prompt: `Build a [ComponentName] React component that:
-- Props: [list props and their types]
-- State: [describe what state it manages]
-- Behavior: [describe what it does]
-- Uses existing components from @components
-- Follows the styling patterns in @[style-file]
-- Includes loading, error, and empty states
-- Is fully accessible (ARIA labels, keyboard navigation)`
-                },
-                {
-                  title: "Authentication System",
-                  prompt: `Implement a complete authentication system using [Auth library: NextAuth/Clerk/Auth.js]. Include:
-- Sign up, sign in, sign out flows
-- Session management
-- Protected routes middleware
-- User profile page
-- Password reset (if applicable)
-Use the database schema in @schema.prisma and follow patterns in @[existing-auth-file]`
-                },
-              ].map((item) => (
-                <Card key={item.title} className="p-6 border-l-4 border-l-[#6c47ff]">
-                  <h4 className="font-bold mb-3 flex items-center gap-2">
-                    <Code2 className="w-4 h-4 text-[#6c47ff]" /> {item.title}
-                  </h4>
-                  <pre className="bg-muted rounded-lg p-4 text-sm overflow-x-auto whitespace-pre-wrap font-mono leading-relaxed">{item.prompt}</pre>
-                </Card>
-              ))}
-            </div>
+            <CopyCard tag="Composer" title="API Route and Database Schema" prompt={`@codebase
 
-            <h3 className="text-xl font-bold mb-4">🔄 Refactoring & Migration</h3>
-            <div className="space-y-4">
-              {[
-                {
-                  title: "Migrate to New Pattern",
-                  prompt: `Refactor @[directory] to use [new pattern/library].
-- Current pattern: [describe what it's doing now]
-- Target pattern: [describe what it should do]
-- Do NOT change any business logic
-- Keep all existing tests passing
-- Update imports throughout the codebase
-- Add migration notes in comments where the change is non-obvious`
-                },
-                {
-                  title: "Add TypeScript Strict Mode",
-                  prompt: `Add strict TypeScript types to @[file].
-- Replace all 'any' types with specific types
-- Add return types to all functions
-- Add prop types to all React components
-- Create interfaces for all data structures
-- Do not change any logic, only add types
-Reference @types for existing type definitions`
-                },
-              ].map((item) => (
-                <Card key={item.title} className="p-6 border-l-4 border-l-[#6c47ff]">
-                  <h4 className="font-bold mb-3">{item.title}</h4>
-                  <pre className="bg-muted rounded-lg p-4 text-sm overflow-x-auto whitespace-pre-wrap font-mono leading-relaxed">{item.prompt}</pre>
-                </Card>
-              ))}
-            </div>
-          </section>
+I need to add a new "projects" feature to this app. Generate the following:
 
-          {/* Chat Prompts */}
-          <section id="chat" className="scroll-mt-12">
-            <h2 className="text-4xl font-bold tracking-tight mb-2">AI Chat Prompts (⌘L)</h2>
-            <p className="text-muted-foreground mb-8">Use Cursor Chat to understand your codebase, get explanations, and plan features before writing code.</p>
-            <div className="space-y-4">
-              {[
-                { title: "Understand a Complex File", prompt: `Explain what @[file] does. Walk me through:
-1. Its main purpose and responsibility
-2. The key functions/methods and what they do
-3. Its dependencies and what it depends on
-4. Any potential issues or code smells you notice` },
-                { title: "Architecture Planning", prompt: `I want to add [feature] to this codebase (@codebase).
-Before writing any code, tell me:
-1. Which existing files I'd need to modify
-2. What new files I should create
-3. The best approach given the current architecture
-4. Any potential issues or tradeoffs
-5. The order I should implement things in` },
-                { title: "Performance Analysis", prompt: `Review @[file] for performance issues. Identify:
-- Unnecessary re-renders (if React)
-- N+1 query problems
-- Missing indexes (if database queries)
-- Memory leaks
-- Expensive operations that could be cached
-Rank issues by severity and suggest specific fixes` },
-                { title: "Security Review", prompt: `Do a security audit of @[file]. Check for:
-- SQL injection vulnerabilities
-- XSS vulnerabilities
-- CSRF vulnerabilities
-- Authentication/authorization issues
-- Exposed sensitive data
-- Input validation gaps
-List each issue with severity (Critical/High/Medium/Low) and how to fix it` },
-              ].map((item) => (
-                <Card key={item.title} className="p-6 border-l-4 border-l-[#6c47ff]">
-                  <h4 className="font-bold mb-3">{item.title}</h4>
-                  <pre className="bg-muted rounded-lg p-4 text-sm overflow-x-auto whitespace-pre-wrap font-mono leading-relaxed">{item.prompt}</pre>
-                </Card>
-              ))}
-            </div>
-          </section>
+1. Database schema/migration for a projects table (id, name, description, owner_id, status, created_at, updated_at)
+2. API routes for CRUD operations following our existing API patterns
+3. TypeScript types and Zod validation schemas
+4. A reusable API client function matching our existing fetch patterns
 
-          {/* Inline Edit */}
-          <section id="inline" className="scroll-mt-12">
-            <h2 className="text-4xl font-bold tracking-tight mb-2">Inline Edit Prompts (⌘K)</h2>
-            <p className="text-muted-foreground mb-8">Select code, press ⌘K, and describe the change. These are the prompts that save you the most time day-to-day.</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {[
-                { scenario: "Add error handling", prompt: "Add try/catch with proper error logging. Use the error format from the rest of the codebase" },
-                { scenario: "Make function async", prompt: "Convert to async/await. Handle the Promise correctly and propagate errors" },
-                { scenario: "Extract to component", prompt: "Extract this JSX into a separate reusable component with typed props" },
-                { scenario: "Add loading state", prompt: "Add isLoading, error, and empty states with appropriate UI for each" },
-                { scenario: "Write tests", prompt: "Write comprehensive unit tests covering: happy path, edge cases, and error cases. Use the test patterns in @[test-file]" },
-                { scenario: "Add JSDoc comments", prompt: "Add JSDoc comments explaining the purpose, params, returns, and any side effects" },
-                { scenario: "Optimize query", prompt: "Optimize this database query. Add proper indexes, select only needed fields, and add pagination" },
-                { scenario: "Add validation", prompt: "Add Zod validation schema for all inputs. Return validation errors with field-level messages" },
-              ].map((item) => (
-                <Card key={item.scenario} className="p-4">
-                  <h4 className="font-bold text-sm text-[#6c47ff] mb-2">{item.scenario}</h4>
-                  <p className="text-sm text-muted-foreground font-mono bg-muted rounded p-2">{item.prompt}</p>
-                </Card>
-              ))}
-            </div>
-          </section>
+Look at how other entities (like users or teams) are structured in the codebase and follow the same patterns exactly. List what files you will create and modify before generating code.`} />
 
-          {/* Debugging */}
-          <section id="debugging" className="scroll-mt-12">
-            <h2 className="text-4xl font-bold tracking-tight mb-2">Debugging Prompts</h2>
-            <p className="text-muted-foreground mb-8">Cursor is exceptional at debugging. Give it the error, the file, and context — and it almost always finds the fix.</p>
-            <div className="space-y-4">
-              {[
-                {
-                  title: "Fix a Specific Error",
-                  prompt: `I'm getting this error: [PASTE EXACT ERROR MESSAGE]
+            <CopyCard tag="Composer" title="React Component from Design Description" prompt={`@file:src/components/ui/Button.tsx @file:src/components/ui/Card.tsx @file:tailwind.config.ts
 
-It's happening in @[file] when I [describe what you were doing].
+Create a PricingTable component with 3 tiers (Starter, Pro, Enterprise):
 
-Here's the relevant stack trace: [paste stack trace]
-
-Fix the root cause. Don't just suppress the error — explain why it's happening and fix the underlying issue.`
-                },
-                {
-                  title: "Debug a Logic Bug",
-                  prompt: `In @[file], the function [functionName] is returning [actual result] but it should return [expected result].
-
-Input: [describe or paste the test input]
-Expected: [what should happen]
-Actual: [what is happening]
-
-Walk me through the logic step by step, identify where it goes wrong, and fix it.`
-                },
-                {
-                  title: "Fix Failing Tests",
-                  prompt: `These tests in @[test-file] are failing: [paste test names or output]
-
-The implementation is in @[impl-file].
-
-Don't change the tests — fix the implementation to make all tests pass. Explain what was wrong.`
-                },
-              ].map((item) => (
-                <Card key={item.title} className="p-6 border-l-4 border-l-red-500">
-                  <h4 className="font-bold mb-3">{item.title}</h4>
-                  <pre className="bg-muted rounded-lg p-4 text-sm overflow-x-auto whitespace-pre-wrap font-mono leading-relaxed">{item.prompt}</pre>
-                </Card>
-              ))}
-            </div>
-          </section>
-
-          {/* @ Context */}
-          <section id="context" className="scroll-mt-12">
-            <h2 className="text-4xl font-bold tracking-tight mb-2">@ Context Mastery</h2>
-            <p className="text-muted-foreground mb-8">The @ symbol is Cursor's superpower. Always add context — it dramatically improves output quality.</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-              {[
-                { symbol: "@file", use: "Reference a specific file — Cursor reads it fully before responding" },
-                { symbol: "@folder", use: "Reference an entire directory — great for 'follow the patterns in @components'" },
-                { symbol: "@codebase", use: "Cursor searches your whole repo for relevant context — use for architecture questions" },
-                { symbol: "@web", use: "Cursor fetches live web content — use for docs, changelogs, or API references" },
-                { symbol: "@docs", use: "Reference your custom docs indexed in Cursor settings" },
-                { symbol: "@git", use: "Reference recent git commits — 'what changed in @git last 5 commits?'" },
-                { symbol: "@terminal", use: "Include your terminal output as context — great for debugging build errors" },
-                { symbol: "@notepads", use: "Reference saved notepads with recurring context like architecture decisions" },
-              ].map((item) => (
-                <Card key={item.symbol} className="p-4">
-                  <code className="text-[#6c47ff] font-bold font-mono">{item.symbol}</code>
-                  <p className="text-sm text-muted-foreground mt-1">{item.use}</p>
-                </Card>
-              ))}
-            </div>
-          </section>
-
-          {/* .cursorrules */}
-          <section id="rules" className="scroll-mt-12">
-            <h2 className="text-4xl font-bold tracking-tight mb-2">.cursorrules — The Secret Weapon</h2>
-            <p className="text-muted-foreground mb-6">
-              Create a <code className="text-[#6c47ff] font-mono bg-muted px-1 rounded">.cursorrules</code> file in your project root. Cursor reads it before every response. This lets you set permanent instructions so you never have to repeat yourself.
-            </p>
-            <Card className="p-6 mb-8">
-              <h4 className="font-bold mb-4">Example .cursorrules for a Next.js project:</h4>
-              <pre className="bg-muted rounded-lg p-4 text-sm overflow-x-auto font-mono leading-relaxed">{`# Project: [Your App Name]
-# Stack: Next.js 14, TypeScript, Tailwind CSS, Prisma, PostgreSQL
-
-## Code Style
-- Use TypeScript strict mode — never use 'any'
-- Prefer const over let
-- Use named exports, not default exports (except pages)
-- Function components only (no class components)
-- Use Tailwind for styling — no inline styles or CSS modules
-
-## Architecture
-- App Router: server components by default, 'use client' only when needed
-- Data fetching: React Server Components with async/await
-- Database: always use Prisma ORM, never raw SQL
-- API routes in /app/api/[route]/route.ts format
-
-## Patterns
-- Error handling: always use try/catch with proper error types
-- Loading states: always add loading.tsx for async data
-- Validation: always use Zod for input validation
-- Auth: use the auth() function from @/lib/auth
-
-## Don't
-- Don't use useEffect for data fetching — use server components
-- Don't use React Query — we use server-side data fetching
-- Don't add new dependencies without asking first`}</pre>
-            </Card>
-          </section>
-
-          {/* FAQ */}
-          <section id="faq" className="scroll-mt-12">
-            <h2 className="text-4xl font-bold tracking-tight mb-8">Cursor AI FAQ</h2>
-            <Accordion type="single" collapsible className="space-y-2">
-              {[
-                { q: "Is Cursor AI better than GitHub Copilot?", a: "For most developers, yes. Cursor's key advantage is its codebase awareness — it understands your entire project, not just the current file. Composer can generate code across multiple files simultaneously, which Copilot cannot do. However, Copilot has tighter IDE integration in VS Code and a lower price point." },
-                { q: "Which AI model should I use in Cursor?", a: "For complex tasks (architecture, full feature generation), use Claude 3.7 Sonnet or GPT-4o — they have the best reasoning. For quick edits and autocomplete, cursor-small (Cursor's built-in model) is fastest. GPT-4o works great for debugging. Claude excels at TypeScript and modern frameworks." },
-                { q: "What is the best way to use Cursor's Composer?", a: "Always: 1) Start with a clear goal statement, 2) Reference relevant existing files with @, 3) Specify what patterns to follow, 4) Tell it what NOT to change. The more context you give, the better the output. Think of Composer like briefing a senior engineer — give them the full picture." },
-                { q: "How do I make Cursor remember my preferences?", a: "Use .cursorrules in your project root for project-specific rules. Use Cursor Settings → Rules for AI for global preferences that apply everywhere. You can add rules like 'always use TypeScript', 'prefer functional programming', or 'always add error handling'." },
-                { q: "Can Cursor build an entire app from scratch?", a: "Yes — and this is increasingly common ('vibe coding'). The best approach: start with a clear architecture prompt describing the full stack and structure, then use Composer for each feature. The key is being specific about tech choices, existing patterns, and constraints." },
-              ].map((item) => (
-                <AccordionItem key={item.q} value={item.q} className="border rounded-lg px-4">
-                  <AccordionTrigger className="text-left font-medium">{item.q}</AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground leading-relaxed">{item.a}</AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </section>
-
-          {/* Related */}
-          <section className="border-t pt-16">
-            <h2 className="text-2xl font-bold mb-6">Continue Learning</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              {[
-                { label: "Vibe Coding Guide", href: "/vibe-coding-prompts" },
-                { label: "AI Coding Prompts", href: "/ai-prompts-coding" },
-                { label: "ChatGPT for Coding", href: "/chatgpt-code-generation" },
-                { label: "Claude for Code", href: "/claude-prompts" },
-                { label: "GitHub Copilot", href: "/ai-prompts-coding" },
-                { label: "Prompt Engineering", href: "/prompt-engineering-fundamentals" },
-                { label: "System Prompts", href: "/chatgpt-system-prompts" },
-                { label: "Prompt Best Practices", href: "/prompt-best-practices" },
-              ].map((link) => (
-                <Link key={link.href} href={link.href} className="text-sm font-medium text-center p-3 rounded-lg border hover:border-[#6c47ff] hover:text-[#6c47ff] transition-colors">
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </section>
+- Each tier shows: name, price, feature list, and CTA button
+- Use our existing Button and Card components
+- Responsive: stack vertically on mobile, 3 columns on desktop
+- Highlight the "Pro" tier as recommended
+- Add a monthly/annual toggle that updates prices
+- Use our Tailwind theme colors from the config
+- TypeScript with proper prop types
+- Export as default from src/components/PricingTable.tsx`} />
+          </div>
         </div>
       </section>
-    </main>
+
+      {/* Debugging & Performance */}
+      <section className="py-14 px-4 border-b border-[#1a1a1a]">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-center gap-3 mb-2">
+            <Terminal size={20} className="text-[#7C3AED]" />
+            <h2 className="text-2xl font-bold">Debugging and Performance</h2>
+          </div>
+          <p className="text-gray-400 mb-6">Paste errors into Chat with file references for context-aware debugging that actually understands your code.</p>
+          <div className="grid gap-4">
+            <CopyCard tag="Chat" title="Error Diagnosis with Stack Trace" prompt={`@file:src/app/api/auth/route.ts
+
+I am getting this error in production:
+
+[PASTE YOUR ERROR AND STACK TRACE HERE]
+
+This happens when users try to [describe the action]. It worked fine until [what changed recently].
+
+Please:
+1. Identify the root cause based on my actual code
+2. Explain why this error occurs
+3. Provide the exact fix with code changes
+4. Suggest how to prevent similar issues in the future`} />
+
+            <CopyCard tag="Chat" title="Performance Profiling and Optimization" prompt={`@file:src/components/DataTable.tsx @file:src/hooks/useData.ts
+
+This component re-renders excessively and the page feels sluggish with 500+ rows. Profile the component and tell me:
+
+1. What is causing unnecessary re-renders?
+2. Are there missing memoization opportunities (useMemo, useCallback, React.memo)?
+3. Should I implement virtualization for this dataset size?
+4. Are there any expensive computations that should be cached?
+5. What is the optimal data fetching strategy for this pattern?
+
+Give me the optimized version of both files with explanations for each change.`} />
+
+            <CopyCard tag="Chat" title="Race Condition and Async Bug Fix" prompt={`@file:src/hooks/useSearch.ts @file:src/lib/api.ts
+
+My search feature has a race condition. When I type quickly, older API responses sometimes overwrite newer results. The search results flicker and show stale data.
+
+Current behavior: type "react" -> results for "r", "re", "rea" arrive out of order
+Expected behavior: only show results for the final query "react"
+
+Analyze the code and fix the race condition. Consider: AbortController, request cancellation, debouncing, and stale request detection. Show me the complete fixed implementation.`} />
+          </div>
+        </div>
+      </section>
+
+      {/* Testing & Quality */}
+      <section className="py-14 px-4 border-b border-[#1a1a1a]">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-center gap-3 mb-2">
+            <Layers size={20} className="text-[#7C3AED]" />
+            <h2 className="text-2xl font-bold">Testing and Quality</h2>
+          </div>
+          <p className="text-gray-400 mb-6">Generate comprehensive test suites that cover real scenarios, not just happy paths.</p>
+          <div className="grid gap-4">
+            <CopyCard tag="Composer" title="Comprehensive Test Suite Generation" prompt={`@file:src/components/CheckoutForm.tsx @file:src/lib/payments.ts @file:src/types/order.ts
+
+Generate a complete test suite for CheckoutForm using our existing test patterns:
+
+1. Unit tests for form validation (valid/invalid inputs for each field)
+2. Integration tests for the payment submission flow
+3. Edge cases: network failures, duplicate submissions, timeout handling
+4. Accessibility tests: keyboard navigation, screen reader labels, error announcements
+5. Mock the payments API following our existing mock patterns
+
+Use the same test framework and assertion style as our other test files. Include both positive and negative test cases. Add descriptive test names that explain the expected behavior.`} />
+
+            <CopyCard tag="Chat" title="Code Review and Quality Analysis" prompt={`@file:src/services/OrderService.ts
+
+Review this code as a senior engineer. Check for:
+
+1. Bug risks: null/undefined handling, off-by-one errors, race conditions
+2. Security: input validation, SQL injection, XSS, data exposure
+3. Performance: N+1 queries, unnecessary allocations, missing indexes
+4. Maintainability: naming, single responsibility, testability, DRY violations
+5. Error handling: are all failure modes covered? Are errors informative?
+
+For each issue found, explain the risk level (critical/medium/low), show the problematic line, and provide the exact fix. Do not suggest style changes unless they affect readability.`} />
+
+            <CopyCard tag="Composer" title="E2E Test Scenarios from User Stories" prompt={`@codebase
+
+Generate end-to-end test scenarios for our user authentication flow. Cover these user stories:
+
+1. New user signs up with email and password
+2. Existing user logs in
+3. User resets forgotten password
+4. OAuth login with Google
+5. Session expiry and automatic redirect to login
+6. Rate limiting after 5 failed login attempts
+
+For each scenario, write the test using our existing E2E framework. Include setup, the user actions, assertions, and teardown. Make sure tests are independent and can run in any order.`} />
+          </div>
+        </div>
+      </section>
+
+      {/* Architecture & Design Patterns */}
+      <section className="py-14 px-4 border-b border-[#1a1a1a]">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-center gap-3 mb-2">
+            <Cpu size={20} className="text-[#7C3AED]" />
+            <h2 className="text-2xl font-bold">Architecture and Design Patterns</h2>
+          </div>
+          <p className="text-gray-400 mb-6">Use Cursor Chat for architecture decisions and Composer for implementation. Let the AI reason about tradeoffs before writing code.</p>
+          <div className="grid gap-4">
+            <CopyCard tag="Chat" title="Architecture Decision Analysis" prompt={`@codebase
+
+I need to add real-time notifications to this app. Before writing any code, analyze our current architecture and recommend an approach:
+
+1. What real-time technology fits best? (WebSockets, SSE, polling, or a managed service like Pusher/Ably)
+2. Where should the notification logic live in our current architecture?
+3. How should we handle: delivery guarantees, offline users, notification preferences, and read/unread state?
+4. What database changes are needed?
+5. What are the scaling implications of each approach?
+
+Consider our current tech stack, deployment setup, and team size. Recommend the simplest solution that meets the requirements. Do not write code yet.`} />
+
+            <CopyCard tag="Composer" title="Refactor to Clean Architecture" prompt={`@file:src/app/api/orders/route.ts
+
+This API route has grown to 300+ lines with business logic, database queries, and validation all mixed together. Refactor it into clean architecture:
+
+1. Extract business logic into a service layer (src/services/OrderService.ts)
+2. Extract database operations into a repository (src/repositories/OrderRepository.ts)
+3. Extract validation into schemas (src/schemas/order.ts)
+4. Keep the route handler thin: validate -> call service -> return response
+5. Add proper TypeScript interfaces for each layer boundary
+6. Maintain all existing behavior and error handling
+
+Show me the complete refactored files. The route handler should be under 30 lines.`} />
+
+            <CopyCard tag="Chat" title="Database Schema Design Review" prompt={`@file:prisma/schema.prisma
+
+Review my database schema for a multi-tenant SaaS application. Evaluate:
+
+1. Are relationships properly defined with appropriate cascade rules?
+2. Are indexes optimized for common query patterns?
+3. Is the multi-tenancy model correct (shared database, tenant_id column)?
+4. Are there any normalization issues or missing tables?
+5. What fields need unique constraints that are currently missing?
+6. Will this schema handle 100K+ tenants and millions of rows efficiently?
+
+For each suggestion, explain the problem it solves and provide the exact schema change.`} />
+          </div>
+        </div>
+      </section>
+
+      {/* Productivity & Workflow */}
+      <section className="py-14 px-4 border-b border-[#1a1a1a]">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-center gap-3 mb-2">
+            <GitBranch size={20} className="text-[#7C3AED]" />
+            <h2 className="text-2xl font-bold">Productivity and Workflow</h2>
+          </div>
+          <p className="text-gray-400 mb-6">Accelerate everyday development tasks with prompts designed for real-world workflows.</p>
+          <div className="grid gap-4">
+            <CopyCard tag="Chat" title="PR Description and Documentation" prompt={`@git
+
+I just finished implementing [FEATURE_NAME]. Look at my recent git changes and generate:
+
+1. A PR description with: summary, motivation, what changed (grouped by area), testing notes, and screenshots needed
+2. Update the relevant README or docs to reflect the new feature
+3. Add inline code comments for any complex logic that future developers might find confusing
+4. Suggest if this PR should be split into smaller PRs for easier review
+
+Format the PR description in markdown with clear sections.`} />
+
+            <CopyCard tag="Inline" title="Quick Refactor with Cmd+K" prompt={`Refactor this function to:
+- Use early returns instead of nested if/else
+- Add TypeScript types for all parameters and return value
+- Handle the null/undefined edge cases
+- Add a JSDoc comment explaining what it does
+- Keep the same behavior, just cleaner code`} />
+
+            <CopyCard tag="Chat" title="Codebase Onboarding and Understanding" prompt={`@codebase
+
+I just joined this project. Give me a complete onboarding overview:
+
+1. What is this application and what does it do?
+2. What is the tech stack (frontend, backend, database, deployment)?
+3. How is the codebase organized? Explain the folder structure and key directories.
+4. What are the main data models and how do they relate?
+5. Where are the API routes and what patterns do they follow?
+6. What testing frameworks and patterns are used?
+7. What are the most important files I should read first?
+
+Be specific and reference actual files and directories. Do not give generic advice.`} />
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-14 px-4 border-b border-[#1a1a1a]">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
+          <div className="space-y-3">
+            {faqItems.map((item, i) => (
+              <FAQ key={i} q={item.q} a={item.a} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Related Pages */}
+      <section className="py-14 px-4">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-xl font-bold mb-6">Related Prompt Guides</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {[
+              { label: "AI Coding Prompts", href: "/ai-prompts-coding" },
+              { label: "ChatGPT Code Generation", href: "/chatgpt-code-generation" },
+              { label: "Replit Agent Prompts", href: "/replit-agent-prompts" },
+              { label: "v0 Prompts", href: "/v0-prompts" },
+              { label: "Lovable AI Prompts", href: "/lovable-ai-prompts" },
+              { label: "BlackBox AI", href: "/blackbox-ai" },
+              { label: "GitHub Copilot Prompts", href: "/github-copilot-prompts" },
+              { label: "AI for Developers", href: "/ai-prompts-for-developers" },
+            ].map(link => (
+              <Link key={link.href} href={link.href} className="text-sm px-4 py-3 bg-[#1a1a1a] border border-[#2a2a2a] rounded-xl text-gray-300 hover:border-[#7C3AED]/40 hover:text-white transition-all text-center">
+                {link.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
   )
 }
