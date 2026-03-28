@@ -131,7 +131,7 @@ const FAQ_ITEMS = [
     answer: 'Yes. Share your revenue trends, expense breakdowns, or financial questions with ChatGPT, and it can help you identify patterns and suggest areas to investigate. However, consult a real accountant for tax, legal, or complex financial decisions.',
   },
   {
-    question: 'Is it ethical to use ChatGPT for marketing if customers don't know?',
+    question: 'Is it ethical to use ChatGPT for marketing if customers don&apos;t know?',
     answer: 'Yes, as long as your marketing is honest. Using ChatGPT to draft emails, social media posts, or FAQs is fine. You are responsible for ensuring all claims are true, offers are clear, and customer data is protected. Transparency about AI use is increasingly expected in content creation.',
   },
   {

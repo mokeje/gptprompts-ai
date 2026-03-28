@@ -47,7 +47,7 @@ const FAQ = () => {
     },
     {
       q: 'How does Luma AI handle character consistency across videos?',
-      a: 'Luma AI maintains strong character consistency by learning from initial character descriptions and visual references. When generating character animations, provide detailed descriptions including appearance, clothing, and movement style. For best results across multiple videos, use the same character reference image and descriptive parameters in your prompts. Luma's consistency features have improved significantly, making it reliable for character-driven narratives and branded content where maintaining visual identity is essential.'
+      a: 'Luma AI maintains strong character consistency by learning from initial character descriptions and visual references. When generating character animations, provide detailed descriptions including appearance, clothing, and movement style. For best results across multiple videos, use the same character reference image and descriptive parameters in your prompts. Luma&apos;s consistency features have improved significantly, making it reliable for character-driven narratives and branded content where maintaining visual identity is essential.'
     },
     {
       q: 'What is the ideal prompt structure for Luma AI?',

@@ -51,11 +51,6 @@ const FAQCollapse = ({ question, answer }: { question: string; answer: string })
   );
 };
 
-export const metadata = {
-  title: 'AI Prompts for Real Estate Agents | GPTPrompts.AI',
-  description: 'Discover powerful ChatGPT prompts designed for real estate professionals. Automate property listings, client follow-ups, market analysis, and social media with AI.',
-};
-
 export default function RealEstateAgentsPage() {
   return (
     <div className="min-h-screen bg-slate-900 text-white">
