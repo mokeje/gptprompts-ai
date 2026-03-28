@@ -7,7 +7,7 @@ import { HomePageGEOSchemas } from "@/components/geo-schemas"
 export const metadata: Metadata = {
   title: "GPTPrompts.AI — Master AI Prompts & Prompt Engineering",
   description:
-    "The internet's most comprehensive prompt engineering resource. 188+ expert guides for ChatGPT, Claude, Gemini, Midjourney, and more. Free, up-to-date, and AI-search optimized. Last updated 2026.",
+    "The internet's most comprehensive prompt engineering resource. 230+ expert guides for ChatGPT, Claude, Gemini, Midjourney, and more. Free, up-to-date, and AI-search optimized. Last updated 2026.",
   keywords: [
     "AI prompts",
     "prompt engineering",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 }
 
 const stats = [
-  { value: "188+", label: "Prompt Guides" },
+  { value: "230+", label: "Prompt Guides" },
   { value: "10", label: "Content Categories" },
   { value: "Free", label: "Always" },
   { value: "2026", label: "Up to Date" },
@@ -38,9 +38,9 @@ const categoryHighlights = [
       { label: "ChatGPT Prompts", href: "/chatgpt-prompts" },
       { label: "Claude Prompts", href: "/claude-prompts" },
       { label: "Gemini Prompts", href: "/gemini-prompts" },
-      { label: "Midjourney Prompts", href: "/midjourney-prompts" },
+      { label: "Grok Prompts", href: "/grok-prompts" },
     ],
-    count: 10,
+    count: 12,
   },
   {
     id: "prompt-engineering",
@@ -63,12 +63,12 @@ const categoryHighlights = [
     icon: "🎨",
     color: "bg-pink-500",
     pages: [
+      { label: "ChatGPT Image Generation", href: "/chatgpt-image-generation-prompts" },
       { label: "Midjourney Guide", href: "/midjourney-guide" },
       { label: "DALL-E 3 Prompts", href: "/dalle-3-prompts" },
-      { label: "Stable Diffusion", href: "/stable-diffusion-guide" },
-      { label: "Leonardo AI", href: "/leonardo-ai-prompts" },
+      { label: "Flux AI Prompts", href: "/flux-ai-prompts" },
     ],
-    count: 24,
+    count: 28,
   },
   {
     id: "career-writing",
@@ -105,12 +105,40 @@ const categoryHighlights = [
     icon: "🏢",
     color: "bg-orange-500",
     pages: [
-      { label: "Legal Prompts", href: "/legal-brief-prompts" },
-      { label: "Medical Education", href: "/medical-education-prompts" },
-      { label: "Real Estate AI", href: "/real-estate-market-analysis" },
-      { label: "Nonprofit Writing", href: "/nonprofit-grant-writing" },
+      { label: "AI for Marketers", href: "/ai-prompts-for-marketers" },
+      { label: "AI for Developers", href: "/ai-prompts-for-developers" },
+      { label: "AI for Data Analysts", href: "/ai-prompts-for-data-analysts" },
+      { label: "AI for Consultants", href: "/ai-prompts-for-consultants" },
     ],
-    count: 22,
+    count: 35,
+  },
+  {
+    id: "ai-tools",
+    title: "AI Tools & Apps",
+    description: "Cursor AI, GitHub Copilot, Napkin AI, Lovable, v0, and more coding & productivity tools",
+    icon: "⚡",
+    color: "bg-indigo-500",
+    pages: [
+      { label: "Cursor AI Prompts", href: "/cursor-ai-prompts" },
+      { label: "GitHub Copilot", href: "/github-copilot-prompts" },
+      { label: "Napkin AI", href: "/napkin-ai-prompts" },
+      { label: "Lovable AI", href: "/lovable-ai-prompts" },
+    ],
+    count: 18,
+  },
+  {
+    id: "productivity",
+    title: "Productivity & Lifestyle",
+    description: "Excel, presentations, brainstorming, meal planning, personal finance & more",
+    icon: "🚀",
+    color: "bg-cyan-500",
+    pages: [
+      { label: "ChatGPT for Excel", href: "/chatgpt-prompts-excel" },
+      { label: "AI for Presentations", href: "/ai-prompts-presentations" },
+      { label: "AI for Brainstorming", href: "/ai-prompts-brainstorming" },
+      { label: "AI for Meeting Notes", href: "/ai-prompts-meeting-notes" },
+    ],
+    count: 12,
   },
 ]
 
@@ -144,18 +172,32 @@ const featuredGuides = [
     badgeColor: "bg-amber-100 text-amber-800",
   },
   {
-    label: "Few-Shot Prompting",
-    href: "/few-shot-prompting",
-    description: "Use examples to get 10x better AI responses every time",
-    badge: "Technique",
+    label: "Grok AI Prompts",
+    href: "/grok-prompts",
+    description: "Real-time web access, deep reasoning, and X/Twitter integration",
+    badge: "New",
+    badgeColor: "bg-orange-100 text-orange-800",
+  },
+  {
+    label: "Cursor AI Prompts",
+    href: "/cursor-ai-prompts",
+    description: "The AI code editor that understands your entire codebase",
+    badge: "Developer",
     badgeColor: "bg-violet-100 text-violet-800",
   },
   {
-    label: "College Application Essays",
-    href: "/college-application-essays",
-    description: "Win admissions at top schools with AI-crafted essays",
-    badge: "Student",
-    badgeColor: "bg-blue-100 text-blue-800",
+    label: "AI Prompts for Marketers",
+    href: "/ai-prompts-for-marketers",
+    description: "Campaign strategy, content creation, SEO, and analytics",
+    badge: "Industry",
+    badgeColor: "bg-pink-100 text-pink-800",
+  },
+  {
+    label: "ChatGPT for Excel",
+    href: "/chatgpt-prompts-excel",
+    description: "Formulas, macros, dashboards, and data analysis made easy",
+    badge: "Productivity",
+    badgeColor: "bg-green-100 text-green-800",
   },
 ]
 
@@ -170,7 +212,7 @@ export default function HomePage() {
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-2 text-xs font-mono bg-white/10 border border-white/20 rounded-full px-4 py-1.5 mb-8">
               <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
-              188+ guides · Updated 2026
+              230+ guides · Updated 2026
             </div>
             <h1 className="text-6xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-none mb-6">
               The world&apos;s best
@@ -221,7 +263,7 @@ export default function HomePage() {
             Browse by category
           </h2>
           <p className="text-lg text-gray-500">
-            188+ prompt guides organized into 10 focused categories
+            230+ prompt guides organized into 12 focused categories
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -298,7 +340,7 @@ export default function HomePage() {
               href="/website-links"
               className="inline-flex items-center gap-2 text-sm font-semibold text-black underline underline-offset-4 hover:no-underline"
             >
-              View all 188+ guides
+              View all 230+ guides
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -422,7 +464,7 @@ export default function HomePage() {
               href="/website-links"
               className="inline-flex items-center gap-2 border border-white/30 text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors"
             >
-              Browse 188+ guides
+              Browse 230+ guides
             </Link>
           </div>
         </div>

@@ -1,37 +1,41 @@
 import Link from "next/link"
 
 const footerLinks = {
-  "AI Model Prompts": [
+  "AI Models": [
     { label: "ChatGPT Prompts", href: "/chatgpt-prompts" },
     { label: "Claude Prompts", href: "/claude-prompts" },
     { label: "Gemini Prompts", href: "/gemini-prompts" },
-    { label: "Midjourney Prompts", href: "/midjourney-prompts" },
+    { label: "Grok Prompts", href: "/grok-prompts" },
     { label: "Perplexity Prompts", href: "/perplexity-prompts" },
     { label: "DeepSeek Prompts", href: "/deepseek-ai-prompts" },
+    { label: "Midjourney Prompts", href: "/midjourney-prompts" },
   ],
-  "Prompt Engineering": [
-    { label: "How to Write AI Prompts", href: "/how-to-write-effective-ai-prompts" },
-    { label: "Few-Shot Prompting", href: "/few-shot-prompting" },
-    { label: "Prompt Chaining", href: "/prompt-chaining-guide" },
-    { label: "Avoiding Hallucinations", href: "/avoiding-hallucinations" },
-    { label: "Prompt Optimization", href: "/prompt-optimization" },
-    { label: "Free AI Prompts", href: "/free-ai-prompts" },
-  ],
-  "Image & Video": [
-    { label: "Midjourney Guide", href: "/midjourney-guide" },
-    { label: "DALL-E 3 Prompts", href: "/dalle-3-prompts" },
+  "AI Tools & Coding": [
+    { label: "Cursor AI Prompts", href: "/cursor-ai-prompts" },
+    { label: "GitHub Copilot", href: "/github-copilot-prompts" },
+    { label: "Napkin AI Prompts", href: "/napkin-ai-prompts" },
+    { label: "Lovable AI Prompts", href: "/lovable-ai-prompts" },
+    { label: "ChatGPT Image Generation", href: "/chatgpt-image-generation-prompts" },
     { label: "Stable Diffusion", href: "/stable-diffusion-guide" },
-    { label: "Adobe Firefly", href: "/adobe-firefly-prompts" },
-    { label: "Runway ML", href: "/runway-ml-prompts" },
-    { label: "Leonardo AI", href: "/leonardo-ai-prompts" },
+    { label: "DALL-E 3 Prompts", href: "/dalle-3-prompts" },
   ],
-  "Career & Academic": [
+  "By Profession": [
+    { label: "AI for Marketers", href: "/ai-prompts-for-marketers" },
+    { label: "AI for Developers", href: "/ai-prompts-for-developers" },
+    { label: "AI for Data Analysts", href: "/ai-prompts-for-data-analysts" },
+    { label: "AI for UX Designers", href: "/ai-prompts-for-ux-designers" },
+    { label: "AI for Journalists", href: "/ai-prompts-for-journalists" },
+    { label: "AI for Consultants", href: "/ai-prompts-for-consultants" },
+    { label: "AI for Photographers", href: "/ai-prompts-for-photographers" },
+  ],
+  "Productivity & Career": [
+    { label: "ChatGPT for Excel", href: "/chatgpt-prompts-excel" },
+    { label: "AI for Presentations", href: "/ai-prompts-presentations" },
+    { label: "AI for Brainstorming", href: "/ai-prompts-brainstorming" },
+    { label: "AI for Meeting Notes", href: "/ai-prompts-meeting-notes" },
     { label: "Resume Prompts", href: "/resume-prompts" },
     { label: "Cover Letter Prompts", href: "/cover-letter-prompts" },
-    { label: "College Essays", href: "/college-application-essays" },
-    { label: "IELTS Prep", href: "/ielts-prompts" },
-    { label: "SAT Prep", href: "/sat-act-prep" },
-    { label: "Prompt Engineering Jobs", href: "/prompt-engineering-jobs-2026" },
+    { label: "Free AI Prompts", href: "/free-ai-prompts" },
   ],
 }
 
@@ -65,7 +69,7 @@ export function SiteFooter() {
               GPTPrompts<span className="text-gray-600">.AI</span>
             </span>
             <span className="text-xs text-gray-600">•</span>
-            <span className="text-sm text-gray-500">188+ prompt guides</span>
+            <span className="text-sm text-gray-500">230+ prompt guides</span>
           </div>
           <div className="flex items-center gap-6 text-sm">
             <Link href="/website-links" className="hover:text-white transition-colors">

@@ -296,6 +296,7 @@ export default function GeminiPage() {
                 { label: "Perplexity Prompts", href: "/perplexity-prompts" },
                 { label: "Midjourney Prompts", href: "/midjourney-prompts" },
                 { label: "Stable Diffusion Prompts", href: "/stable-diffusion-prompts" },
+                { label: "Grok Prompts", href: "/grok-prompts" },
               ].map((link) => (
                 <li key={link.href}>
                   <Link
@@ -310,15 +311,15 @@ export default function GeminiPage() {
           </div>
 
           <div className="space-y-8">
-            <h4 className="text-xs font-bold uppercase tracking-[0.2em] opacity-40">Career & Writing</h4>
+            <h4 className="text-xs font-bold uppercase tracking-[0.2em] opacity-40">AI Tools & Professions</h4>
             <ul className="space-y-5 text-sm font-medium">
               {[
-                { label: "Resume Prompts", href: "/resume-prompts" },
-                { label: "Cover Letter Prompts", href: "/cover-letter-prompts" },
-                { label: "Personal Statement Prompts", href: "/essay-prompts" },
-                { label: "Writing Prompts", href: "/writing-prompts" },
-                { label: "Story Prompts", href: "/story-prompts" },
-                { label: "500+ Writing Prompts", href: "/500-writing-prompts" },
+                { label: "Cursor AI Prompts", href: "/cursor-ai-prompts" },
+                { label: "GitHub Copilot", href: "/github-copilot-prompts" },
+                { label: "AI for Marketers", href: "/ai-prompts-for-marketers" },
+                { label: "AI for Developers", href: "/ai-prompts-for-developers" },
+                { label: "AI for Data Analysts", href: "/ai-prompts-for-data-analysts" },
+                { label: "ChatGPT for Excel", href: "/chatgpt-prompts-excel" },
               ].map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="hover:text-primary transition-colors opacity-80 hover:opacity-100">
@@ -330,12 +331,15 @@ export default function GeminiPage() {
           </div>
 
           <div className="space-y-8">
-            <h4 className="text-xs font-bold uppercase tracking-[0.2em] opacity-40">Specialized</h4>
+            <h4 className="text-xs font-bold uppercase tracking-[0.2em] opacity-40">Productivity</h4>
             <ul className="space-y-5 text-sm font-medium">
               {[
-                { label: "Image Prompts", href: "/image-prompts" },
-                { label: "SQL Prompts", href: "/sql-prompts" },
-                { label: "Journaling Guide", href: "/journal-guide" },
+                { label: "AI for Presentations", href: "/ai-prompts-presentations" },
+                { label: "AI for Brainstorming", href: "/ai-prompts-brainstorming" },
+                { label: "AI for Meeting Notes", href: "/ai-prompts-meeting-notes" },
+                { label: "Business Plans", href: "/chatgpt-prompts-business-plans" },
+                { label: "Personal Finance", href: "/ai-prompts-personal-finance" },
+                { label: "Customer Service", href: "/ai-prompts-customer-service" },
               ].map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="hover:text-primary transition-colors opacity-80 hover:opacity-100">
@@ -350,12 +354,12 @@ export default function GeminiPage() {
             <h4 className="text-xs font-bold uppercase tracking-[0.2em] opacity-40">Resources & Guides</h4>
             <ul className="space-y-5 text-sm font-medium">
               {[
-                { label: "Virtual Assistant Prompts", href: "/virtual-assistant-prompts" },
-                { label: "Creative Writing for Beginners", href: "/creative-writing-prompts-beginners" },
-                { label: "Photo Editing Prompts", href: "/photo-editing-prompts" },
-                { label: "Social Media Marketing", href: "/social-media-marketing-prompts" },
+                { label: "Resume Prompts", href: "/resume-prompts" },
+                { label: "Cover Letter Prompts", href: "/cover-letter-prompts" },
+                { label: "Image Prompts", href: "/image-prompts" },
                 { label: "Free Prompts Library", href: "/free-ai-prompts" },
-                { label: "Coolest ChatGPT Prompts", href: "/coolest-chatgpt-prompts" },
+                { label: "Writing Prompts", href: "/writing-prompts" },
+                { label: "Social Media Marketing", href: "/social-media-marketing-prompts" },
               ].map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="hover:text-primary transition-colors opacity-80 hover:opacity-100">

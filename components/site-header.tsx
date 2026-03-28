@@ -166,7 +166,7 @@ export function SiteHeader() {
                 className="block px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-50"
                 onClick={() => setMobileOpen(false)}
               >
-                All Prompts (188+)
+                All Prompts (230+)
               </Link>
               <Link
                 href="/ai-tools-list"
@@ -197,7 +197,7 @@ export function SiteHeader() {
               <input
                 ref={searchRef}
                 type="text"
-                placeholder="Search 188+ prompt guides..."
+                placeholder="Search 230+ prompt guides..."
                 className="flex-1 text-base outline-none"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}

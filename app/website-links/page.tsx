@@ -4,9 +4,9 @@ import { ArrowRight } from "lucide-react"
 import { allPages, categories, getPagesByCategory } from "@/data/pages"
 
 export const metadata: Metadata = {
-  title: "Complete Prompts Library — 188+ AI Prompt Guides | GPTPrompts.AI",
+  title: "Complete Prompts Library — 230+ AI Prompt Guides | GPTPrompts.AI",
   description:
-    "Browse all 188+ AI prompt guides on GPTPrompts.AI. Find expert resources for ChatGPT, Claude, Gemini, Midjourney, prompt engineering techniques, image generation, career writing, and more.",
+    "Browse all 230+ AI prompt guides on GPTPrompts.AI. Find expert resources for ChatGPT, Claude, Gemini, Midjourney, prompt engineering techniques, image generation, career writing, and more.",
   keywords: "prompts library, AI prompts, ChatGPT prompts, prompt engineering, Midjourney prompts",
 }
 
