@@ -225,6 +225,30 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/ai-prompts-health-wellness-coaches",
   ]
 
+  // New Pages (March 2026)
+  const march2026Pages = [
+    "/lovable-ai-prompts",
+    "/v0-prompts",
+    "/flux-ai-prompts",
+    "/pika-ai-prompts",
+    "/ideogram-ai-prompts",
+    "/luma-ai-prompts",
+    "/replit-agent-prompts",
+    "/notebooklm-prompts",
+    "/ai-prompts-product-managers",
+    "/ai-prompts-hr-recruiting",
+    "/ai-prompts-accountants",
+    "/ai-prompts-interior-design",
+    "/ai-prompts-lawyers",
+    "/ai-prompts-small-business",
+    "/ai-prompts-real-estate-agents",
+    "/ai-prompts-teachers-educators",
+    "/ai-prompts-coaches",
+    "/ai-prompts-content-creators",
+    "/chatgpt-email-marketing-prompts",
+    "/chatgpt-social-media-manager-prompts",
+  ]
+
   const allPages = [
     ...corePages,
     ...aiModelPages,
@@ -254,6 +278,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...professionalPromptingPages,
     ...aiToolsPages,
     ...websiteLinks,
+
+    // New Pages (March 2026)
+    ...march2026Pages,
   ]
 
   return allPages.map((route) => ({

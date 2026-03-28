@@ -1384,6 +1384,173 @@ export const allPages: PageEntry[] = [
     description: "Join the GPTPrompts.AI team",
     tags: ["careers", "jobs"],
   },
+
+  // ── New Pages (March 2026) ───────────────────────────────────────────
+
+  // AI Tools
+  {
+    label: "Lovable AI Prompts",
+    href: "/lovable-ai-prompts",
+    category: "ai-tools",
+    description: "Build full-stack web apps with Lovable AI using effective prompts for SaaS, dashboards, and landing pages",
+    tags: ["lovable", "app builder", "saas", "full-stack"],
+    featured: true,
+  },
+  {
+    label: "v0 Prompts",
+    href: "/v0-prompts",
+    category: "ai-tools",
+    description: "Generate production-ready React and Next.js UI components with v0 by Vercel",
+    tags: ["v0", "vercel", "react", "ui components"],
+    featured: true,
+  },
+  {
+    label: "Replit Agent Prompts",
+    href: "/replit-agent-prompts",
+    category: "ai-tools",
+    description: "Build and deploy full applications with Replit Agent using effective prompts",
+    tags: ["replit", "agent", "deployment", "full-stack"],
+  },
+  {
+    label: "NotebookLM Prompts",
+    href: "/notebooklm-prompts",
+    category: "ai-tools",
+    description: "Master Google NotebookLM for research synthesis, study guides, and document analysis",
+    tags: ["notebooklm", "google", "research", "study"],
+  },
+
+  // Image & Video
+  {
+    label: "Flux AI Prompts",
+    href: "/flux-ai-prompts",
+    category: "image-video",
+    description: "Create stunning AI images with Flux by Black Forest Labs using structured prompt techniques",
+    tags: ["flux", "black forest labs", "image generation"],
+    featured: true,
+  },
+  {
+    label: "Pika AI Prompts",
+    href: "/pika-ai-prompts",
+    category: "image-video",
+    description: "Generate cinematic AI videos with Pika using effective motion and style prompts",
+    tags: ["pika", "video generation", "cinematic"],
+  },
+  {
+    label: "Ideogram AI Prompts",
+    href: "/ideogram-ai-prompts",
+    category: "image-video",
+    description: "Create AI images with perfect text rendering using Ideogram AI prompts",
+    tags: ["ideogram", "text in images", "typography"],
+  },
+  {
+    label: "Luma AI Prompts",
+    href: "/luma-ai-prompts",
+    category: "image-video",
+    description: "Generate photorealistic 3D scenes and videos with Luma AI Dream Machine",
+    tags: ["luma", "3d", "dream machine", "video"],
+  },
+
+  // Industry Guides
+  {
+    label: "AI Prompts for Product Managers",
+    href: "/ai-prompts-product-managers",
+    category: "industry",
+    subcategory: "business",
+    description: "AI prompts for product strategy, user research, roadmapping, and stakeholder communication",
+    tags: ["product management", "strategy", "roadmap", "user research"],
+    featured: true,
+  },
+  {
+    label: "AI Prompts for HR & Recruiting",
+    href: "/ai-prompts-hr-recruiting",
+    category: "industry",
+    subcategory: "business",
+    description: "AI prompts for job descriptions, candidate screening, onboarding, and HR compliance",
+    tags: ["hr", "recruiting", "hiring", "onboarding"],
+  },
+  {
+    label: "AI Prompts for Accountants",
+    href: "/ai-prompts-accountants",
+    category: "industry",
+    subcategory: "finance",
+    description: "AI prompts for bookkeeping, tax planning, financial analysis, and audit preparation",
+    tags: ["accounting", "tax", "bookkeeping", "finance"],
+    featured: true,
+  },
+  {
+    label: "AI Prompts for Interior Design",
+    href: "/ai-prompts-interior-design",
+    category: "industry",
+    subcategory: "creative",
+    description: "AI prompts for design concepts, mood boards, client proposals, and space planning",
+    tags: ["interior design", "home decor", "design concepts"],
+  },
+  {
+    label: "AI Prompts for Lawyers",
+    href: "/ai-prompts-lawyers",
+    category: "industry",
+    subcategory: "legal",
+    description: "AI prompts for legal research, contract drafting, case analysis, and client communication",
+    tags: ["legal", "law", "contracts", "case analysis"],
+    featured: true,
+  },
+  {
+    label: "AI Prompts for Small Business",
+    href: "/ai-prompts-small-business",
+    category: "industry",
+    subcategory: "business",
+    description: "AI prompts for business planning, marketing, operations, and customer service for small businesses",
+    tags: ["small business", "entrepreneurship", "startup"],
+  },
+  {
+    label: "AI Prompts for Real Estate Agents",
+    href: "/ai-prompts-real-estate-agents",
+    category: "industry",
+    subcategory: "sales",
+    description: "AI prompts for property listings, market analysis, client outreach, and deal management",
+    tags: ["real estate", "property", "listings", "market analysis"],
+  },
+  {
+    label: "AI Prompts for Teachers & Educators",
+    href: "/ai-prompts-teachers-educators",
+    category: "industry",
+    subcategory: "education",
+    description: "AI prompts for lesson planning, student assessment, differentiated instruction, and classroom management",
+    tags: ["teaching", "education", "lesson plans", "assessment"],
+  },
+  {
+    label: "AI Prompts for Coaches",
+    href: "/ai-prompts-coaches",
+    category: "industry",
+    subcategory: "coaching",
+    description: "AI prompts for client onboarding, program design, content creation, and coaching business growth",
+    tags: ["coaching", "life coach", "business coach", "programs"],
+  },
+  {
+    label: "AI Prompts for Content Creators",
+    href: "/ai-prompts-content-creators",
+    category: "industry",
+    subcategory: "creative",
+    description: "AI prompts for content ideation, scriptwriting, repurposing, and audience growth strategies",
+    tags: ["content creation", "youtube", "podcast", "creator economy"],
+    featured: true,
+  },
+
+  // Social Media & Marketing
+  {
+    label: "ChatGPT Email Marketing Prompts",
+    href: "/chatgpt-email-marketing-prompts",
+    category: "social-media",
+    description: "AI prompts for email campaigns, sequences, subject lines, and newsletter content",
+    tags: ["email marketing", "newsletters", "campaigns", "subject lines"],
+  },
+  {
+    label: "ChatGPT Social Media Manager Prompts",
+    href: "/chatgpt-social-media-manager-prompts",
+    category: "social-media",
+    description: "AI prompts for social media strategy, content calendars, community management, and analytics",
+    tags: ["social media", "content calendar", "community management"],
+  },
 ]
 
 // Helper functions
