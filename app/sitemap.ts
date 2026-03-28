@@ -305,6 +305,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // New Pages (March 2026)
     ...march2026Pages,
     ...march2026Batch2Pages,
+
+    // Batch 3 (March 2026)
+    "/sora-prompts",
+    "/openai-codex-prompts",
+    "/ai-agent-prompts",
+    "/gemini-advanced-prompts",
+    "/ai-prompts-email-writing",
+    "/ai-prompts-linkedin",
+    "/chatgpt-prompts-google-sheets",
+    "/ai-prompts-for-startups",
+    "/ai-prompts-for-researchers",
+    "/ai-prompts-for-writers",
+    "/chatgpt-prompts-coding-interviews",
+    "/ai-prompts-supply-chain",
+    "/manus-ai-prompts",
+    "/chatgpt-prompts-powerpoint",
+    "/ai-prompts-notion",
   ]
 
   return allPages.map((route) => ({
