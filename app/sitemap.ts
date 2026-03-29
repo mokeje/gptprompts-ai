@@ -252,6 +252,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/compare/midjourney-vs-ideogram",
   ]
 
+  // Best AI For [Use Case] Pages
+  const bestAIForPages = [
+    "/best-ai-for",
+    "/best-ai-for/writing",
+    "/best-ai-for/coding",
+    "/best-ai-for/students",
+    "/best-ai-for/research",
+    "/best-ai-for/image-generation",
+    "/best-ai-for/video-creation",
+    "/best-ai-for/marketing",
+    "/best-ai-for/content-creators",
+    "/best-ai-for/small-business",
+    "/best-ai-for/music",
+    "/best-ai-for/productivity",
+    "/best-ai-for/social-media",
+  ]
+
   // AI Tool Alternatives Pages
   const alternativesPages = [
     "/alternatives",
@@ -383,6 +400,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...aiToolsPages,
     ...aiToolsDirectoryPages,
     ...comparePages,
+    ...bestAIForPages,
     ...alternativesPages,
     ...websiteLinks,
 

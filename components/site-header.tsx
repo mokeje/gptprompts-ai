@@ -117,24 +117,63 @@ export function SiteHeader() {
                   </div>
                 )
               })}
-              <Link
-                href="/ai-tools"
-                className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-black rounded-md hover:bg-gray-50 transition-colors"
+              {/* AI Tools dropdown */}
+              <div
+                className="relative"
+                onMouseEnter={() => setActiveDropdown("ai-tools-section")}
+                onMouseLeave={() => setActiveDropdown(null)}
               >
-                AI Tools
-              </Link>
-              <Link
-                href="/compare"
-                className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-black rounded-md hover:bg-gray-50 transition-colors"
-              >
-                Compare
-              </Link>
-              <Link
-                href="/alternatives"
-                className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-black rounded-md hover:bg-gray-50 transition-colors"
-              >
-                Alternatives
-              </Link>
+                <button className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-gray-700 hover:text-black rounded-md hover:bg-gray-50 transition-colors">
+                  AI Tools
+                  <ChevronDown className="w-3 h-3 opacity-50" />
+                </button>
+                {activeDropdown === "ai-tools-section" && (
+                  <div className="absolute top-full right-0 pt-1 z-50 w-60">
+                    <div className="bg-white rounded-xl border border-gray-200 shadow-lg overflow-hidden">
+                      <Link
+                        href="/ai-tools"
+                        className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-black transition-colors border-b border-gray-50"
+                      >
+                        <span className="text-base">🗂️</span>
+                        <div>
+                          <div className="font-semibold">AI Tools Directory</div>
+                          <div className="text-xs text-gray-400">Browse 35+ AI tools</div>
+                        </div>
+                      </Link>
+                      <Link
+                        href="/best-ai-for"
+                        className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-black transition-colors border-b border-gray-50"
+                      >
+                        <span className="text-base">⚡</span>
+                        <div>
+                          <div className="font-semibold">Best AI For...</div>
+                          <div className="text-xs text-gray-400">By use case: writing, coding...</div>
+                        </div>
+                      </Link>
+                      <Link
+                        href="/compare"
+                        className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-black transition-colors border-b border-gray-50"
+                      >
+                        <span className="text-base">⚖️</span>
+                        <div>
+                          <div className="font-semibold">Compare Tools</div>
+                          <div className="text-xs text-gray-400">Side-by-side comparisons</div>
+                        </div>
+                      </Link>
+                      <Link
+                        href="/alternatives"
+                        className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-black transition-colors"
+                      >
+                        <span className="text-base">🔀</span>
+                        <div>
+                          <div className="font-semibold">Alternatives</div>
+                          <div className="text-xs text-gray-400">Find alternatives to any tool</div>
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
+                )}
+              </div>
               <Link
                 href="/website-links"
                 className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-black rounded-md hover:bg-gray-50 transition-colors"
@@ -179,27 +218,23 @@ export function SiteHeader() {
                   {cat.label}
                 </Link>
               ))}
-              <Link
-                href="/ai-tools"
-                className="block px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-50"
-                onClick={() => setMobileOpen(false)}
-              >
-                AI Tools Directory
-              </Link>
-              <Link
-                href="/compare"
-                className="block px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-50"
-                onClick={() => setMobileOpen(false)}
-              >
-                Compare AI Tools
-              </Link>
-              <Link
-                href="/alternatives"
-                className="block px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-50"
-                onClick={() => setMobileOpen(false)}
-              >
-                AI Alternatives
-              </Link>
+              <div className="border border-gray-100 rounded-xl overflow-hidden">
+                <div className="px-3 py-1.5 text-xs font-semibold text-gray-400 uppercase tracking-wider bg-gray-50">
+                  AI Tools
+                </div>
+                <Link href="/ai-tools" className="flex items-center gap-2 px-3 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 border-t border-gray-100" onClick={() => setMobileOpen(false)}>
+                  <span>🗂️</span> AI Tools Directory
+                </Link>
+                <Link href="/best-ai-for" className="flex items-center gap-2 px-3 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 border-t border-gray-100" onClick={() => setMobileOpen(false)}>
+                  <span>⚡</span> Best AI For...
+                </Link>
+                <Link href="/compare" className="flex items-center gap-2 px-3 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 border-t border-gray-100" onClick={() => setMobileOpen(false)}>
+                  <span>⚖️</span> Compare Tools
+                </Link>
+                <Link href="/alternatives" className="flex items-center gap-2 px-3 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 border-t border-gray-100" onClick={() => setMobileOpen(false)}>
+                  <span>🔀</span> Alternatives
+                </Link>
+              </div>
               <Link
                 href="/website-links"
                 className="block px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-50"
