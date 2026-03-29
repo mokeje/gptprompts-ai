@@ -130,6 +130,12 @@ export function SiteHeader() {
                 Compare
               </Link>
               <Link
+                href="/alternatives"
+                className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-black rounded-md hover:bg-gray-50 transition-colors"
+              >
+                Alternatives
+              </Link>
+              <Link
                 href="/website-links"
                 className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-black rounded-md hover:bg-gray-50 transition-colors"
               >
@@ -186,6 +192,13 @@ export function SiteHeader() {
                 onClick={() => setMobileOpen(false)}
               >
                 Compare AI Tools
+              </Link>
+              <Link
+                href="/alternatives"
+                className="block px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-50"
+                onClick={() => setMobileOpen(false)}
+              >
+                AI Alternatives
               </Link>
               <Link
                 href="/website-links"

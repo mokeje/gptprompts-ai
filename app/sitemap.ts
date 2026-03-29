@@ -192,6 +192,87 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const aiToolsPages = ["/ai-tools-list"]
 
+  // AI Tools Directory (added via tools.ts)
+  const aiToolsDirectoryPages = [
+    "/ai-tools",
+    "/ai-tools/chatgpt",
+    "/ai-tools/claude",
+    "/ai-tools/gemini",
+    "/ai-tools/grok",
+    "/ai-tools/perplexity",
+    "/ai-tools/microsoft-copilot",
+    "/ai-tools/meta-ai",
+    "/ai-tools/midjourney",
+    "/ai-tools/dalle-3",
+    "/ai-tools/stable-diffusion",
+    "/ai-tools/flux-ai",
+    "/ai-tools/adobe-firefly",
+    "/ai-tools/craiyon",
+    "/ai-tools/bing-image-creator",
+    "/ai-tools/ideogram",
+    "/ai-tools/sora",
+    "/ai-tools/runway",
+    "/ai-tools/kling-ai",
+    "/ai-tools/kapwing",
+    "/ai-tools/jasper",
+    "/ai-tools/copy-ai",
+    "/ai-tools/squibler",
+    "/ai-tools/cursor",
+    "/ai-tools/github-copilot",
+    "/ai-tools/windsurf",
+    "/ai-tools/v0",
+    "/ai-tools/suno",
+    "/ai-tools/udio",
+    "/ai-tools/elevenlabs",
+    "/ai-tools/notion-ai",
+    "/ai-tools/grammarly",
+    "/ai-tools/otter-ai",
+  ]
+
+  // AI Tool Comparison Pages
+  const comparePages = [
+    "/compare",
+    "/compare/chatgpt-vs-claude",
+    "/compare/chatgpt-vs-gemini",
+    "/compare/claude-vs-gemini",
+    "/compare/chatgpt-vs-perplexity",
+    "/compare/chatgpt-vs-grok",
+    "/compare/midjourney-vs-dalle-3",
+    "/compare/midjourney-vs-stable-diffusion",
+    "/compare/midjourney-vs-flux-ai",
+    "/compare/dalle-3-vs-adobe-firefly",
+    "/compare/cursor-vs-github-copilot",
+    "/compare/cursor-vs-windsurf",
+    "/compare/github-copilot-vs-windsurf",
+    "/compare/sora-vs-runway",
+    "/compare/sora-vs-kling-ai",
+    "/compare/suno-vs-udio",
+    "/compare/elevenlabs-vs-suno",
+    "/compare/perplexity-vs-chatgpt",
+    "/compare/midjourney-vs-ideogram",
+  ]
+
+  // AI Tool Alternatives Pages
+  const alternativesPages = [
+    "/alternatives",
+    "/alternatives/chatgpt",
+    "/alternatives/claude",
+    "/alternatives/gemini",
+    "/alternatives/grok",
+    "/alternatives/perplexity",
+    "/alternatives/microsoft-copilot",
+    "/alternatives/midjourney",
+    "/alternatives/dalle-3",
+    "/alternatives/stable-diffusion",
+    "/alternatives/sora",
+    "/alternatives/runway",
+    "/alternatives/cursor",
+    "/alternatives/github-copilot",
+    "/alternatives/suno",
+    "/alternatives/jasper",
+    "/alternatives/elevenlabs",
+  ]
+
   const aiToolPromptPages = [
     "/chatgpt-prompts-midjourney",
     "/runway-ml-prompts",
@@ -300,6 +381,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...aiToolProductivityPages,
     ...professionalPromptingPages,
     ...aiToolsPages,
+    ...aiToolsDirectoryPages,
+    ...comparePages,
+    ...alternativesPages,
     ...websiteLinks,
 
     // New Pages (March 2026)
