@@ -118,6 +118,12 @@ export function SiteHeader() {
                 )
               })}
               <Link
+                href="/ai-tools"
+                className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-black rounded-md hover:bg-gray-50 transition-colors"
+              >
+                AI Tools
+              </Link>
+              <Link
                 href="/website-links"
                 className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-black rounded-md hover:bg-gray-50 transition-colors"
               >
@@ -162,18 +168,18 @@ export function SiteHeader() {
                 </Link>
               ))}
               <Link
+                href="/ai-tools"
+                className="block px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-50"
+                onClick={() => setMobileOpen(false)}
+              >
+                AI Tools Directory
+              </Link>
+              <Link
                 href="/website-links"
                 className="block px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-50"
                 onClick={() => setMobileOpen(false)}
               >
                 All Prompts (300+)
-              </Link>
-              <Link
-                href="/ai-tools-list"
-                className="block px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-50"
-                onClick={() => setMobileOpen(false)}
-              >
-                AI Tools Directory
               </Link>
             </nav>
           </div>
