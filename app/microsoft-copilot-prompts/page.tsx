@@ -64,12 +64,6 @@ const FAQItem = ({ q, a }: { q: string; a: string }) => {
   )
 }
 
-export const metadata = {
-  title: "Best Microsoft Copilot Prompts: Enterprise M365 Workflows 2026 | GPTPrompts.AI",
-  description:
-    "Enterprise-grade Microsoft Copilot prompts for Teams, Excel, Power BI, Graph grounding, and M365 productivity. Boost efficiency with AI-powered workflows.",
-}
-
 export default function MicrosoftCopilotPage() {
   return (
     <main className="min-h-screen bg-[#0a0a0a]">
