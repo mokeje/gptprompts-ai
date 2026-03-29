@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Copy, Check } from 'lucide-react';
 
-const CopyCard = ({ prompt }) => {
+const CopyCard = ({ prompt }: { prompt: string }) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {

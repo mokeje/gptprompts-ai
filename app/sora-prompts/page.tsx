@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
-import { CopyCard } from '@/components/ui/copy-card';
+import { useState } from 'react';
+import { Check, Copy, ChevronDown, ChevronUp } from 'lucide-react';
 import {
   Accordion,
   AccordionContent,
@@ -9,6 +9,43 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import Link from 'next/link';
+
+const CopyCard = ({ text, accentColor }: { text: string; accentColor: string }) => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg p-6 hover:border-opacity-60 transition-colors group"
+      style={{ '--hover-color': accentColor } as React.CSSProperties}
+    >
+      <pre className="bg-[#0a0a0a] rounded p-4 text-sm text-gray-300 overflow-x-auto whitespace-pre-wrap font-mono leading-relaxed mb-4 max-h-64">
+        {text}
+      </pre>
+      <button
+        onClick={handleCopy}
+        className="w-full flex items-center justify-center gap-2 text-white font-medium py-2 px-4 rounded transition-colors"
+        style={{ backgroundColor: accentColor }}
+      >
+        {copied ? (
+          <>
+            <Check className="w-4 h-4" />
+            Copied
+          </>
+        ) : (
+          <>
+            <Copy className="w-4 h-4" />
+            Copy Prompt
+          </>
+        )}
+      </button>
+    </div>
+  );
+};
 
 const SoraPromptsPage = () => {
   const [expandedFaq, setExpandedFaq] = useState<string | undefined>(undefined);

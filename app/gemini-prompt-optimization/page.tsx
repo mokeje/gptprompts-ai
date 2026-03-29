@@ -1,362 +1,565 @@
-import type { Metadata } from "next"
-import Link from "next/link"
+'use client'
 
-export const metadata: Metadata = {
-  title: "Gemini Prompt Optimization: Advanced Techniques for Better Results",
-  description:
-    "Master Gemini prompt optimization with SI→RI→QI structure, long-context workflows, response schemas, and Draft→Critique→Revise loops. Cut factual errors by 30%+.",
-  keywords:
-    "Gemini prompt optimization, Google Gemini prompts, SI RI QI prompting, long context prompts, response schemas, Gemini API",
+import { useState } from 'react'
+import Link from 'next/link'
+import { Copy, Check, ChevronDown, ChevronUp, Zap, Brain, TrendingUp, MessageSquare, Search, Lightbulb } from 'lucide-react'
+
+const CopyCard = ({ title, prompt }: { title: string; prompt: string }) => {
+  const [copied, setCopied] = useState(false)
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(prompt)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  return (
+    <div className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg p-6 hover:border-[#4F46E5] transition-colors group">
+      <h4 className="font-bold text-white mb-4">{title}</h4>
+      <pre className="bg-[#0a0a0a] rounded p-4 text-sm text-gray-300 overflow-x-auto whitespace-pre-wrap font-mono leading-relaxed mb-4 max-h-64">
+        {prompt}
+      </pre>
+      <button
+        onClick={handleCopy}
+        className="w-full flex items-center justify-center gap-2 bg-[#4F46E5] hover:bg-[#4338CA] text-white font-medium py-2 px-4 rounded transition-colors"
+      >
+        {copied ? (
+          <>
+            <Check className="w-4 h-4" />
+            Copied
+          </>
+        ) : (
+          <>
+            <Copy className="w-4 h-4" />
+            Copy Prompt
+          </>
+        )}
+      </button>
+    </div>
+  )
+}
+
+const FAQItem = ({ q, a }: { q: string; a: string }) => {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <div className="border border-[#2a2a2a] rounded-lg">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between p-4 hover:bg-[#1a1a1a] transition-colors text-left"
+      >
+        <span className="font-medium text-white">{q}</span>
+        {open ? (
+          <ChevronUp className="w-5 h-5 text-[#4F46E5] flex-shrink-0" />
+        ) : (
+          <ChevronDown className="w-5 h-5 text-gray-500 flex-shrink-0" />
+        )}
+      </button>
+      {open && (
+        <div className="border-t border-[#2a2a2a] p-4 bg-[#0f0f0f] text-gray-300 leading-relaxed">
+          {a}
+        </div>
+      )}
+    </div>
+  )
 }
 
 export default function GeminiPromptOptimizationPage() {
+  const jsonLdArticle = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: 'Gemini Prompt Optimization: Expert Prompts for Google&apos;s Most Advanced AI',
+    description: 'Master Gemini&apos;s capabilities with expert prompts for multimodal reasoning, image understanding, code generation, and advanced reasoning tasks. Unlock the full potential of Google&apos;s latest AI model.',
+    image: 'https://gptprompts.ai/gemini-optimization.jpg',
+    datePublished: '2026-03-28',
+    dateModified: '2026-03-28',
+    author: {
+      '@type': 'Organization',
+      name: 'GPTPrompts.AI',
+    },
+  }
+
+  const jsonLdFAQ = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'What makes Gemini different from other large language models?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Gemini is Google&apos;s multimodal AI model that excels at understanding and processing text, images, audio, and video. It&apos;s designed with native multimodal capabilities from the ground up, making it particularly strong at reasoning across different media types.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'How can I optimize my prompts for Gemini&apos;s specific strengths?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Focus on clear context setting, specific output formatting requirements, and leveraging Gemini&apos;s strengths in multimodal reasoning. Use structured examples, be explicit about constraints, and take advantage of its ability to process and analyze images, documents, and data visualizations.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'What are the best use cases for Gemini?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Gemini excels at multimodal tasks including document analysis, image understanding, complex reasoning, code review and generation, creative brainstorming, and data analysis. It&apos;s particularly effective for tasks requiring cross-modal understanding and reasoning.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'How does Gemini handle image processing and analysis?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Gemini can process images alongside text, allowing you to ask questions about visual content, extract information from documents, analyze diagrams, read charts, and understand spatial relationships. You can include images directly in your prompts for native multimodal processing.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Can Gemini generate code from descriptions and images?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes, Gemini can generate code from text descriptions and can also understand code shown in images or screenshots. This makes it valuable for code review, architecture discussion, and generating implementations from design mockups.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'What are token limits and input constraints for Gemini?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Gemini has different context window sizes depending on the specific model version. Check Google&apos;s documentation for current specifications. Generally, it supports substantial context windows suitable for analyzing long documents, multiple images, and complex reasoning tasks.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'How should I structure prompts for maximum accuracy?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Use a clear structure with: (1) role/context setting, (2) specific task definition, (3) output format requirements, (4) examples or examples of what you want, (5) any constraints or guidelines. Be explicit rather than implicit.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Does Gemini support system prompts or role-based instructions?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Gemini supports detailed system-level instruction and role definition at the beginning of conversations. You can define personas, expertise areas, tone, and specific behavioral guidelines to shape how Gemini responds throughout the interaction.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Can I use Gemini for multi-step reasoning tasks?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes, Gemini is strong at multi-step reasoning. You can use techniques like step-by-step breakdown, think-aloud prompting, and chain-of-thought instructions to guide it through complex problems and ensure transparent reasoning.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'How does Gemini handle creative versus analytical tasks?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Gemini performs well on both creative and analytical tasks. For creative work, use more open-ended prompts with style guidance. For analytical work, be precise and provide structure. Temperature and response format settings can be adjusted to match task needs.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'What are the best practices for getting consistent outputs from Gemini?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Use specific output formatting instructions, provide examples of desired output, set clear constraints, use structured prompt templates, and test variations. Consistency improves when expectations are explicit.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'How can I leverage Gemini&apos;s reasoning abilities for business decisions?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Provide Gemini with relevant data, context, and decision frameworks. Ask it to reason through options, identify trade-offs, and present structured analyses. Use it as a thinking partner to validate assumptions and explore scenarios before making decisions.',
+        },
+      },
+    ],
+  }
+
   return (
-    <main className="min-h-screen bg-white">
-      {/* Header */}
-      <div className="bg-gradient-to-b from-blue-50 to-white border-b">
-        <div className="max-w-4xl mx-auto px-4 py-12 sm:py-16">
-          <div className="flex items-center gap-2 text-blue-600 mb-4">
-            <Link href="/" className="hover:underline">
-              Home
-            </Link>
-            <span>/</span>
-            <Link href="/website-links" className="hover:underline">
-              Prompts Library
-            </Link>
-            <span>/</span>
-            <span>Gemini Optimization</span>
+    <div className="min-h-screen bg-[#0a0a0a] text-white">
+      <header className="bg-gradient-to-b from-[#4F46E5] to-[#3730A3] text-white py-32 px-6 md:px-12">
+        <div className="max-w-7xl mx-auto">
+          <Link href="/" className="text-xl font-bold mb-12 inline-block hover:text-[#4F46E5] transition-colors">
+            GPTPrompts.AI
+          </Link>
+          <div className="flex items-center gap-3 mb-8">
+            <div className="w-16 h-16 bg-[#4F46E5] rounded-lg flex items-center justify-center">
+              <Brain className="w-8 h-8 text-white" />
+            </div>
+            <div>
+              <h1 className="text-6xl md:text-8xl font-bold">Gemini</h1>
+              <p className="text-2xl md:text-4xl text-[#a5b4fc] font-light">Prompt Optimization</p>
+            </div>
           </div>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Gemini Prompt Optimization: Advanced Techniques for Better Results
-          </h1>
-          <p className="text-lg text-gray-600 max-w-3xl">
-            Design structured, context-rich instructions that leverage Gemini's strengths: deep Google integration,
-            long-context windows, structured outputs, and tool calling.
+          <p className="text-xl md:text-2xl max-w-4xl opacity-90">
+            Master Google&apos;s advanced multimodal AI. Expert prompts for image understanding, complex reasoning, code generation, and advanced analytics. Optimize every Gemini interaction.
           </p>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="max-w-4xl mx-auto px-4 py-12">
-        <div className="prose prose-lg max-w-none">
-          {/* Foundations */}
-          <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Foundations: What "Optimized" Means for Gemini</h2>
-            <p className="text-gray-700 mb-4">
-              Google's latest Gemini docs highlight key pillars of effective prompting:
-            </p>
-            <ul className="list-disc list-inside space-y-2 text-gray-700 mb-4">
-              <li>
-                <strong>Structured instructions:</strong> Consistent pattern for system, role, and query instructions
-              </li>
-              <li>
-                <strong>Tight coupling to data:</strong> Use file references and URLs instead of vague summaries
-              </li>
-              <li>
-                <strong>Explicit output control:</strong> Response schemas or clear format specs
-              </li>
-              <li>
-                <strong>Iterative refinement:</strong> Draft → critique → revise workflows
-              </li>
-            </ul>
-            <p className="text-gray-700">
-              Tests on Gemini 2.5 and 3 show that structured, iterated prompts improve factual alignment more than
-              ad-hoc chatting. For comparison, see our{" "}
-              <Link href="/chatgpt-prompt-optimization" className="text-blue-600 hover:underline">
-                ChatGPT optimization guide
-              </Link>
-              .
-            </p>
-          </section>
-
-          {/* Technique 1: SI→RI→QI */}
-          <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Technique 1: Use SI → RI → QI Structure</h2>
-            <p className="text-gray-700 mb-4">
-              A core Gemini pattern is System Instruction → Role Instruction → Query Instruction.
-            </p>
-            <div className="bg-blue-50 p-6 rounded-lg">
-              <p className="font-semibold text-blue-800 mb-3">Example template:</p>
-              <div className="space-y-3 text-gray-700">
-                <p>
-                  <strong>System instruction (SI):</strong> "You are assisting with competitive research for SaaS tools.
-                  Follow all instructions precisely and prioritize factual accuracy over fluency."
-                </p>
-                <p>
-                  <strong>Role instruction (RI):</strong> "Act as a B2B analyst who explains findings clearly for
-                  [audience]."
-                </p>
-                <p>
-                  <strong>Query instruction (QI):</strong> "Using these sources: [URLs], summarize [specific question]
-                  in [format] under [length constraint]."
-                </p>
-              </div>
-            </div>
-            <p className="text-gray-700 mt-4">
-              Separating global rules (system) from persona and task reduces ambiguity and prompt injection risk.
-            </p>
-          </section>
-
-          {/* Technique 2: Long-Context */}
-          <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              Technique 2: Exploit Long-Context & File References
-            </h2>
-            <p className="text-gray-700 mb-4">
-              Gemini supports very large context windows, but dumping everything in one prompt is inefficient.
-            </p>
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <p className="font-semibold text-gray-900 mb-3">Best practices:</p>
-              <ul className="list-disc list-inside space-y-2 text-gray-700">
-                <li>Use file references/URLs instead of pasting huge text blobs</li>
-                <li>
-                  For mixed content (PDFs, slides), use <strong>map-reduce</strong>:
-                  <ul className="list-disc list-inside ml-6 mt-1">
-                    <li>First prompt: "Summarize each section/file separately."</li>
-                    <li>Second prompt: "Synthesize across summaries to answer specific questions."</li>
-                  </ul>
-                </li>
-                <li>Keep instructions short and clear even when context is huge</li>
-              </ul>
-            </div>
-          </section>
-
-          {/* Technique 3: Response Schemas */}
-          <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Technique 3: Response Schemas & Structured Output</h2>
-            <p className="text-gray-700 mb-4">
-              Gemini's API supports response schemas—a major optimization lever for consistent, parseable outputs.
-            </p>
-            <div className="bg-blue-50 p-6 rounded-lg">
-              <p className="font-semibold text-blue-800 mb-2">Human-side equivalent:</p>
-              <pre className="bg-white p-4 rounded text-sm overflow-x-auto">
-                {`"Return your answer as a JSON object:
-{
-  "summary": "string",
-  "key_points": ["string"],
-  "risks": ["string"],
-  "recommended_actions": ["string"]
-}
-Do not include any text outside of the JSON."`}
-              </pre>
-            </div>
-            <p className="text-gray-700 mt-4">
-              This cuts parsing time and mistakes, and makes chaining and automation easier.
-            </p>
-          </section>
-
-          {/* Technique 4: Draft→Critique→Revise */}
-          <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Technique 4: Draft → Critique → Revise Loop</h2>
-            <p className="text-gray-700 mb-4">
-              Iterative prompting reliably improves accuracy and can cut factual inconsistencies by 30%+.
-            </p>
-            <div className="bg-gray-50 p-6 rounded-lg">
-              <ol className="list-decimal list-inside space-y-3 text-gray-700">
-                <li>
-                  <strong>Draft:</strong> "Write an initial answer using the sources provided. Label this section
-                  'DRAFT'."
-                </li>
-                <li>
-                  <strong>Critique:</strong> "Now, critique your DRAFT as a domain expert: Identify factual
-                  uncertainties, missing perspectives, or weak arguments."
-                </li>
-                <li>
-                  <strong>Revise:</strong> "Rewrite the answer under 'FINAL', incorporating the CRITIQUE and noting any
-                  assumptions."
-                </li>
-              </ol>
-            </div>
-            <p className="text-gray-700 mt-4">
-              This technique pairs well with our{" "}
-              <Link href="/avoiding-hallucinations" className="text-blue-600 hover:underline">
-                hallucination prevention strategies
-              </Link>
-              .
-            </p>
-          </section>
-
-          {/* Technique 5: Few-Shot for Gemini */}
-          <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Technique 5: Few-Shot Prompting for Gemini</h2>
-            <p className="text-gray-700 mb-4">
-              Few-shot works across LLMs, but with Gemini you can use search-like queries + answer pairs to align with
-              Google's QA style.
-            </p>
-            <div className="bg-blue-50 p-6 rounded-lg">
-              <pre className="text-sm overflow-x-auto whitespace-pre-wrap">
-                {`SI: "You answer questions using concise, well-structured explanations."
-RI: "You are a technical writer for cloud engineers."
-
-Examples (few-shot):
-Q: "What is a VPC?"
-A: "[short, high-quality answer]."
-
-Q: "What is a load balancer?"
-A: "[answer]."
-
-QI: "Now answer: [new question] in the same style and length."`}
-              </pre>
-            </div>
-            <p className="text-gray-700 mt-4">
-              For more details, see our comprehensive{" "}
-              <Link href="/few-shot-prompting" className="text-blue-600 hover:underline">
-                few-shot prompting guide
-              </Link>
-              .
-            </p>
-          </section>
-
-          {/* Technique 6: CoT & Map-Reduce */}
-          <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              Technique 6: Chain-of-Thought & Map-Reduce Reasoning
-            </h2>
-            <p className="text-gray-700 mb-4">
-              Gemini supports nuanced reasoning patterns, especially when you separate reasoning from final answers.
-            </p>
-            <div className="bg-gray-50 p-6 rounded-lg mb-4">
-              <p className="font-semibold text-gray-900 mb-2">CoT pattern for Gemini:</p>
-              <p className="text-gray-700">
-                "Think step by step before answering. List the key factors or sub-questions. Analyze each factor
-                briefly. Synthesize your reasoning into a concise final answer under 'FINAL ANSWER'. Keep reasoning
-                under 'THOUGHTS'; users will only see 'FINAL ANSWER'."
-              </p>
-            </div>
-            <div className="bg-blue-50 p-6 rounded-lg">
-              <p className="font-semibold text-blue-800 mb-2">Map-Reduce for long-context tasks:</p>
-              <ul className="list-disc list-inside space-y-1 text-gray-700">
-                <li>
-                  <strong>Map:</strong> "For each document, summarize key points relevant to X."
-                </li>
-                <li>
-                  <strong>Reduce:</strong> "Using the above summaries only, compare and synthesize to answer Y."
-                </li>
-              </ul>
-            </div>
-          </section>
-
-          {/* Blueprint */}
-          <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Advanced Gemini Prompt Blueprint</h2>
-            <div className="bg-gray-900 text-gray-100 p-6 rounded-lg">
-              <pre className="text-sm overflow-x-auto whitespace-pre-wrap">
-                {`GEMINI ADVANCED PROMPT BLUEPRINT
-
-System instruction (SI):
-"You are assisting with [task type]. Prioritize factual accuracy, clarity, and concise answers. Follow all constraints exactly."
-
-Role instruction (RI):
-"Act as a [role] helping [audience]. Use language and examples appropriate for them."
-
-Context:
-– Data: [URLs, file references, pasted snippets]
-– Constraints: [jurisdiction, time frame, policy, etc.]
-
-Query instruction (QI):
-"Using only the context above:
-1. [subtask 1]
-2. [subtask 2]
-Return your answer in [format: JSON/table/sections], under [length limits].
-
-Then, under a 'CRITIQUE' heading, briefly self-review your answer for completeness and potential uncertainties."`}
-              </pre>
-            </div>
-          </section>
-
-          {/* FAQ */}
-          <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">FAQ: Gemini Prompt Optimization</h2>
-            <div className="space-y-6">
-              <div className="border-b pb-4">
-                <h3 className="font-semibold text-gray-900 mb-2">
-                  How is Gemini prompt optimization different from ChatGPT's?
-                </h3>
-                <p className="text-gray-700">
-                  The fundamentals are similar, but Gemini adds emphasis on SI→RI→QI structure, long-context workflows,
-                  response schemas, and tool calling tuned to Google's ecosystem.
-                </p>
-              </div>
-              <div className="border-b pb-4">
-                <h3 className="font-semibold text-gray-900 mb-2">Do I always need few-shot examples with Gemini?</h3>
-                <p className="text-gray-700">
-                  No. For simple tasks, clear instructions are enough. For style, structured transformations, or nuanced
-                  reasoning, few-shot + SI/RI often yields much better consistency.
-                </p>
-              </div>
-              <div className="border-b pb-4">
-                <h3 className="font-semibold text-gray-900 mb-2">How do I reduce hallucinations with Gemini?</h3>
-                <p className="text-gray-700">
-                  Use explicit data sources (files/URLs), map-reduce patterns, the Draft→Critique→Revise loop, and
-                  uncertainty instructions ("don't guess; say if you're unsure").
-                </p>
-              </div>
-              <div className="border-b pb-4">
-                <h3 className="font-semibold text-gray-900 mb-2">Can these techniques be reused across other LLMs?</h3>
-                <p className="text-gray-700">
-                  Yes. SI/RI/QI, structured outputs, CoT, meta-prompting, and iterative refinement are broadly
-                  applicable, though implementation details vary.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          {/* Related Resources */}
-          <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Related Resources</h2>
-            <div className="grid md:grid-cols-2 gap-4">
-              <Link
-                href="/chatgpt-prompt-optimization"
-                className="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition"
-              >
-                <h3 className="font-semibold text-gray-900">ChatGPT Prompt Optimization</h3>
-                <p className="text-sm text-gray-600">Advanced techniques for OpenAI models</p>
-              </Link>
-              <Link
-                href="/claude-prompting-guide"
-                className="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition"
-              >
-                <h3 className="font-semibold text-gray-900">Claude Prompting Guide</h3>
-                <p className="text-sm text-gray-600">XML tags and structured prompting for Claude</p>
-              </Link>
-              <Link
-                href="/gemini-vs-chatgpt-bloggers"
-                className="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition"
-              >
-                <h3 className="font-semibold text-gray-900">Gemini vs ChatGPT for Bloggers</h3>
-                <p className="text-sm text-gray-600">When to use each model</p>
-              </Link>
-              <Link
-                href="/advanced-prompt-frameworks"
-                className="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition"
-              >
-                <h3 className="font-semibold text-gray-900">Advanced Prompt Frameworks</h3>
-                <p className="text-sm text-gray-600">RACE, COSTAR, SPEC & more</p>
-              </Link>
-            </div>
-          </section>
-        </div>
-      </div>
-
-      {/* Footer */}
-      <footer className="bg-gray-50 border-t">
-        <div className="max-w-4xl mx-auto px-4 py-8">
-          <p className="text-center text-gray-600">
-            © {new Date().getFullYear()} GPTPrompts.AI - Your guide to AI prompt engineering
-          </p>
-          <div className="flex justify-center gap-4 mt-4">
-            <Link href="/" className="text-blue-600 hover:underline">
-              Home
-            </Link>
-            <Link href="/website-links" className="text-blue-600 hover:underline">
-              Prompts Library
-            </Link>
-            <Link href="/gemini-prompts" className="text-blue-600 hover:underline">
-              Gemini Prompts
-            </Link>
+          <div className="mt-8 inline-block bg-[#4F46E5] text-white px-6 py-2 rounded-lg font-semibold">
+            Category: Multimodal AI Optimization
           </div>
         </div>
-      </footer>
-    </main>
+      </header>
+
+      {/* Multimodal Image Understanding Section */}
+      <section className="max-w-7xl mx-auto py-24 px-6 md:px-12">
+        <div className="flex items-center gap-3 mb-12">
+          <div className="w-12 h-12 bg-[#4F46E5] rounded-lg flex items-center justify-center flex-shrink-0">
+            <Search className="w-6 h-6 text-white" />
+          </div>
+          <h2 className="text-4xl font-bold">Multimodal Image Understanding</h2>
+        </div>
+        <p className="text-gray-300 mb-12 text-lg">Leverage Gemini&apos;s native image processing and analysis capabilities for comprehensive visual understanding and insights.</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <CopyCard
+            title="Document Structure & Content Analysis"
+            prompt={`Analyze the structure and content of this document image. Provide:
+1. Document type and purpose
+2. Key sections and their hierarchy
+3. Main content and data extracted
+4. Visual formatting (headers, tables, lists)
+5. Any embedded visualizations or diagrams
+6. Recommendations for digitization or processing
+
+Be thorough and precise in identifying all structural elements.`}
+          />
+          <CopyCard
+            title="Chart and Data Visualization Interpreter"
+            prompt={`Examine this chart or data visualization image. Extract and explain:
+1. Chart type and purpose
+2. Axes labels and scale
+3. All data points, trends, and patterns
+4. Key insights and anomalies
+5. Relationships between variables
+6. Recommended actions based on the data
+
+Provide both raw data interpretation and strategic insights.`}
+          />
+          <CopyCard
+            title="Scene Composition & Spatial Analysis"
+            prompt={`Analyze the composition and spatial elements in this image:
+1. Main subjects and their positions
+2. Background and environmental context
+3. Lighting, shadows, and visual hierarchy
+4. Color palette and visual balance
+5. Foreground, midground, and background layers
+6. Suggested improvements or applications
+
+Include both technical and aesthetic observations.`}
+          />
+        </div>
+      </section>
+
+      {/* Advanced Reasoning & Problem Solving Section */}
+      <section className="max-w-7xl mx-auto py-24 px-6 md:px-12 border-t border-[#2a2a2a]">
+        <div className="flex items-center gap-3 mb-12">
+          <div className="w-12 h-12 bg-[#4F46E5] rounded-lg flex items-center justify-center flex-shrink-0">
+            <TrendingUp className="w-6 h-6 text-white" />
+          </div>
+          <h2 className="text-4xl font-bold">Advanced Reasoning & Problem Solving</h2>
+        </div>
+        <p className="text-gray-300 mb-12 text-lg">Use Gemini&apos;s strong reasoning capabilities to tackle complex problems, validate hypotheses, and make data-driven decisions.</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <CopyCard
+            title="Multi-Step Logic Chain Builder"
+            prompt={`Help me work through this complex problem step by step:
+
+[Problem statement]
+
+Please:
+1. Break down the problem into logical components
+2. Identify key assumptions and constraints
+3. Map dependencies between elements
+4. Create a step-by-step solution path
+5. Identify potential pitfalls at each step
+6. Suggest validation methods for each phase
+
+Present your reasoning clearly, showing your thinking process.`}
+          />
+          <CopyCard
+            title="Hypothesis Validation Framework"
+            prompt={`I have this hypothesis: [Your hypothesis]
+
+Given this context: [Context/data]
+
+Help me:
+1. Clarify and refine the hypothesis
+2. Identify assumptions underlying it
+3. Determine what evidence would support or refute it
+4. Suggest testing or validation approaches
+5. Identify counterarguments and alternative explanations
+6. Design a robust validation experiment
+
+Be critical and thorough in your analysis.`}
+          />
+          <CopyCard
+            title="Decision Matrix & Trade-off Analyzer"
+            prompt={`I need to choose between these options: [List options]
+
+Relevant factors: [List factors and priorities]
+
+Please create a decision framework that:
+1. Defines clear evaluation criteria
+2. Weights each criterion by importance
+3. Scores each option against criteria
+4. Identifies trade-offs and implications
+5. Highlights hidden assumptions
+6. Provides a clear recommendation with rationale
+
+Consider both quantitative and qualitative factors.`}
+          />
+        </div>
+      </section>
+
+      {/* Code Generation & Technical Architecture Section */}
+      <section className="max-w-7xl mx-auto py-24 px-6 md:px-12 border-t border-[#2a2a2a]">
+        <div className="flex items-center gap-3 mb-12">
+          <div className="w-12 h-12 bg-[#4F46E5] rounded-lg flex items-center justify-center flex-shrink-0">
+            <Lightbulb className="w-6 h-6 text-white" />
+          </div>
+          <h2 className="text-4xl font-bold">Code Generation & Technical Architecture</h2>
+        </div>
+        <p className="text-gray-300 mb-12 text-lg">Generate production-ready code and design scalable architectures with Gemini&apos;s technical understanding.</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <CopyCard
+            title="Architecture Design Assistant"
+            prompt={`Design a system architecture for: [Your requirement]
+
+Please provide:
+1. High-level architecture diagram (in text format)
+2. Key components and their responsibilities
+3. Data flow between components
+4. Technology recommendations with justification
+5. Scalability considerations
+6. Potential bottlenecks and mitigation strategies
+7. Security and reliability requirements
+
+Consider production-grade requirements and best practices.`}
+          />
+          <CopyCard
+            title="Code Review & Optimization Expert"
+            prompt={`Review this code:
+
+[Your code]
+
+Analyze and suggest:
+1. Performance improvements with estimated impact
+2. Code quality and readability enhancements
+3. Potential bugs or edge cases
+4. Best practices violations
+5. Testing gaps
+6. Documentation improvements
+7. Refactoring opportunities
+
+Prioritize suggestions by impact and complexity.`}
+          />
+          <CopyCard
+            title="API Endpoint & Integration Designer"
+            prompt={`Design API endpoints for this use case: [Your use case]
+
+Please specify:
+1. Endpoint paths and HTTP methods
+2. Request/response schema with examples
+3. Authentication and authorization approach
+4. Rate limiting and quota strategy
+5. Error handling and status codes
+6. Versioning strategy
+7. Documentation structure
+
+Follow RESTful principles and include edge cases.`}
+          />
+        </div>
+      </section>
+
+      {/* Creative Applications & Analytics Section */}
+      <section className="max-w-7xl mx-auto py-24 px-6 md:px-12 border-t border-[#2a2a2a]">
+        <div className="flex items-center gap-3 mb-12">
+          <div className="w-12 h-12 bg-[#4F46E5] rounded-lg flex items-center justify-center flex-shrink-0">
+            <MessageSquare className="w-6 h-6 text-white" />
+          </div>
+          <h2 className="text-4xl font-bold">Creative Applications & Data Analytics</h2>
+        </div>
+        <p className="text-gray-300 mb-12 text-lg">Unlock creative possibilities and extract actionable insights from data using Gemini&apos;s multimodal capabilities.</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <CopyCard
+            title="Brand & Content Strategy Builder"
+            prompt={`Develop a comprehensive content strategy for: [Your brand/product]
+
+Target audience: [Describe your audience]
+
+Please create:
+1. Brand positioning statement
+2. Content pillars and themes
+3. Visual style guidelines
+4. Tone and voice specifications
+5. Content calendar framework
+6. Engagement metrics to track
+7. Competitor analysis and differentiation
+
+Make it specific and actionable.`}
+          />
+          <CopyCard
+            title="Data-Driven Insights Extractor"
+            prompt={`Analyze this dataset: [Describe or share your data]
+
+Key question: [What you want to understand]
+
+Provide:
+1. Data summary and structure overview
+2. Key metrics and trends
+3. Statistical insights and patterns
+4. Anomalies and outliers
+5. Correlations and relationships
+6. Actionable recommendations
+7. Limitations and caveats
+
+Be specific with numbers and examples.`}
+          />
+          <CopyCard
+            title="Narrative & Story Development"
+            prompt={`Help me develop a compelling narrative for: [Your topic/brand]
+
+Intended audience: [Describe audience]
+Key messages: [List main points to convey]
+
+Create:
+1. Core story arc and structure
+2. Opening hook to capture attention
+3. Supporting story elements and examples
+4. Character development (if applicable)
+5. Emotional resonance points
+6. Strong conclusion and call to action
+7. Alternative narrative angles
+
+Make it memorable and shareable.`}
+          />
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="max-w-4xl mx-auto py-24 px-6 md:px-12 border-t border-[#2a2a2a]">
+        <h2 className="text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+        <div className="space-y-4">
+          <FAQItem
+            q="What makes Gemini different from other large language models?"
+            a="Gemini is Google's multimodal AI model that excels at understanding and processing text, images, audio, and video natively. Unlike some models adapted to multimodal tasks, Gemini was designed from the ground up as multimodal. This native integration makes it particularly strong at reasoning across different media types and understanding complex visual information alongside text."
+          />
+          <FAQItem
+            q="How can I optimize my prompts for Gemini's specific strengths?"
+            a="Focus on clear context setting, specific output formatting requirements, and leveraging Gemini's multimodal strengths. Use structured examples, be explicit about constraints, use step-by-step instructions for complex reasoning, and take advantage of its ability to process and analyze images, documents, and data visualizations. Provide context about what you're trying to accomplish, not just what you want it to do."
+          />
+          <FAQItem
+            q="What are the best use cases for Gemini?"
+            a="Gemini excels at multimodal tasks including document analysis, image understanding, complex reasoning, code review and generation, creative brainstorming, and data analysis. It's particularly effective for tasks requiring cross-modal understanding (understanding text and images together), long document analysis, and scenarios where you need to provide visual context for your questions."
+          />
+          <FAQItem
+            q="How does Gemini handle image processing and analysis?"
+            a="Gemini can process images alongside text, allowing you to ask questions about visual content, extract information from documents, analyze diagrams, read charts, understand spatial relationships, and identify objects. You can include images directly in your prompts for native multimodal processing. The model understands context within images and can perform complex visual reasoning."
+          />
+          <FAQItem
+            q="Can Gemini generate code from descriptions and images?"
+            a="Yes, Gemini can generate code from text descriptions and can also understand code shown in images or screenshots. This makes it valuable for code review, architecture discussion, generating implementations from design mockups, and documenting existing code by analyzing screenshots or diagrams. You can show it UI designs and ask it to generate corresponding code."
+          />
+          <FAQItem
+            q="What are token limits and input constraints for Gemini?"
+            a="Gemini has different context window sizes depending on the specific model version. Check Google's documentation for current specifications. Generally, it supports substantial context windows suitable for analyzing long documents, processing multiple images simultaneously, and handling complex reasoning tasks. Context length has been expanded in recent versions to accommodate more comprehensive interactions."
+          />
+          <FAQItem
+            q="How should I structure prompts for maximum accuracy?"
+            a="Use a clear structure with: (1) role/context setting, (2) specific task definition, (3) output format requirements, (4) examples of what you want, (5) any constraints or guidelines, and (6) quality criteria. Be explicit rather than implicit about what constitutes a good response. The more structure you provide, the more consistent and accurate results you'll get."
+          />
+          <FAQItem
+            q="Does Gemini support system prompts or role-based instructions?"
+            a="Yes, Gemini supports detailed system-level instruction and role definition throughout your conversation. You can define personas, expertise areas, tone, communication style, and specific behavioral guidelines to shape how Gemini responds. This is particularly useful when you want consistent behavior across multiple interactions within the same conversation."
+          />
+          <FAQItem
+            q="Can I use Gemini for multi-step reasoning tasks?"
+            a="Yes, Gemini is strong at multi-step reasoning. You can use techniques like step-by-step breakdown, think-aloud prompting (asking it to show its reasoning), chain-of-thought instructions, and explicit constraint definition to guide it through complex problems. For best results, ask it to show its work and explain its reasoning at each step."
+          />
+          <FAQItem
+            q="How does Gemini handle creative versus analytical tasks?"
+            a="Gemini performs well on both creative and analytical tasks. For creative work, use more open-ended prompts with style guidance and examples of desired output. For analytical work, be precise, provide structure, and define success criteria. Different model configurations may emphasize different strengths, so test to find what works best for your specific use case."
+          />
+          <FAQItem
+            q="What are the best practices for getting consistent outputs from Gemini?"
+            a="Use specific output formatting instructions (e.g., JSON, markdown lists, numbered steps), provide concrete examples of desired output, set clear constraints and boundaries, use structured prompt templates, test variations to see what works best, and maintain consistent context across interactions. Consistency improves when expectations are explicit and examples demonstrate the desired quality."
+          />
+          <FAQItem
+            q="How can I leverage Gemini's reasoning abilities for business decisions?"
+            a="Provide Gemini with relevant data, context, and decision frameworks. Ask it to reason through options, identify trade-offs, present structured analyses, and validate assumptions. Use it as a thinking partner to explore scenarios and test hypotheses before making decisions. Be specific about constraints (budget, timeline, resources) to get more relevant recommendations."
+          />
+        </div>
+      </section>
+
+      {/* Related Links Section */}
+      <section className="max-w-7xl mx-auto py-24 px-6 md:px-12 border-t border-[#2a2a2a]">
+        <h2 className="text-4xl font-bold mb-12">Related Prompt Collections</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <Link href="/gpt-4o-prompts" className="group">
+            <div className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg p-6 hover:border-[#4F46E5] transition-colors h-full">
+              <h3 className="font-bold text-white mb-2 group-hover:text-[#4F46E5] transition-colors">GPT-4O Prompts</h3>
+              <p className="text-gray-400 text-sm">Advanced vision and reasoning capabilities</p>
+            </div>
+          </Link>
+          <Link href="/grok-prompts" className="group">
+            <div className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg p-6 hover:border-[#4F46E5] transition-colors h-full">
+              <h3 className="font-bold text-white mb-2 group-hover:text-[#4F46E5] transition-colors">Grok Prompts</h3>
+              <p className="text-gray-400 text-sm">Real-time reasoning and current events</p>
+            </div>
+          </Link>
+          <Link href="/claude-prompts" className="group">
+            <div className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg p-6 hover:border-[#4F46E5] transition-colors h-full">
+              <h3 className="font-bold text-white mb-2 group-hover:text-[#4F46E5] transition-colors">Claude Prompts</h3>
+              <p className="text-gray-400 text-sm">In-depth analysis and long-form content</p>
+            </div>
+          </Link>
+          <Link href="/microsoft-copilot-prompts" className="group">
+            <div className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg p-6 hover:border-[#4F46E5] transition-colors h-full">
+              <h3 className="font-bold text-white mb-2 group-hover:text-[#4F46E5] transition-colors">Microsoft Copilot</h3>
+              <p className="text-gray-400 text-sm">Enterprise productivity and integration</p>
+            </div>
+          </Link>
+          <Link href="/midjourney-prompts" className="group">
+            <div className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg p-6 hover:border-[#4F46E5] transition-colors h-full">
+              <h3 className="font-bold text-white mb-2 group-hover:text-[#4F46E5] transition-colors">Midjourney Prompts</h3>
+              <p className="text-gray-400 text-sm">AI image generation and visual design</p>
+            </div>
+          </Link>
+          <Link href="/essay-prompts" className="group">
+            <div className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg p-6 hover:border-[#4F46E5] transition-colors h-full">
+              <h3 className="font-bold text-white mb-2 group-hover:text-[#4F46E5] transition-colors">Essay Prompts</h3>
+              <p className="text-gray-400 text-sm">Writing and academic content generation</p>
+            </div>
+          </Link>
+          <Link href="/ai-prompts-presentations" className="group">
+            <div className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg p-6 hover:border-[#4F46E5] transition-colors h-full">
+              <h3 className="font-bold text-white mb-2 group-hover:text-[#4F46E5] transition-colors">Presentation Prompts</h3>
+              <p className="text-gray-400 text-sm">Slide decks and visual presentations</p>
+            </div>
+          </Link>
+          <Link href="/social-media-marketing-prompts" className="group">
+            <div className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg p-6 hover:border-[#4F46E5] transition-colors h-full">
+              <h3 className="font-bold text-white mb-2 group-hover:text-[#4F46E5] transition-colors">Social Media Marketing</h3>
+              <p className="text-gray-400 text-sm">Content and campaign strategies</p>
+            </div>
+          </Link>
+        </div>
+      </section>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdArticle) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdFAQ) }}
+      />
+    </div>
   )
 }

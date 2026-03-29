@@ -228,7 +228,7 @@ export default function EmailWritingPromptsPage() {
             </Link>
             <Link href="/gemini-advanced-prompts" className="group bg-gray-800 p-6 rounded-lg hover:border-[#4285F4] border border-gray-700 transition-all">
               <h3 className="text-lg font-bold text-white group-hover:text-[#4285F4] transition-colors mb-2">Gemini Advanced</h3>
-              <p className="text-gray-400 text-sm">Advanced prompts for Google's Gemini model</p>
+              <p className="text-gray-400 text-sm">Advanced prompts for Google&apos;s Gemini model</p>
             </Link>
           </div>
         </div>

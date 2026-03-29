@@ -1,271 +1,450 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Card } from "@/components/ui/card"
-import { Eye, Mic, Brain } from "lucide-react"
-import type { Metadata } from "next"
-import Link from "next/link"
+'use client'
 
-export const metadata: Metadata = {
-  title: "GPT-4o Prompts: Master ChatGPT's Most Powerful Model | GPTPrompts.AI",
-  description:
-    "Unlock GPT-4o's full potential with expert prompts. Vision analysis, audio, code generation, and reasoning — 50+ prompts for GPT-4o's unique multimodal capabilities. The definitive 2026 guide.",
-  keywords: ["gpt-4o prompts", "gpt4o prompts", "chatgpt 4o prompts", "gpt-4o guide", "openai gpt-4o", "gpt-4o vision prompts"],
-}
+import { useState } from 'react'
+import Link from 'next/link'
+import { Copy, Check, ChevronDown, ChevronUp, Zap, Brain, TrendingUp, MessageSquare, Search, Lightbulb } from 'lucide-react'
 
-export default function GPT4oPromptsPage() {
+export default function GPT4OPromptsPage() {
+  const CopyCard = ({ title, prompt }: { title: string; prompt: string }) => {
+    const [copied, setCopied] = useState(false)
+
+    const handleCopy = async () => {
+      await navigator.clipboard.writeText(prompt)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    }
+
+    return (
+      <div className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg p-6 hover:border-[#10A937] transition-colors group">
+        <h4 className="font-bold text-white mb-4">{title}</h4>
+        <pre className="bg-[#0a0a0a] rounded p-4 text-sm text-gray-300 overflow-x-auto whitespace-pre-wrap font-mono leading-relaxed mb-4 max-h-64">
+          {prompt}
+        </pre>
+        <button
+          onClick={handleCopy}
+          className="w-full flex items-center justify-center gap-2 bg-[#10A937] hover:bg-[#0d8829] text-white font-medium py-2 px-4 rounded transition-colors"
+        >
+          {copied ? (
+            <>
+              <Check className="w-4 h-4" />
+              Copied
+            </>
+          ) : (
+            <>
+              <Copy className="w-4 h-4" />
+              Copy Prompt
+            </>
+          )}
+        </button>
+      </div>
+    )
+  }
+
+  const FAQItem = ({ q, a }: { q: string; a: string }) => {
+    const [open, setOpen] = useState(false)
+
+    return (
+      <div className="border border-[#2a2a2a] rounded-lg">
+        <button
+          onClick={() => setOpen(!open)}
+          className="w-full flex items-center justify-between p-4 hover:bg-[#1a1a1a] transition-colors text-left"
+        >
+          <span className="font-medium text-white">{q}</span>
+          {open ? (
+            <ChevronUp className="w-5 h-5 text-[#10A937] flex-shrink-0" />
+          ) : (
+            <ChevronDown className="w-5 h-5 text-gray-500 flex-shrink-0" />
+          )}
+        </button>
+        {open && (
+          <div className="border-t border-[#2a2a2a] p-4 bg-[#0f0f0f] text-gray-300 leading-relaxed">
+            {a}
+          </div>
+        )}
+      </div>
+    )
+  }
+
   return (
-    <main className="min-h-screen bg-background font-sans text-foreground">
-      <header className="bg-[#10a37f] text-white py-32 px-6 md:px-12 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/3 h-full opacity-10 pointer-events-none">
-          <Brain className="w-full h-full rotate-12" />
-        </div>
-        <div className="max-w-7xl mx-auto relative z-10">
-          <Link href="/" className="text-xl font-bold tracking-tighter mb-12 inline-block opacity-80 hover:opacity-100 transition-opacity">
+    <div className="bg-[#0a0a0a] text-white min-h-screen">
+      <header className="bg-gradient-to-b from-[#10A937] to-[#0d7a29] text-white py-32 px-6 md:px-12">
+        <div className="max-w-7xl mx-auto">
+          <Link href="/" className="text-xl font-bold mb-12 inline-block hover:text-[#10A937] transition-colors">
             GPTPrompts.AI
           </Link>
-          <h1 className="text-6xl md:text-9xl font-bold tracking-tight leading-[0.85] mb-8">
-            GPT-4o<br />
-            <span className="italic opacity-90">Prompts.</span>
-          </h1>
-          <p className="text-xl md:text-3xl max-w-4xl text-pretty leading-relaxed mb-10 opacity-90">
-            GPT-4o is ChatGPT's most powerful model — handling text, images, audio, and code natively. This guide teaches you how to unlock every capability with the right prompts.
+          <div className="flex items-center gap-3 mb-8">
+            <div className="w-16 h-16 bg-[#10A937] rounded-lg flex items-center justify-center">
+              <Zap className="w-8 h-8 text-white" />
+            </div>
+            <div>
+              <h1 className="text-6xl md:text-8xl font-bold">GPT-4O</h1>
+              <p className="text-2xl md:text-4xl text-[#a8e6a1] font-light">Advanced Vision &amp; Reasoning</p>
+            </div>
+          </div>
+          <p className="text-xl md:text-2xl max-w-4xl opacity-90">
+            Leverage multimodal intelligence. Expert prompts for vision analysis, complex reasoning, code generation, and creative applications. Maximize GPT-4O&apos;s capabilities.
           </p>
-          <div className="flex gap-6 text-sm font-medium uppercase tracking-[0.2em] opacity-70">
-            <span>50+ Prompts</span>
-            <span>·</span>
-            <span>Text · Vision · Audio · Code</span>
-            <span>·</span>
-            <span>Updated 2026</span>
+          <div className="mt-8 inline-block bg-[#10A937] text-white px-6 py-2 rounded-lg font-semibold">
+            Category: Advanced AI &amp; Multimodal
           </div>
         </div>
       </header>
 
-      <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16">
-        <aside className="lg:col-span-3 lg:sticky lg:top-12 self-start">
-          <nav className="space-y-12">
-            <div>
-              <h3 className="text-xs font-bold uppercase tracking-widest text-[#10a37f] mb-6">GPT-4o Guide</h3>
-              <ul className="space-y-4 text-sm font-medium text-muted-foreground">
-                {[
-                  { id: "intro", label: "GPT-4o vs GPT-4", num: "00" },
-                  { id: "text", label: "Text Prompts", num: "01" },
-                  { id: "vision", label: "Vision & Image Analysis", num: "02" },
-                  { id: "coding", label: "Coding with GPT-4o", num: "03" },
-                  { id: "reasoning", label: "Complex Reasoning", num: "04" },
-                  { id: "structured", label: "Structured Output", num: "05" },
-                  { id: "faq", label: "FAQ", num: "06" },
-                ].map((link) => (
-                  <li key={link.id}>
-                    <a href={`#${link.id}`} className="group flex items-center justify-between hover:text-[#10a37f] transition-colors">
-                      <span>{link.label}</span>
-                      <span className="text-xs opacity-30 group-hover:opacity-100">{link.num}</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
+      <main className="max-w-7xl mx-auto px-6 md:px-12 py-24">
+        {/* Vision Analysis Section */}
+        <section className="mb-20">
+          <div className="flex items-center gap-3 mb-12">
+            <div className="w-12 h-12 bg-[#10A937] rounded-lg flex items-center justify-center">
+              <Search className="w-6 h-6 text-white" />
             </div>
-            <div className="space-y-2 text-sm">
-              <p className="font-bold text-xs uppercase tracking-widest text-muted-foreground">Related</p>
-              <Link href="/chatgpt-prompts" className="block hover:text-[#10a37f] transition-colors">ChatGPT Guide →</Link>
-              <Link href="/chatgpt-system-prompts" className="block hover:text-[#10a37f] transition-colors">System Prompts →</Link>
-              <Link href="/gpt-o1-guide" className="block hover:text-[#10a37f] transition-colors">o1 Reasoning Model →</Link>
-              <Link href="/claude-prompts" className="block hover:text-[#10a37f] transition-colors">Claude vs GPT-4o →</Link>
+            <h2 className="text-3xl md:text-4xl font-bold">Vision Analysis &amp; Image Understanding</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <CopyCard
+              title="Document Structure Analyzer"
+              prompt={`Analyze this document image and provide:
+1. Overall structure and layout (headers, sections, columns)
+2. Key information hierarchy
+3. Any visual elements (tables, charts, logos)
+4. Document type classification
+5. Recommended OCR or extraction approach
+
+Focus on structural accuracy and logical flow.`}
+            />
+            <CopyCard
+              title="Chart Data Extractor"
+              prompt={`Examine this chart/graph image and extract:
+1. Chart type and title
+2. Axis labels and scale ranges
+3. All data points or series values
+4. Trends or patterns visible
+5. Any annotations or notes
+6. Data format suggestions (CSV, JSON)
+
+Prioritize accuracy in numerical values.`}
+            />
+            <CopyCard
+              title="Scene Composition Analyzer"
+              prompt={`Analyze this image for composition and visual design:
+1. Main subject and focal points
+2. Color palette analysis
+3. Lighting and shadows
+4. Depth and perspective techniques
+5. Visual hierarchy and emphasis
+6. Design principles applied
+
+Provide actionable insights for reproduction or improvement.`}
+            />
+          </div>
+        </section>
+
+        {/* Complex Reasoning Section */}
+        <section className="mb-20">
+          <div className="flex items-center gap-3 mb-12">
+            <div className="w-12 h-12 bg-[#10A937] rounded-lg flex items-center justify-center">
+              <Brain className="w-6 h-6 text-white" />
             </div>
-          </nav>
-        </aside>
+            <h2 className="text-3xl md:text-4xl font-bold">Complex Reasoning &amp; Problem Solving</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <CopyCard
+              title="Multi-Step Logic Chain"
+              prompt={`Break down this complex problem systematically:
+1. Identify all given information and constraints
+2. Define the core problem statement
+3. Map dependencies between variables
+4. Outline step-by-step solution approach
+5. Identify potential obstacles or edge cases
+6. Provide final solution with verification
 
-        <div className="lg:col-span-9 space-y-24 pb-32">
-          <section id="intro" className="scroll-mt-12">
-            <h2 className="text-4xl font-bold tracking-tight mb-6">GPT-4o vs Other ChatGPT Models</h2>
-            <p className="text-muted-foreground leading-relaxed text-lg mb-6">
-              GPT-4o ("o" for "omni") is OpenAI's flagship model — it processes text, images, and audio natively as a single unified model, not separate systems stitched together. This makes it faster, cheaper, and more capable than GPT-4 Turbo for most tasks.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-              {[
-                { icon: <Brain className="w-5 h-5" />, title: "Text & Reasoning", desc: "Best-in-class for complex analysis, writing, and instruction following" },
-                { icon: <Eye className="w-5 h-5" />, title: "Vision", desc: "Analyze images, screenshots, documents, and charts natively" },
-                { icon: <Mic className="w-5 h-5" />, title: "Multimodal", desc: "Handles text + image inputs simultaneously for richer context" },
-              ].map((item) => (
-                <Card key={item.title} className="p-4">
-                  <div className="text-[#10a37f] mb-3">{item.icon}</div>
-                  <h3 className="font-bold mb-1">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground">{item.desc}</p>
-                </Card>
-              ))}
+Show all reasoning stages clearly.`}
+            />
+            <CopyCard
+              title="Hypothesis Validation Framework"
+              prompt={`Evaluate this hypothesis rigorously:
+1. State the hypothesis clearly
+2. Identify assumptions being made
+3. Suggest ways to test or validate
+4. Outline potential counterarguments
+5. Assess confidence level (with reasoning)
+6. Recommend next investigation steps
+
+Be critical and evidence-focused.`}
+            />
+            <CopyCard
+              title="Decision Matrix Builder"
+              prompt={`Help structure this decision problem:
+1. List all viable options
+2. Identify key decision criteria
+3. Weight each criterion by importance
+4. Score each option against criteria
+5. Calculate weighted totals
+6. Recommend best option with trade-off analysis
+
+Include risk assessment for top choices.`}
+            />
+          </div>
+        </section>
+
+        {/* Code Generation & Debugging Section */}
+        <section className="mb-20">
+          <div className="flex items-center gap-3 mb-12">
+            <div className="w-12 h-12 bg-[#10A937] rounded-lg flex items-center justify-center">
+              <Lightbulb className="w-6 h-6 text-white" />
             </div>
-            <p className="text-muted-foreground leading-relaxed">
-              <strong>Use GPT-4o when:</strong> You need the best balance of speed, cost, and capability. It's the default model in ChatGPT Plus and the best choice for 90% of tasks. Use o1 or o3 only when you specifically need deep reasoning on math/logic problems.
-            </p>
-          </section>
+            <h2 className="text-3xl md:text-4xl font-bold">Code Generation &amp; Technical Architecture</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <CopyCard
+              title="Architecture Design Assistant"
+              prompt={`Design the architecture for this system:
+1. Identify core components and services
+2. Define data flow and interactions
+3. Suggest appropriate tech stack
+4. Outline scalability approach
+5. Identify potential bottlenecks
+6. Provide deployment strategy
 
-          <section id="text" className="scroll-mt-12">
-            <h2 className="text-4xl font-bold tracking-tight mb-2">GPT-4o Text Prompts</h2>
-            <p className="text-muted-foreground mb-8">GPT-4o excels at complex instruction-following, nuanced writing, and long-form analysis.</p>
-            <div className="space-y-4">
-              {[
-                {
-                  title: "Deep Analysis Prompt",
-                  prompt: `Analyze [topic/document/situation] comprehensively.
+Include diagrams in text format (ASCII or Mermaid).`}
+            />
+            <CopyCard
+              title="Code Review & Optimization"
+              prompt={`Review this code for quality:
+1. Identify bugs or logical errors
+2. Assess code readability and maintainability
+3. Flag performance issues
+4. Suggest refactoring opportunities
+5. Check for security vulnerabilities
+6. Provide optimized version
 
-Approach this like a McKinsey consultant would:
-1. Executive summary (3 bullet points)
-2. Key findings (with evidence for each)
-3. Root cause analysis
-4. Strategic implications
-5. Recommended actions (prioritized by impact/effort)
+Explain each change and its impact.`}
+            />
+            <CopyCard
+              title="API Endpoint Designer"
+              prompt={`Design REST API endpoints for this use case:
+1. Define resource models and entities
+2. List required endpoints with methods
+3. Specify request/response schemas
+4. Outline authentication approach
+5. Include error handling strategy
+6. Provide OpenAPI/Swagger specification
 
-Be specific, not generic. Cite concrete examples. Where you don't have data, flag the assumption explicitly.`
-                },
-                {
-                  title: "Long-Form Writing",
-                  prompt: `Write a [type: article/report/essay] on [topic].
+Focus on RESTful principles and usability.`}
+            />
+          </div>
+        </section>
 
-Length: [X] words
-Audience: [describe readers — their expertise level, why they care]
-Tone: [professional/conversational/academic]
-Structure: Use H2 and H3 headers
-Key points to cover: [list 3-5 must-include points]
-Perspective: [any specific angle or argument to make]
-Don't include: [what to avoid]
-
-Open with a hook — a surprising fact, compelling question, or vivid scenario. Not a definition.`
-                },
-              ].map((item) => (
-                <Card key={item.title} className="p-6 border-l-4 border-l-[#10a37f]">
-                  <h4 className="font-bold mb-3">{item.title}</h4>
-                  <pre className="bg-muted rounded-lg p-4 text-sm overflow-x-auto whitespace-pre-wrap font-mono leading-relaxed">{item.prompt}</pre>
-                </Card>
-              ))}
+        {/* Creative &amp; Content Generation Section */}
+        <section className="mb-20">
+          <div className="flex items-center gap-3 mb-12">
+            <div className="w-12 h-12 bg-[#10A937] rounded-lg flex items-center justify-center">
+              <MessageSquare className="w-6 h-6 text-white" />
             </div>
-          </section>
+            <h2 className="text-3xl md:text-4xl font-bold">Creative Applications &amp; Multimodal Tasks</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <CopyCard
+              title="Brand Visual Strategy"
+              prompt={`Develop a visual brand strategy:
+1. Analyze current brand assets (if provided)
+2. Define visual identity principles
+3. Create color palette rationale
+4. Suggest typography approach
+5. Design logo mark variations
+6. Outline application guidelines
 
-          <section id="vision" className="scroll-mt-12">
-            <h2 className="text-4xl font-bold tracking-tight mb-2">Vision & Image Analysis Prompts</h2>
-            <p className="text-muted-foreground mb-8">GPT-4o can analyze any image you upload — documents, screenshots, charts, photos, code, and more.</p>
-            <div className="space-y-4">
-              {[
-                {
-                  title: "Document/Screenshot Analysis",
-                  prompt: `[Upload image]
-Analyze this image and tell me:
-1. What is shown (describe it fully)
-2. Key data points or important information
-3. Any issues, errors, or anomalies you notice
-4. What action I should take based on this`
-                },
-                {
-                  title: "Data Chart Analysis",
-                  prompt: `[Upload chart/graph]
-Analyze this data visualization:
-1. What metric(s) are shown and over what period
-2. Key trends (rising, falling, volatile, stable)
-3. Notable outliers or anomalies and possible explanations
-4. What this data suggests about [business/situation]
-5. What questions this raises that the chart doesn't answer`
-                },
-                {
-                  title: "UI/Design Feedback",
-                  prompt: `[Upload screenshot of UI]
-Review this UI design and provide feedback:
+Ensure consistency and professional appeal.`}
+            />
+            <CopyCard
+              title="Narrative Scene Builder"
+              prompt={`Create a detailed scene for this story:
+1. Set the time, location, and atmosphere
+2. Describe visual details vividly
+3. Introduce characters and their positions
+4. Include sensory elements
+5. Build tension or emotional tone
+6. Suggest imagery references
 
-1. First impression (what's the purpose, is it immediately clear?)
-2. UX issues (anything confusing, hard to find, or poorly organized?)
-3. Visual hierarchy (does the eye go to the right places?)
-4. Accessibility concerns (contrast, font size, interactive element sizing)
-5. Top 3 specific improvements that would have the biggest impact`
-                },
-              ].map((item) => (
-                <Card key={item.title} className="p-6 border-l-4 border-l-[#10a37f]">
-                  <h4 className="font-bold mb-3">{item.title}</h4>
-                  <pre className="bg-muted rounded-lg p-4 text-sm overflow-x-auto whitespace-pre-wrap font-mono leading-relaxed">{item.prompt}</pre>
-                </Card>
-              ))}
-            </div>
-          </section>
+Make it cinematically compelling.`}
+            />
+            <CopyCard
+              title="Data Visualization Designer"
+              prompt={`Design a visualization for this dataset:
+1. Analyze the data structure
+2. Suggest optimal chart type(s)
+3. Outline color and styling approach
+4. Design legend and annotations
+5. Plan interactive elements
+6. Provide implementation guidance
 
-          <section id="structured" className="scroll-mt-12">
-            <h2 className="text-4xl font-bold tracking-tight mb-2">Structured Output Prompts</h2>
-            <p className="text-muted-foreground mb-6">GPT-4o is exceptional at returning structured data — JSON, tables, and formatted outputs that you can use programmatically.</p>
-            <div className="space-y-4">
-              {[
-                {
-                  title: "JSON Data Extraction",
-                  prompt: `Extract the following information from this text and return it as valid JSON only (no explanation, no markdown):
+Prioritize clarity and insight discovery.`}
+            />
+          </div>
+        </section>
 
-Text: [paste text]
+        {/* FAQ Section */}
+        <section className="mb-24">
+          <h2 className="text-3xl md:text-4xl font-bold mb-12">Frequently Asked Questions</h2>
+          <div className="space-y-4">
+            <FAQItem
+              q="What are the key differences between GPT-4 and GPT-4O?"
+              a="GPT-4O introduces native multimodal capabilities, accepting images directly without conversion. It offers improved reasoning speed, better performance on complex tasks, and enhanced vision understanding. It&apos;s also more affordable and faster in response times compared to GPT-4 Turbo."
+            />
+            <FAQItem
+              q="How do I effectively use GPT-4O's vision capabilities?"
+              a="Provide clear, well-lit images with visible details. Specify exactly what you want analyzed (document structure, data extraction, visual design). Include context about the image&apos;s purpose. For best results, ask specific questions rather than open-ended requests. GPT-4O handles screenshots, diagrams, charts, and photographs effectively."
+            />
+            <FAQItem
+              q="What are some advanced reasoning use cases for GPT-4O?"
+              a="GPT-4O excels at multi-step logic problems, scientific hypothesis evaluation, system design, market analysis, legal document interpretation, and complex mathematical reasoning. It can handle ambiguity well and generate structured approaches to unstructured problems."
+            />
+            <FAQItem
+              q="Can GPT-4O generate code from visual designs?"
+              a="Yes, GPT-4O can analyze screenshots of designs and generate corresponding code (HTML/CSS/JavaScript, React components, etc.). Provide clear screenshots of the desired interface and specify the technology stack you prefer. The accuracy improves with detailed specifications."
+            />
+            <FAQItem
+              q="How does GPT-4O handle image resolution and file formats?"
+              a="GPT-4O accepts JPEG, PNG, GIF, and WebP formats. It processes images of various resolutions effectively. For document analysis, higher resolution images yield better OCR accuracy. For scene analysis, standard web resolution (1080p+) is typically sufficient."
+            />
+            <FAQItem
+              q="What are the token costs for multimodal requests with GPT-4O?"
+              a="Images are metered in tokens based on resolution and detail level. A standard image (1024x768) costs approximately 170 tokens. High-detail images cost more. Always factor image tokens into your budget when using vision features. Refer to OpenAI&apos;s pricing page for exact calculations."
+            />
+            <FAQItem
+              q="How can I improve accuracy in GPT-4O's data extraction tasks?"
+              a="Provide high-contrast, well-scanned documents. Include context about expected data format. Ask for structured output (JSON, CSV, tables). Request verification steps. For sensitive data extraction, ask for confidence levels. Always validate results, especially for financial or legal documents."
+            />
+            <FAQItem
+              q="Does GPT-4O understand complex technical diagrams?"
+              a="Yes, GPT-4O can interpret architecture diagrams, flowcharts, wireframes, ER diagrams, and circuit diagrams. It can extract information, suggest improvements, and convert diagrams to code or documentation. Clarity of the diagram is important for accuracy."
+            />
+            <FAQItem
+              q="Can GPT-4O analyze screenshots of applications or websites?"
+              a="Absolutely. GPT-4O can review UI/UX designs, identify accessibility issues, suggest improvements, generate component code, and provide redesign recommendations. It&apos;s useful for code generation from Figma/design tool screenshots."
+            />
+            <FAQItem
+              q="How do I use GPT-4O for creative projects?"
+              a="Provide reference images, mood boards, or current work. Ask for specific creative feedback, design suggestions, or generated variations. Use it for color palette development, composition analysis, and narrative visualization. Combine text prompts with image references for best results."
+            />
+            <FAQItem
+              q="What&apos;s the best way to chain GPT-4O tasks together?"
+              a="Start with image analysis to extract information, then use that extracted data in follow-up prompts. Reference previous results in new requests. This approach creates sophisticated multi-step workflows. Keep context in your conversation for coherent results across requests."
+            />
+            <FAQItem
+              q="Are there privacy considerations for uploading images to GPT-4O?"
+              a="OpenAI states that images are not used for training after March 1, 2024. However, be cautious with sensitive documents containing personal information. Redact confidential details when possible. Review OpenAI&apos;s privacy policy for your jurisdiction&apos;s regulations."
+            />
+          </div>
+        </section>
 
-Schema:
-{
-  "name": string,
-  "date": "YYYY-MM-DD",
-  "amount": number,
-  "category": string,
-  "notes": string | null
-}
+        {/* Related Links Section */}
+        <section>
+          <h2 className="text-3xl md:text-4xl font-bold mb-12">Explore Related Prompts</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Link
+              href="/grok-prompts"
+              className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg p-6 hover:border-[#10A937] transition-colors group"
+            >
+              <h3 className="font-bold text-white group-hover:text-[#10A937] transition-colors">Grok Prompts</h3>
+              <p className="text-gray-400 mt-2">Real-time reasoning and current events analysis</p>
+            </Link>
+            <Link
+              href="/microsoft-copilot-prompts"
+              className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg p-6 hover:border-[#10A937] transition-colors group"
+            >
+              <h3 className="font-bold text-white group-hover:text-[#10A937] transition-colors">Microsoft Copilot</h3>
+              <p className="text-gray-400 mt-2">Enterprise productivity and M365 workflows</p>
+            </Link>
+            <Link
+              href="/claude-prompts"
+              className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg p-6 hover:border-[#10A937] transition-colors group"
+            >
+              <h3 className="font-bold text-white group-hover:text-[#10A937] transition-colors">Claude Prompts</h3>
+              <p className="text-gray-400 mt-2">Long-context reasoning and analysis</p>
+            </Link>
+            <Link
+              href="/gemini-prompt-optimization"
+              className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg p-6 hover:border-[#10A937] transition-colors group"
+            >
+              <h3 className="font-bold text-white group-hover:text-[#10A937] transition-colors">Gemini Optimization</h3>
+              <p className="text-gray-400 mt-2">Google&apos;s advanced model techniques</p>
+            </Link>
+            <Link
+              href="/midjourney-prompts"
+              className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg p-6 hover:border-[#10A937] transition-colors group"
+            >
+              <h3 className="font-bold text-white group-hover:text-[#10A937] transition-colors">Midjourney Prompts</h3>
+              <p className="text-gray-400 mt-2">AI image generation and visual creativity</p>
+            </Link>
+            <Link
+              href="/social-media-marketing-prompts"
+              className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg p-6 hover:border-[#10A937] transition-colors group"
+            >
+              <h3 className="font-bold text-white group-hover:text-[#10A937] transition-colors">Social Media Marketing</h3>
+              <p className="text-gray-400 mt-2">Content strategy and audience engagement</p>
+            </Link>
+            <Link
+              href="/essay-prompts"
+              className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg p-6 hover:border-[#10A937] transition-colors group"
+            >
+              <h3 className="font-bold text-white group-hover:text-[#10A937] transition-colors">Essay Prompts</h3>
+              <p className="text-gray-400 mt-2">Academic and creative writing guidance</p>
+            </Link>
+            <Link
+              href="/ai-prompts-presentations"
+              className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg p-6 hover:border-[#10A937] transition-colors group"
+            >
+              <h3 className="font-bold text-white group-hover:text-[#10A937] transition-colors">AI Presentations</h3>
+              <p className="text-gray-400 mt-2">Presentation design and delivery</p>
+            </Link>
+          </div>
+        </section>
+      </main>
 
-If a field is missing from the text, use null. Return ONLY valid JSON.`
-                },
-                {
-                  title: "Structured Research Output",
-                  prompt: `Research [topic] and return findings in this exact JSON structure:
-{
-  "summary": "2-3 sentence overview",
-  "key_facts": ["fact 1", "fact 2", "fact 3"],
-  "pros": ["pro 1", "pro 2"],
-  "cons": ["con 1", "con 2"],
-  "recommendation": "clear recommendation",
-  "confidence": "high|medium|low"
-}
-
-Base your confidence rating on how well-established the information is.`
-                },
-              ].map((item) => (
-                <Card key={item.title} className="p-6 border-l-4 border-l-[#10a37f]">
-                  <h4 className="font-bold mb-3">{item.title}</h4>
-                  <pre className="bg-muted rounded-lg p-4 text-sm overflow-x-auto whitespace-pre-wrap font-mono leading-relaxed">{item.prompt}</pre>
-                </Card>
-              ))}
-            </div>
-          </section>
-
-          <section id="faq" className="scroll-mt-12">
-            <h2 className="text-4xl font-bold tracking-tight mb-8">GPT-4o FAQ</h2>
-            <Accordion type="single" collapsible className="space-y-2">
-              {[
-                { q: "Is GPT-4o better than GPT-4?", a: "For most tasks, yes. GPT-4o is faster (2x), cheaper (50% cost via API), natively multimodal, and performs comparably or better than GPT-4 Turbo on most benchmarks. The only exception is very deep logical reasoning where GPT-o1/o3 specifically excel." },
-                { q: "What's the difference between GPT-4o and o1/o3?", a: "GPT-4o is the best general-purpose model. o1 and o3 are reasoning models that 'think step by step' before answering — they're slower and more expensive but dramatically better at math, logic, and science problems. Use o1/o3 for PhD-level problems; use GPT-4o for everything else." },
-                { q: "How do I access GPT-4o?", a: "GPT-4o is the default model in ChatGPT Plus ($20/month). Free ChatGPT users get limited GPT-4o access. For developers, it's available via the OpenAI API as gpt-4o. The latest version is gpt-4o-2024-11-20." },
-                { q: "Can GPT-4o see images?", a: "Yes — GPT-4o has native vision capabilities. Upload any image (screenshot, photo, document, chart) and ask questions about it. This works in ChatGPT's web interface, mobile app, and via the API with the image_url parameter." },
-                { q: "What is GPT-4o mini?", a: "GPT-4o mini is a smaller, faster, cheaper version of GPT-4o. It's 10x cheaper than GPT-4o via the API and good for high-volume, simpler tasks (classification, summarization, basic Q&A). Use GPT-4o for complex tasks and GPT-4o mini for scale." },
-              ].map((item) => (
-                <AccordionItem key={item.q} value={item.q} className="border rounded-lg px-4">
-                  <AccordionTrigger className="text-left font-medium">{item.q}</AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground leading-relaxed">{item.a}</AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </section>
-
-          <section className="border-t pt-16">
-            <h2 className="text-2xl font-bold mb-6">Related AI Model Guides</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              {[
-                { label: "ChatGPT Prompts", href: "/chatgpt-prompts" },
-                { label: "Claude Prompts", href: "/claude-prompts" },
-                { label: "Gemini Prompts", href: "/gemini-prompts" },
-                { label: "o1 Reasoning Guide", href: "/gpt-o1-guide" },
-                { label: "DeepSeek AI", href: "/deepseek-ai-prompts" },
-                { label: "System Prompts", href: "/chatgpt-system-prompts" },
-                { label: "API Prompting", href: "/chatgpt-api-prompting" },
-                { label: "Perplexity Prompts", href: "/perplexity-prompts" },
-              ].map((link) => (
-                <Link key={link.href} href={link.href} className="text-sm font-medium text-center p-3 rounded-lg border hover:border-[#10a37f] hover:text-[#10a37f] transition-colors">
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </section>
-        </div>
-      </section>
-    </main>
+      {/* JSON-LD Schemas */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: 'GPT-4O Advanced Vision & Reasoning Prompts',
+        description: 'Expert prompts for leveraging GPT-4O multimodal capabilities including vision analysis, complex reasoning, code generation, and creative applications.',
+        image: 'https://gptprompts.ai/gpt-4o-prompts.jpg',
+        datePublished: '2026-03-28',
+        dateModified: '2026-03-28',
+        author: {
+          '@type': 'Organization',
+          name: 'GPTPrompts.AI'
+        }
+      })}} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: [
+          {
+            '@type': 'Question',
+            name: 'What are the key differences between GPT-4 and GPT-4O?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'GPT-4O introduces native multimodal capabilities, accepting images directly without conversion. It offers improved reasoning speed, better performance on complex tasks, and enhanced vision understanding. It&apos;s also more affordable and faster in response times compared to GPT-4 Turbo.'
+            }
+          },
+          {
+            '@type': 'Question',
+            name: 'How do I effectively use GPT-4O&apos;s vision capabilities?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'Provide clear, well-lit images with visible details. Specify exactly what you want analyzed. Include context about the image&apos;s purpose. For best results, ask specific questions rather than open-ended requests. GPT-4O handles screenshots, diagrams, charts, and photographs effectively.'
+            }
+          },
+          {
+            '@type': 'Question',
+            name: 'What are some advanced reasoning use cases for GPT-4O?',
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: 'GPT-4O excels at multi-step logic problems, scientific hypothesis evaluation, system design, market analysis, legal document interpretation, and complex mathematical reasoning.'
+            }
+          }
+        ]
+      })}} />
+    </div>
   )
 }
