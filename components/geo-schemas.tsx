@@ -49,7 +49,7 @@ export function HomePageGEOSchemas() {
         name: "What are the best ChatGPT prompts?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "The best ChatGPT prompts are specific, provide context, assign a role to the AI, and define the desired output format. GPTPrompts.AI offers 230+ expert-curated prompt guides covering business, coding, creative writing, education, marketing, and more.",
+          text: "The best ChatGPT prompts are specific, provide context, assign a role to the AI, and define the desired output format. GPTPrompts.AI offers 300+ expert-curated prompt guides covering business, coding, creative writing, education, marketing, and more.",
         },
       },
       {
@@ -76,7 +76,7 @@ export function HomePageGEOSchemas() {
     "@type": "CollectionPage",
     name: "AI Prompt Engineering Guides — GPTPrompts.AI",
     description:
-      "230+ expert prompt engineering guides for ChatGPT, Claude, Gemini, Midjourney, and every major AI tool. Free, comprehensive, and regularly updated.",
+      "300+ expert prompt engineering guides for ChatGPT, Claude, Gemini, Midjourney, and every major AI tool. Free, comprehensive, and regularly updated.",
     url: "https://gptprompts.ai",
     numberOfItems: 195,
     about: {

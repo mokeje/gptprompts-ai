@@ -4,7 +4,7 @@ export const siteConfig = {
   name: "GPTPrompts.AI",
   url: "https://gptprompts.ai",
   description:
-    "The internet's most comprehensive prompt engineering resource. 230+ expert guides for ChatGPT, Claude, Gemini, Midjourney, and more. Free, up-to-date, and AI-search optimized.",
+    "The internet's most comprehensive prompt engineering resource. 300+ expert guides for ChatGPT, Claude, Gemini, Midjourney, and more. Free, up-to-date, and AI-search optimized.",
   links: {
     twitter: "https://twitter.com/gptpromptsai",
     github: "https://github.com/mokeje/gptprompts-ai",

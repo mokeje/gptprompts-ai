@@ -69,7 +69,7 @@ export function SiteFooter() {
               GPTPrompts<span className="text-gray-600">.AI</span>
             </span>
             <span className="text-xs text-gray-600">•</span>
-            <span className="text-sm text-gray-500">230+ prompt guides</span>
+            <span className="text-sm text-gray-500">300+ prompt guides</span>
           </div>
           <div className="flex items-center gap-6 text-sm">
             <Link href="/website-links" className="hover:text-white transition-colors">

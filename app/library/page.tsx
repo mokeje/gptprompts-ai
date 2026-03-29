@@ -6,7 +6,7 @@ import { categories, getPagesByCategory, allPages } from "@/data/pages"
 export const metadata: Metadata = {
   title: "AI Prompt Library — Browse by Category | GPTPrompts.AI",
   description:
-    "Browse 230+ AI prompt guides by category. Find prompts for ChatGPT, Claude, Gemini, image generation, career writing, university essays, industry use cases, and more.",
+    "Browse 300+ AI prompt guides by category. Find prompts for ChatGPT, Claude, Gemini, image generation, career writing, university essays, industry use cases, and more.",
 }
 
 export default function LibraryPage() {

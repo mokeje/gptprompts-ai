@@ -229,7 +229,7 @@ export default function ClaudeSkillsPage() {
       <section className="py-16 px-4">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-2xl font-bold mb-3">Explore More AI Prompt Guides</h2>
-          <p className="text-gray-400 mb-6">230+ free guides for ChatGPT, Claude, Gemini, Midjourney, and every major AI tool.</p>
+          <p className="text-gray-400 mb-6">300+ free guides for ChatGPT, Claude, Gemini, Midjourney, and every major AI tool.</p>
           <Link href="/website-links" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-black transition-all hover:opacity-90" style={{ backgroundColor: accent }}>
             Browse All Guides →
           </Link>

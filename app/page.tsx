@@ -7,7 +7,7 @@ import { HomePageGEOSchemas } from "@/components/geo-schemas"
 export const metadata: Metadata = {
   title: "GPTPrompts.AI — Master AI Prompts & Prompt Engineering",
   description:
-    "The internet's most comprehensive prompt engineering resource. 230+ expert guides for ChatGPT, Claude, Gemini, Midjourney, and more. Free, up-to-date, and AI-search optimized. Last updated 2026.",
+    "The internet's most comprehensive prompt engineering resource. 300+ expert guides for ChatGPT, Claude, Gemini, Midjourney, and more. Free, up-to-date, and AI-search optimized. Last updated 2026.",
   keywords: [
     "AI prompts",
     "prompt engineering",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 }
 
 const stats = [
-  { value: "230+", label: "Prompt Guides" },
+  { value: "300+", label: "Prompt Guides" },
   { value: "10", label: "Content Categories" },
   { value: "Free", label: "Always" },
   { value: "2026", label: "Up to Date" },
@@ -212,7 +212,7 @@ export default function HomePage() {
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-2 text-xs font-mono bg-white/10 border border-white/20 rounded-full px-4 py-1.5 mb-8">
               <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
-              230+ guides · Updated 2026
+              300+ guides · Updated 2026
             </div>
             <h1 className="text-6xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-none mb-6">
               The world&apos;s best
@@ -263,7 +263,7 @@ export default function HomePage() {
             Browse by category
           </h2>
           <p className="text-lg text-gray-500">
-            230+ prompt guides organized into 12 focused categories
+            300+ prompt guides organized into 12 focused categories
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -340,7 +340,7 @@ export default function HomePage() {
               href="/website-links"
               className="inline-flex items-center gap-2 text-sm font-semibold text-black underline underline-offset-4 hover:no-underline"
             >
-              View all 230+ guides
+              View all 300+ guides
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -464,7 +464,7 @@ export default function HomePage() {
               href="/website-links"
               className="inline-flex items-center gap-2 border border-white/30 text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition-colors"
             >
-              Browse 230+ guides
+              Browse 300+ guides
             </Link>
           </div>
         </div>
