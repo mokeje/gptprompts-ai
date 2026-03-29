@@ -155,7 +155,7 @@ export default function NewsPromptsPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <CopyCard
                 title="Multi-source Verification"
-                prompt="I'm researching a claim that [specific claim]. Help me identify the most reliable sources to verify this, suggest credible databases or public records I should check, and outline potential counterarguments I should investigate."
+                prompt="I\'m researching a claim that [specific claim]. Help me identify the most reliable sources to verify this, suggest credible databases or public records I should check, and outline potential counterarguments I should investigate."
               />
               <CopyCard
                 title="Misinformation Pattern Detection"
@@ -167,11 +167,11 @@ export default function NewsPromptsPage() {
               />
               <CopyCard
                 title="Quote Verification"
-                prompt="I have this quote attributed to [person]: '[quote]'. Help me identify where this quote originally appeared, whether it's been misattributed, if it's been taken out of context, and suggest how to responsibly report on it."
+                prompt="I have this quote attributed to [person]: '[quote]'. Help me identify where this quote originally appeared, whether it\'s been misattributed, if it\'s been taken out of context, and suggest how to responsibly report on it."
               />
               <CopyCard
                 title="Data Visualization Planning"
-                prompt="I'm reporting on [dataset/trend]. Suggest the most effective ways to visualize this data for a news audience, identify what data points would be most impactful, and flag any potential ways the data could be misrepresented."
+                prompt="I\'m reporting on [dataset/trend]. Suggest the most effective ways to visualize this data for a news audience, identify what data points would be most impactful, and flag any potential ways the data could be misrepresented."
               />
               <CopyCard
                 title="Expert Source Identification"
@@ -190,7 +190,7 @@ export default function NewsPromptsPage() {
               />
               <CopyCard
                 title="Breaking News Context Builder"
-                prompt="I'm covering this breaking news: [news event]. Provide: immediate historical context, key previous events, likely questions audiences will have, and credible sources to contact quickly for comment."
+                prompt="I\'m covering this breaking news: [news event]. Provide: immediate historical context, key previous events, likely questions audiences will have, and credible sources to contact quickly for comment."
               />
               <CopyCard
                 title="Evergreen Story Pitch Development"
@@ -221,11 +221,11 @@ export default function NewsPromptsPage() {
               />
               <CopyCard
                 title="Challenging Question Framework"
-                prompt="I'm interviewing [person/official] about [topic]. Create 5-7 substantive follow-up questions designed to get beyond prepared talking points, including clarifying questions about contradictions in their previous statements."
+                prompt="I\'m interviewing [person/official] about [topic]. Create 5-7 substantive follow-up questions designed to get beyond prepared talking points, including clarifying questions about contradictions in their previous statements."
               />
               <CopyCard
                 title="Source Protection Protocols"
-                prompt="I'm planning to report on [sensitive topic] with anonymous sources. Outline: how to securely communicate with sources, what documentation to collect safely, how to verify information from anonymous sources, and legal considerations I should understand."
+                prompt="I\'m planning to report on [sensitive topic] with anonymous sources. Outline: how to securely communicate with sources, what documentation to collect safely, how to verify information from anonymous sources, and legal considerations I should understand."
               />
               <CopyCard
                 title="Interview Angle Preparation"
@@ -233,7 +233,7 @@ export default function NewsPromptsPage() {
               />
               <CopyCard
                 title="Press Conference Strategy"
-                prompt="I'm covering a press conference on [topic]. Prepare: key questions to ask, follow-up questions for likely responses, background context to understand responses, and questions to ask officials afterward in hallway conversations."
+                prompt="I\'m covering a press conference on [topic]. Prepare: key questions to ask, follow-up questions for likely responses, background context to understand responses, and questions to ask officials afterward in hallway conversations."
               />
               <CopyCard
                 title="Fact-Check During Interview"
@@ -260,7 +260,7 @@ export default function NewsPromptsPage() {
               />
               <CopyCard
                 title="Social Media Angle Development"
-                prompt="I'm publishing a story about [topic]. Create 6-8 different social media snippets optimized for: Twitter/X, TikTok, Instagram, LinkedIn, and Facebook. Each should highlight different angles or quote the story in different ways."
+                prompt="I\'m publishing a story about [topic]. Create 6-8 different social media snippets optimized for: Twitter/X, TikTok, Instagram, LinkedIn, and Facebook. Each should highlight different angles or quote the story in different ways."
               />
               <CopyCard
                 title="Breaking News Update Framework"
@@ -268,7 +268,7 @@ export default function NewsPromptsPage() {
               />
               <CopyCard
                 title="Feature Article Opening"
-                prompt="I'm writing a feature about [subject/story]. Create 3-4 compelling opening approaches (anecdote, scene-setting, surprising statistic, question). For each, explain why it would hook readers and which approach best serves the overall story."
+                prompt="I\'m writing a feature about [subject/story]. Create 3-4 compelling opening approaches (anecdote, scene-setting, surprising statistic, question). For each, explain why it would hook readers and which approach best serves the overall story."
               />
             </div>
           </section>
@@ -295,7 +295,7 @@ export default function NewsPromptsPage() {
               />
               <CopyCard
                 title="Reader Comment Moderation Framework"
-                prompt="We're implementing comment moderation for stories about [sensitive topics]. Create guidelines for: what types of comments to remove, how to handle misinformation in comments, how to promote constructive discussion, and how to maintain community standards."
+                prompt="We\'re implementing comment moderation for stories about [sensitive topics]. Create guidelines for: what types of comments to remove, how to handle misinformation in comments, how to promote constructive discussion, and how to maintain community standards."
               />
               <CopyCard
                 title="Post-Publication Analysis"
@@ -315,11 +315,11 @@ export default function NewsPromptsPage() {
             />
             <FAQItem
               question="What are best practices for AI-assisted story ideation?"
-              answer="Provide AI with trending topics, reader engagement data, and your publication's editorial focus. Ask it to identify underreported angles, emerging story patterns, and audience interest gaps. Always verify all AI-suggested story angles through human editorial judgment before assignment. AI excels at pattern recognition but lacks newsroom context and editorial values."
+              answer="Provide AI with trending topics, reader engagement data, and your publication\'s editorial focus. Ask it to identify underreported angles, emerging story patterns, and audience interest gaps. Always verify all AI-suggested story angles through human editorial judgment before assignment. AI excels at pattern recognition but lacks newsroom context and editorial values."
             />
             <FAQItem
               question="How can journalists use AI for interview preparation?"
-              answer="Use AI to research interview subjects by analyzing their public statements, past interviews, and notable achievements. AI can suggest relevant questions, identify potential contradictions in their public record, and prepare background briefings on complex topics. This preparation saves time but doesn't replace original reporting and independent verification."
+              answer="Use AI to research interview subjects by analyzing their public statements, past interviews, and notable achievements. AI can suggest relevant questions, identify potential contradictions in their public record, and prepare background briefings on complex topics. This preparation saves time but doesn\'t replace original reporting and independent verification."
             />
             <FAQItem
               question="What safeguards should news organizations implement for AI content?"

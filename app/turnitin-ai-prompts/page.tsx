@@ -39,8 +39,8 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
 export default function TurnitinAIPrompts() {
   const prompts = {
     "Turnitin Detection Fundamentals": [
-      "You are a Turnitin AI detection specialist. Analyze the following submission and explain how Turnitin's AI detection algorithm would evaluate it. Look for: token patterns consistent with GPT models, sentence structure variations typical of AI systems, vocabulary consistency, and overall semantic coherence. Submission: [INSERT TEXT]\\n\\nProvide a predicted AI score (0-100%) based on Turnitin's detection methodology.",
-      "Compare this student submission to the student's previous work samples. Identify stylistic differences, vocabulary shifts, complexity changes, or structural variations that might indicate AI involvement. Previous samples: [TEXT 1, TEXT 2]\\n\\nCurrent submission: [TEXT]\\n\\nAssess likelihood of AI use.",
+      "You are a Turnitin AI detection specialist. Analyze the following submission and explain how Turnitin\'s AI detection algorithm would evaluate it. Look for: token patterns consistent with GPT models, sentence structure variations typical of AI systems, vocabulary consistency, and overall semantic coherence. Submission: [INSERT TEXT]\\n\\nProvide a predicted AI score (0-100%) based on Turnitin\'s detection methodology.",
+      "Compare this student submission to the student\'s previous work samples. Identify stylistic differences, vocabulary shifts, complexity changes, or structural variations that might indicate AI involvement. Previous samples: [TEXT 1, TEXT 2]\\n\\nCurrent submission: [TEXT]\\n\\nAssess likelihood of AI use.",
       "Analyze the metadata and submission patterns of this assignment. Consider: submission time (late night, unusual timing), file properties, editing history if available, and comparison to class averages. What do these contextual factors suggest? Submission details: [INSERT DETAILS]",
       "Evaluate the match between assignment requirements and submission quality. Does the submission demonstrate understanding of the assignment brief? Are there misalignments between what was asked and what was delivered that might indicate copy-paste AI output? Assignment: [INSERT]\\n\\nSubmission: [INSERT]",
       "Perform a Turnitin-specific plagiarism cross-reference. Even if original AI generation, does the content match high-frequency patterns in AI training data? Analyze for: over-citation of common sources, generic examples, templated structures. Submission: [INSERT TEXT]",
@@ -50,16 +50,16 @@ export default function TurnitinAIPrompts() {
       "Perform a Turnitin-compatible linguistic analysis. Calculate: average sentence length, vocabulary richness (type-token ratio), passive voice frequency, connector word usage. Compare to benchmarks for the assignment type. What patterns suggest AI authorship? Text: [INSERT TEXT]",
       "Analyze hedging language frequency specific to AI patterns. Turnitin flags excessive use of: 'might', 'may', 'arguably', 'it could be said', 'some believe'. What percentage of sentences contain hedging? Text: [INSERT TEXT]",
       "Evaluate paragraph structure consistency. Turnitin systems often flag: identical paragraph length patterns, formulaic opening/closing sentences, monotonous transition words. Analyze this submission. Text: [INSERT TEXT]",
-      "Examine the use of citations within the text. AI-generated academic work often has: misplaced citations, citations that don't match quoted material, or patterns of citation placement. Document issues. Text: [INSERT TEXT]",
+      "Examine the use of citations within the text. AI-generated academic work often has: misplaced citations, citations that don\'t match quoted material, or patterns of citation placement. Document issues. Text: [INSERT TEXT]",
       "Analyze the presence of self-correction and natural editing. Humans revise as they write; AI does not. Look for: backtracking, clarifications, false starts, or evidence of genuine thinking process. Text: [INSERT TEXT]",
-      "Evaluate vocabulary appropriateness for the student's level. Does word choice match their previous work? Are technical terms used correctly or in generic ways? Does complexity match the expected skill level? Text: [INSERT TEXT]"
+      "Evaluate vocabulary appropriateness for the student\'s level. Does word choice match their previous work? Are technical terms used correctly or in generic ways? Does complexity match the expected skill level? Text: [INSERT TEXT]"
     ],
     "Academic Context Analysis": [
-      "Assess whether the submission demonstrates mastery of course concepts. Compare to: lecture notes, assigned readings, classroom discussions, and the student's participation level. Does the work suggest deep engagement with material or surface-level synthesis? Text: [INSERT TEXT]",
-      "Analyze the originality of the student's argument or analysis. Does the submission present a novel interpretation, original application of concepts, or unique perspective? Or does it follow predictable academic formulas? Text: [INSERT TEXT]",
+      "Assess whether the submission demonstrates mastery of course concepts. Compare to: lecture notes, assigned readings, classroom discussions, and the student\'s participation level. Does the work suggest deep engagement with material or surface-level synthesis? Text: [INSERT TEXT]",
+      "Analyze the originality of the student\'s argument or analysis. Does the submission present a novel interpretation, original application of concepts, or unique perspective? Or does it follow predictable academic formulas? Text: [INSERT TEXT]",
       "Evaluate the quality of evidence and examples used. Are they: specific and sourced, generic illustrations, clichéd examples, or contextually misaligned? AI often defaults to standard examples. Text: [INSERT TEXT]",
       "Assess critical thinking markers. Look for: acknowledgment of counterarguments, nuanced analysis, recognition of limitations, interrogation of sources. Does the work show intellectual grappling with the topic? Text: [INSERT TEXT]",
-      "Examine the student's voice and perspective consistency. Does the work reflect their personality, opinions, and intellectual development shown in class? Or does it feel impersonal and generic? Text: [INSERT TEXT]",
+      "Examine the student\'s voice and perspective consistency. Does the work reflect their personality, opinions, and intellectual development shown in class? Or does it feel impersonal and generic? Text: [INSERT TEXT]",
       "Analyze engagement with primary sources vs. secondary commentary. Turnitin users in academic settings should demonstrate source literacy. Is the submission engaging original materials or just paraphrasing summaries? Text: [INSERT TEXT]"
     ],
     "Assignment-Type Specific Detection": [
@@ -72,9 +72,9 @@ export default function TurnitinAIPrompts() {
     ],
     "Turnitin Integration & Workflow": [
       "Document Turnitin flagged sections and analyze why they triggered detection. Review: similarity percentages, AI writing detection score, specific flagged phrases. Does the pattern suggest AI authorship across multiple sections? Report: [INSERT REPORT]",
-      "Compare Turnitin's plagiarism report to AI detection findings. Is content matching sources directly (plagiarism) or paraphrasing patterns (possible AI generation)? What's the distinction? Report: [INSERT REPORT]",
+      "Compare Turnitin\'s plagiarism report to AI detection findings. Is content matching sources directly (plagiarism) or paraphrasing patterns (possible AI generation)? What\'s the distinction? Report: [INSERT REPORT]",
       "Analyze the assignment submission timeline using Turnitin data. Were multiple drafts submitted? Do version histories show genuine revision or minimal changes? Does timing align with class schedule? Timeline: [INSERT DETAILS]",
-      "Evaluate the student's use of Turnitin's feedback tools. Have they engaged with previous feedback, revised based on suggestions, or submitted similar quality work after comments? History: [INSERT DETAILS]",
+      "Evaluate the student\'s use of Turnitin\'s feedback tools. Have they engaged with previous feedback, revised based on suggestions, or submitted similar quality work after comments? History: [INSERT DETAILS]",
       "Create a Turnitin-compatible decision rubric. Combine: AI detection score, plagiarism findings, writing pattern analysis, academic context, and instructor judgment. Provide overall assessment. Data: [INSERT DATA]",
       "Document evidence for instructor conversation. If AI use is suspected, prepare: specific text examples, comparative analysis, AI detection metrics, and potential explanations to discuss with the student. Evidence: [INSERT EVIDENCE]"
     ]
@@ -82,40 +82,40 @@ export default function TurnitinAIPrompts() {
 
   const faqs = [
     {
-      question: "How does Turnitin's AI detection work compared to other tools?",
-      answer: "Turnitin's AI writing detection uses large language models to identify patterns consistent with AI generation. It analyzes token patterns, burstiness (variation in word choice), and semantic consistency. Unlike some competitors, Turnitin integrates AI detection with plagiarism detection in a single report. However, Turnitin scores are not definitive proof of AI use—they're one data point requiring human judgment."
+      question: "How does Turnitin\'s AI detection work compared to other tools?",
+      answer: "Turnitin\'s AI writing detection uses large language models to identify patterns consistent with AI generation. It analyzes token patterns, burstiness (variation in word choice), and semantic consistency. Unlike some competitors, Turnitin integrates AI detection with plagiarism detection in a single report. However, Turnitin scores are not definitive proof of AI use—they\'re one data point requiring human judgment."
     },
     {
-      question: "What are the limitations of Turnitin's AI detection?",
-      answer: "Turnitin's AI detection can produce false positives (flagging human work as AI), especially for technical writing, ESL students, or highly structured genres. Fine-tuned models, paraphrased AI text, and hybrid human-AI work are harder to detect. The tool is most reliable with obvious, unedited AI outputs. Always combine Turnitin scores with other evidence and human review."
+      question: "What are the limitations of Turnitin\'s AI detection?",
+      answer: "Turnitin\'s AI detection can produce false positives (flagging human work as AI), especially for technical writing, ESL students, or highly structured genres. Fine-tuned models, paraphrased AI text, and hybrid human-AI work are harder to detect. The tool is most reliable with obvious, unedited AI outputs. Always combine Turnitin scores with other evidence and human review."
     },
     {
       question: "How can students legitimately use AI while working with Turnitin?",
       answer: "Many institutions now permit AI use if disclosed. Best practices include: clearly marking AI-generated sections, using AI for brainstorming or outlining (not final work), editing AI output substantially to reflect personal voice, citing AI tool use in methodology sections, and following institutional AI use policies. Transparency is key—discuss AI use with instructors."
     },
     {
-      question: "What's the difference between Turnitin AI detection and similarity scores?",
-      answer: "Similarity scores show how much text matches existing sources (plagiarism). AI detection scores show patterns consistent with AI generation (not necessarily copied). High similarity doesn't prove AI use; high AI scores don't prove plagiarism. A submission can have low similarity but high AI scores, or vice versa. Use both metrics together."
+      question: "What\'s the difference between Turnitin AI detection and similarity scores?",
+      answer: "Similarity scores show how much text matches existing sources (plagiarism). AI detection scores show patterns consistent with AI generation (not necessarily copied). High similarity doesn\'t prove AI use; high AI scores don\'t prove plagiarism. A submission can have low similarity but high AI scores, or vice versa. Use both metrics together."
     },
     {
       question: "Can students appeal Turnitin AI detection results?",
-      answer: "Yes. If a student believes they've been incorrectly flagged, they can work with their instructor to: provide evidence of their writing process, explain contextual factors (ESL status, learning differences, subject matter complexity), submit similar work for comparison, or use other writing samples to demonstrate consistency. Appeals require supporting evidence, not just denial."
+      answer: "Yes. If a student believes they\'ve been incorrectly flagged, they can work with their instructor to: provide evidence of their writing process, explain contextual factors (ESL status, learning differences, subject matter complexity), submit similar work for comparison, or use other writing samples to demonstrate consistency. Appeals require supporting evidence, not just denial."
     },
     {
-      question: "How should instructors interpret Turnitin's AI percentages?",
-      answer: "Turnitin provides a percentage likelihood of AI generation—not binary proof. 50% doesn't mean half the work is AI. Interpret scores as a risk indicator: <25% = likely human, 25-75% = requires investigation, >75% = likely AI. Always investigate flagged work using contextual evidence (student history, assignment difficulty, writing samples) before conclusions."
+      question: "How should instructors interpret Turnitin\'s AI percentages?",
+      answer: "Turnitin provides a percentage likelihood of AI generation—not binary proof. 50% doesn\'t mean half the work is AI. Interpret scores as a risk indicator: <25% = likely human, 25-75% = requires investigation, >75% = likely AI. Always investigate flagged work using contextual evidence (student history, assignment difficulty, writing samples) before conclusions."
     },
     {
-      question: "What's the difference between detecting AI and plagiarism?",
-      answer: "Plagiarism detection identifies copied content from existing sources. AI detection identifies content generated by language models. Content can be: original human work, plagiarized human work, original AI work, or plagiarized AI work. Turnitin detects both, but they're distinct concerns. Original AI work isn't plagiarism but may violate academic integrity policies depending on institutional rules."
+      question: "What\'s the difference between detecting AI and plagiarism?",
+      answer: "Plagiarism detection identifies copied content from existing sources. AI detection identifies content generated by language models. Content can be: original human work, plagiarized human work, original AI work, or plagiarized AI work. Turnitin detects both, but they\'re distinct concerns. Original AI work isn\'t plagiarism but may violate academic integrity policies depending on institutional rules."
     },
     {
       question: "How does Turnitin handle multilingual or translated submissions?",
-      answer: "Turnitin's AI detection works best with English. Performance degrades for non-English submissions due to training data limitations. Translated AI content is harder to detect than native AI writing. If a submission is translated, consider: Is the quality unusually high for the student's language proficiency? Does it match their native language writing patterns? These factors warrant additional investigation."
+      answer: "Turnitin\'s AI detection works best with English. Performance degrades for non-English submissions due to training data limitations. Translated AI content is harder to detect than native AI writing. If a submission is translated, consider: Is the quality unusually high for the student\'s language proficiency? Does it match their native language writing patterns? These factors warrant additional investigation."
     },
     {
-      question: "Can instructors see what Turnitin's AI detection is flagging?",
-      answer: "Turnitin provides an overall AI writing detection score, but details on specific flagged patterns aren't transparently displayed to instructors in all versions. Instructors see the percentage score and can review submitted text. For detailed analysis, instructors often combine Turnitin data with their own linguistic analysis or use complementary tools to identify specific AI patterns."
+      question: "Can instructors see what Turnitin\'s AI detection is flagging?",
+      answer: "Turnitin provides an overall AI writing detection score, but details on specific flagged patterns aren\'t transparently displayed to instructors in all versions. Instructors see the percentage score and can review submitted text. For detailed analysis, instructors often combine Turnitin data with their own linguistic analysis or use complementary tools to identify specific AI patterns."
     },
     {
       question: "What should institutions do about AI detection policy?",
@@ -158,7 +158,7 @@ export default function TurnitinAIPrompts() {
             <span className="text-[#DC2626] font-semibold text-sm">Academic Integrity & Detection</span>
           </div>
           <h1 className="text-5xl font-bold mb-6 text-white">Turnitin AI Detection Prompts</h1>
-          <p className="text-xl text-gray-400 max-w-3xl">Master Turnitin's AI detection capabilities with expert prompts designed for educators, academic integrity officers, and institutions. Learn to distinguish AI-generated work from plagiarism, interpret detection scores accurately, and integrate AI detection into your academic workflow.</p>
+          <p className="text-xl text-gray-400 max-w-3xl">Master Turnitin\'s AI detection capabilities with expert prompts designed for educators, academic integrity officers, and institutions. Learn to distinguish AI-generated work from plagiarism, interpret detection scores accurately, and integrate AI detection into your academic workflow.</p>
         </div>
 
         <div className="grid gap-6 mb-16">

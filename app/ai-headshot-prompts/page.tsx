@@ -43,11 +43,11 @@ export default function AIHeadshotPrompts() {
       "Create a corporate headshot featuring someone who appears to be [AGE RANGE] with [HAIR STYLE/COLOR], [SKIN TONE]. Professional clothing appropriate for [INDUSTRY]. Warm, approachable expression. Soft studio lighting. Plain neutral background. Medium shot from shoulders up. Professional and trustworthy appearance.",
       "Generate a headshot of a [PROFESSION] in professional attire, [FACIAL FEATURES], [SKIN TONE]. Natural, confident expression. Professional studio setting with subtle background. Lighting emphasizes facial features. Corporate-appropriate styling. Head and shoulders composition. Suitable for professional directories and business cards.",
       "Create a business headshot with [SPECIFIC STYLE REQUIREMENTS] for a [ROLE/INDUSTRY]. [PERSON DESCRIPTION]. Professional makeup and grooming. Well-lit studio environment. Neutral or subtle background. Direct eye contact with the camera. Professional confidence and approachability evident.",
-      "Generate a professional portrait of [DESCRIPTION] suitable for [PROFESSIONAL CONTEXT]. Clear facial features. Professional clothing appropriate for the industry. Studio lighting that's flattering. Neutral background that doesn't distract. Composition from shoulders up. Realistic and professional appearance.",
+      "Generate a professional portrait of [DESCRIPTION] suitable for [PROFESSIONAL CONTEXT]. Clear facial features. Professional clothing appropriate for the industry. Studio lighting that\'s flattering. Neutral background that doesn\'t distract. Composition from shoulders up. Realistic and professional appearance.",
       "Create a headshot for [PROFESSION] featuring [SPECIFIC ATTRIBUTES]. Professional styling and grooming. Well-executed studio lighting. Subtle background color or white/gray. Natural, confident expression. No unusual styling or distracting elements. Suitable for professional use."
     ],
     "Styling & Fashion Guidance": [
-      "Generate a headshot of [PERSON DESCRIPTION] wearing a [SPECIFIC COLOR] [GARMENT TYPE] that's professional and flattering. Neckline style: [NECKLINE TYPE]. Jewelry: [JEWELRY DESCRIPTION]. Hair styling: [HAIR STYLE]. Professional appearance appropriate for [CONTEXT]. Studio lighting, neutral background.",
+      "Generate a headshot of [PERSON DESCRIPTION] wearing a [SPECIFIC COLOR] [GARMENT TYPE] that\'s professional and flattering. Neckline style: [NECKLINE TYPE]. Jewelry: [JEWELRY DESCRIPTION]. Hair styling: [HAIR STYLE]. Professional appearance appropriate for [CONTEXT]. Studio lighting, neutral background.",
       "Create a headshot featuring professional attire in [COLOR PALETTE]. The outfit should convey [DESIRED IMPRESSION] while remaining business-appropriate. Styling elements: [SPECIFIC DETAILS]. Grooming and makeup: [DESCRIPTION]. Overall appearance should suggest [PROFESSIONAL QUALITIES].",
       "Generate a headshot with coordinated professional styling. Color scheme: [COLORS]. Garment fit: [FIT DESCRIPTION]. Accessories: [ACCESSORY TYPES]. Hair and makeup: [STYLING]. The overall look should be [ADJECTIVES] while maintaining corporate professionalism.",
       "Create a headshot with [DRESS CODE LEVEL] professional attire. Specific garment: [GARMENT]. Color: [COLOR]. Styling approach: [APPROACH]. The outfit should complement [PHYSICAL CHARACTERISTICS] and suggest [PROFESSIONAL ATTRIBUTES].",
@@ -83,7 +83,7 @@ export default function AIHeadshotPrompts() {
   const faqs = [
     {
       question: "What makes an effective AI-generated headshot?",
-      answer: "An effective AI-generated headshot combines several elements: clear, well-lit facial features with realistic proportions, professional attire appropriate for the industry, a neutral or subtle background that doesn't distract, natural and confident expression, and proper composition (typically shoulders up). The image should look polished and trustworthy—suitable for LinkedIn, corporate websites, and professional directories. Avoid over-processed or overly filtered appearances."
+      answer: "An effective AI-generated headshot combines several elements: clear, well-lit facial features with realistic proportions, professional attire appropriate for the industry, a neutral or subtle background that doesn\'t distract, natural and confident expression, and proper composition (typically shoulders up). The image should look polished and trustworthy—suitable for LinkedIn, corporate websites, and professional directories. Avoid over-processed or overly filtered appearances."
     },
     {
       question: "How do I ensure my headshot looks authentic and realistic?",
@@ -99,7 +99,7 @@ export default function AIHeadshotPrompts() {
     },
     {
       question: "Can I use AI headshots for LinkedIn and professional profiles?",
-      answer: "Yes, AI-generated headshots are increasingly used on professional platforms. Ensure the image meets the platform's image quality standards. Many professionals prefer AI headshots that look like high-quality professional photography. However, be aware of platform policies and industry norms—some traditional industries may have expectations about authenticity. Disclose AI generation if required by your platform. Quality, professionalism, and authenticity in appearance are more important than the source."
+      answer: "Yes, AI-generated headshots are increasingly used on professional platforms. Ensure the image meets the platform\'s image quality standards. Many professionals prefer AI headshots that look like high-quality professional photography. However, be aware of platform policies and industry norms—some traditional industries may have expectations about authenticity. Disclose AI generation if required by your platform. Quality, professionalism, and authenticity in appearance are more important than the source."
     },
     {
       question: "What should I do if the AI-generated facial proportions look off?",
@@ -107,7 +107,7 @@ export default function AIHeadshotPrompts() {
     },
     {
       question: "How do I ensure diversity and authentic representation in headshots?",
-      answer: "Specify ethnicity, skin tone, hair texture, and facial features clearly and respectfully in your prompt. Research proper terminology for the characteristics you're describing. Request culturally appropriate styling and grooming. Specify that representation should be respectful and authentic. Ensure lighting and makeup techniques are optimized for the specific skin tone and features. Review the result for authenticity—avoid stereotypical or caricatured representations. Authentic diversity looks more professional and trustworthy."
+      answer: "Specify ethnicity, skin tone, hair texture, and facial features clearly and respectfully in your prompt. Research proper terminology for the characteristics you\'re describing. Request culturally appropriate styling and grooming. Specify that representation should be respectful and authentic. Ensure lighting and makeup techniques are optimized for the specific skin tone and features. Review the result for authenticity—avoid stereotypical or caricatured representations. Authentic diversity looks more professional and trustworthy."
     },
     {
       question: "Should I smile or maintain a serious expression in professional headshots?",
@@ -119,7 +119,7 @@ export default function AIHeadshotPrompts() {
     },
     {
       question: "How often should I update my professional headshot?",
-      answer: "Professional headshots should be updated every 2-3 years or whenever your appearance significantly changes (new hair color, major styling change, significant aging, etc.). Your headshot should look like you do now, not how you looked years ago. If you're actively job searching or using the image frequently for professional purposes, ensure it's current. AI-generated headshots make it easier to update regularly without expensive photography sessions. Keep multiple versions for different contexts (LinkedIn, corporate website, etc.)."
+      answer: "Professional headshots should be updated every 2-3 years or whenever your appearance significantly changes (new hair color, major styling change, significant aging, etc.). Your headshot should look like you do now, not how you looked years ago. If you\'re actively job searching or using the image frequently for professional purposes, ensure it\'s current. AI-generated headshots make it easier to update regularly without expensive photography sessions. Keep multiple versions for different contexts (LinkedIn, corporate website, etc.)."
     }
   ]
 

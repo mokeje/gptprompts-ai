@@ -276,7 +276,7 @@ export default function AIFreeArtPromptsPage() {
             />
             <FAQItem
               question="Can I use AI-generated art ideas for commercial projects?"
-              answer="Yes. Using AI-generated ideas, compositions, and style references for your own artwork is allowed. However, directly using AI-generated images without modification or proper licensing may have restrictions depending on the AI tool's terms. Always check the specific tool's commercial usage policy."
+              answer="Yes. Using AI-generated ideas, compositions, and style references for your own artwork is allowed. However, directly using AI-generated images without modification or proper licensing may have restrictions depending on the AI tool\'s terms. Always check the specific tool\'s commercial usage policy."
             />
             <FAQItem
               question="How do I create more specific art prompts for my style?"
@@ -291,7 +291,7 @@ export default function AIFreeArtPromptsPage() {
               answer="Treat AI as a collaborative brainstorming partner, not a replacement. Use AI-generated ideas as starting points, then apply your own interpretation, technical skills, and creative judgment. Your unique execution, choices, and perspective are what make the final artwork authentically yours."
             />
             <FAQItem
-              question="What if my AI art prompt generates ideas I don't like?"
+              question="What if my AI art prompt generates ideas I don\'t like?"
               answer="Refine your prompts with more specific details, different keywords, or alternative directions. Ask for variations, different styles, or complementary concepts. Iteration is key—most artists need several attempts to get ideas they truly connect with."
             />
             <FAQItem
@@ -300,7 +300,7 @@ export default function AIFreeArtPromptsPage() {
             />
             <FAQItem
               question="How do I blend AI inspiration with traditional art techniques?"
-              answer="Use AI to generate composition ideas, color schemes, or subject suggestions, then execute them using your preferred medium (watercolor, charcoal, sculpture, etc.). This hybrid approach combines AI's ideation strength with the tactile authenticity of traditional art-making."
+              answer="Use AI to generate composition ideas, color schemes, or subject suggestions, then execute them using your preferred medium (watercolor, charcoal, sculpture, etc.). This hybrid approach combines AI\'s ideation strength with the tactile authenticity of traditional art-making."
             />
             <FAQItem
               question="Should I credit AI when sharing artwork inspired by AI prompts?"
@@ -308,7 +308,7 @@ export default function AIFreeArtPromptsPage() {
             />
             <FAQItem
               question="How can I use AI prompts to explore unfamiliar art styles?"
-              answer="Ask AI to generate ideas in styles you're curious about (surrealism, impressionism, abstract, hyperrealism). Then research those styles independently and try creating artwork based on both the AI suggestions and your own learning. This accelerates your artistic education and expands your creative range."
+              answer="Ask AI to generate ideas in styles you\'re curious about (surrealism, impressionism, abstract, hyperrealism). Then research those styles independently and try creating artwork based on both the AI suggestions and your own learning. This accelerates your artistic education and expands your creative range."
             />
           </div>
         </div>

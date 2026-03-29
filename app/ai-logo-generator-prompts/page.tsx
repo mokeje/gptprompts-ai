@@ -40,16 +40,16 @@ export default function AILogoGeneratorPrompts() {
   const prompts = {
     "Logo Design Fundamentals": [
       "You are a professional logo designer. Create a logo for [COMPANY/BRAND NAME] that conveys: [KEY BRAND VALUES]. The logo should be: simple and memorable, scalable from favicon to billboard size, work in both color and black/white, and appeal to [TARGET AUDIENCE]. Provide a detailed brief explaining design choices, symbolism, and brand alignment.",
-      "Design a minimalist logo for [BRAND]. Requirements: single mark or wordmark, geometric or organic style, limited color palette (2-3 colors max), contemporary yet timeless, memorable at small sizes. Explain the design concept and why it works for this brand's market position.",
+      "Design a minimalist logo for [BRAND]. Requirements: single mark or wordmark, geometric or organic style, limited color palette (2-3 colors max), contemporary yet timeless, memorable at small sizes. Explain the design concept and why it works for this brand\'s market position.",
       "Create a logo that conveys [BRAND PERSONALITY] (e.g., trustworthy, innovative, playful, luxurious). Consider: industry context, target audience, competitive landscape, and longevity. Provide a mood board description and explain how visual elements reinforce brand perception.",
       "Design a flexible logo system for [BRAND] that includes: primary mark, secondary variations, icon version, and wordmark option. Explain how each variation functions across different applications (digital, print, merchandise, social). Ensure visual consistency across the system.",
       "Create a logo concept for [PRODUCT/SERVICE] in the [INDUSTRY] space. The design should: differentiate from competitors, communicate core value proposition, be adaptable across platforms, and age well over time. Include color psychology rationale and typography recommendations.",
-      "Design a logo that balances [TWO CONTRASTING ELEMENTS, e.g., modern + traditional, tech + human]. Explain the design tension you're creating and why it appeals to [TARGET DEMOGRAPHIC]. Provide variations showing how it adapts to different contexts."
+      "Design a logo that balances [TWO CONTRASTING ELEMENTS, e.g., modern + traditional, tech + human]. Explain the design tension you\'re creating and why it appeals to [TARGET DEMOGRAPHIC]. Provide variations showing how it adapts to different contexts."
     ],
     "Visual Style & Aesthetics": [
       "Generate logo design directions for [BRAND] in these styles: (1) Geometric minimalism, (2) Organic/illustrative, (3) Abstract/symbolic, (4) Typographic emphasis. For each direction, explain the mood it conveys, what type of brand it suits best, and why [SPECIFIC BRAND] might choose this style.",
       "Create a logo mood board description for [BRAND]. Include: color palette with rationale, typography style, visual metaphors, geometric vs. organic balance, line weight treatment, and emotional tone. Explain how these aesthetic choices align with brand positioning.",
-      "Design a logo using [SPECIFIC DESIGN TREND, e.g., gradient, negative space, hand-drawn, 3D effect]. Explain how this trend serves the design (beyond aesthetics), whether it's timeless or trendy, and how it functions across digital and print media. What are the risks?",
+      "Design a logo using [SPECIFIC DESIGN TREND, e.g., gradient, negative space, hand-drawn, 3D effect]. Explain how this trend serves the design (beyond aesthetics), whether it\'s timeless or trendy, and how it functions across digital and print media. What are the risks?",
       "Create logo concepts exploring [CULTURAL ELEMENT] authentically within [BRAND CONTEXT]. Ensure respectful representation, avoid stereotypes, integrate cultural symbolism meaningfully. Explain how the cultural element strengthens brand story without feeling appropriative.",
       "Design a logo with [SPECIFIC CONSTRAINT, e.g., single color, monochrome gradient, 2-3 shapes only, circular format]. Explain how limitations enhance creativity and force smart design decisions. What does this constraint teach us about effective logo design?",
       "Generate logo options in [SPECIFIC VISUAL LANGUAGE, e.g., Art Deco, Brutalism, Swiss Style, Memphis Design]. For each, explain the design principles of this movement and how they function for [BRAND]. Which could age well? Which is trend-dependent?"
@@ -107,7 +107,7 @@ export default function AILogoGeneratorPrompts() {
     },
     {
       question: "How important is the logo concept or story behind it?",
-      answer: "The concept is crucial—it's the difference between a decorative mark and a meaningful symbol. The best logos have clear conceptual foundations: they visualize the brand mission, represent a core value, or communicate key differentiators. When you can explain your logo in one sentence—why it looks the way it does—you've found the concept. This clarity makes the logo more memorable and meaningful."
+      answer: "The concept is crucial—it\'s the difference between a decorative mark and a meaningful symbol. The best logos have clear conceptual foundations: they visualize the brand mission, represent a core value, or communicate key differentiators. When you can explain your logo in one sentence—why it looks the way it does—you\'ve found the concept. This clarity makes the logo more memorable and meaningful."
     },
     {
       question: "What file formats do I need for my final logo?",

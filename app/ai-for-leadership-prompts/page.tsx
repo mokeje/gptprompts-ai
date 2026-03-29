@@ -60,16 +60,16 @@ export default function LeadershipPromptsPage() {
 
   const prompts = {
     'Leadership Development': [
-      "Analyze my leadership style based on the following feedback I've received: [insert feedback]. Identify three key strengths and three areas for growth. Suggest specific actions to develop each growth area.",
+      "Analyze my leadership style based on the following feedback I\'ve received: [insert feedback]. Identify three key strengths and three areas for growth. Suggest specific actions to develop each growth area.",
       "Create a 90-day leadership development plan for a new manager transitioning from an individual contributor role. Include priority focus areas, learning resources, and monthly milestones.",
-      "I'm struggling with delegation. Help me identify which tasks I should delegate, how to prepare my team for those responsibilities, and how to build accountability without micromanaging.",
+      "I\'m struggling with delegation. Help me identify which tasks I should delegate, how to prepare my team for those responsibilities, and how to build accountability without micromanaging.",
       "Design a coaching conversation framework I can use with each team member monthly. Include opening questions, active listening techniques, and how to set clear growth goals.",
       "Evaluate my current leadership behaviors against these core values: [insert values]. Where am I aligned, and where do I need to make changes in how I show up as a leader?",
-      "Create a leadership assessment comparing my perceived strengths and weaknesses with 360-degree feedback. What patterns emerge, and what's my personal leadership priority?"
+      "Create a leadership assessment comparing my perceived strengths and weaknesses with 360-degree feedback. What patterns emerge, and what\'s my personal leadership priority?"
     ],
     'Team Management': [
-      "I'm managing a team with diverse working styles and motivations. Help me create a personalized approach for each team member based on their strengths and preferences.",
-      "Design a performance management system that feels fair and motivating rather than punitive. Include how I'll set expectations, provide feedback, and recognize high performers.",
+      "I\'m managing a team with diverse working styles and motivations. Help me create a personalized approach for each team member based on their strengths and preferences.",
+      "Design a performance management system that feels fair and motivating rather than punitive. Include how I\'ll set expectations, provide feedback, and recognize high performers.",
       "My team is experiencing conflict between two key members. Guide me through a structured approach to addressing this, including one-on-one conversations and team dynamics work.",
       "Create a framework for having difficult conversations with underperforming team members. Include how to gather data, prepare, have the conversation, and follow up.",
       "How can I foster psychological safety in my team so people feel safe to take risks, admit mistakes, and share ideas? Create an action plan with specific behaviors.",
@@ -81,20 +81,20 @@ export default function LeadershipPromptsPage() {
       "My team is struggling with a recent change. Help me diagnose the root causes of resistance and design interventions that address both emotional and practical concerns.",
       "Design a process for building buy-in to a new strategic direction. Include how to involve key stakeholders, incorporate their input, and create ownership across the organization.",
       "Create a 12-month roadmap for scaling the team and introducing new processes. Include hiring strategy, training plans, and how to maintain culture during growth.",
-      "I'm implementing a new organizational structure. Help me design transition conversations, role clarification sessions, and how to address anxiety and uncertainty."
+      "I\'m implementing a new organizational structure. Help me design transition conversations, role clarification sessions, and how to address anxiety and uncertainty."
     ],
     'Decision-Making and Problem-Solving': [
-      "Help me structure a critical business decision I'm facing. Use a framework that includes gathering diverse perspectives, analyzing tradeoffs, and ensuring buy-in.",
+      "Help me structure a critical business decision I\'m facing. Use a framework that includes gathering diverse perspectives, analyzing tradeoffs, and ensuring buy-in.",
       "I have a complex problem with no obvious solution. Guide me through a rigorous problem-solving process including root cause analysis and generating multiple options.",
       "Create a decision-making framework that balances speed with inclusiveness. When should I decide alone vs. involve the team? How do I communicate decisions effectively?",
       "Help me evaluate a strategic opportunity by defining success criteria, assessing risks, analyzing resource requirements, and determining go/no-go decision points.",
-      "I'm facing a crisis that requires fast decision-making under uncertainty. Design a decision protocol that ensures safety while moving quickly and learning as we go.",
-      "Create a lessons-learned process for decisions that didn't work out. How do I extract insights without blame and apply them to future decision-making?"
+      "I\'m facing a crisis that requires fast decision-making under uncertainty. Design a decision protocol that ensures safety while moving quickly and learning as we go.",
+      "Create a lessons-learned process for decisions that didn\'t work out. How do I extract insights without blame and apply them to future decision-making?"
     ],
     'Self-Leadership and Impact': [
-      "Conduct a 360-degree leadership analysis based on feedback I can provide: [insert examples]. What's my blind spot, and what changes would increase my leadership impact?",
+      "Conduct a 360-degree leadership analysis based on feedback I can provide: [insert examples]. What\'s my blind spot, and what changes would increase my leadership impact?",
       "Create a personal leadership brand statement that reflects who I am, what I stand for, and the impact I want to have. How do I embody this brand consistently?",
-      "I'm managing up to a more senior leader. Design a strategy for building influence, credibility, and trust with my boss and stakeholders above me.",
+      "I\'m managing up to a more senior leader. Design a strategy for building influence, credibility, and trust with my boss and stakeholders above me.",
       "Help me identify my leadership gaps relative to my career goals. What skills, experiences, and mindsets do I need to develop to reach my next level?",
       "Design a sustainability plan for managing stress and preventing burnout while maintaining high performance. Include daily practices, boundaries, and when to ask for help.",
       "Create a reflective practice I can do weekly or monthly to assess my leadership effectiveness, growth, and alignment with my values."
@@ -111,27 +111,27 @@ export default function LeadershipPromptsPage() {
       a: "The best leaders match their style to the situation. Directive leadership works when decisions are urgent or clarity is critical. Collaborative leadership works when buy-in and ownership matter more than speed. Use AI to analyze past decisions and identify patterns about when each approach served you best."
     },
     {
-      q: "What's the difference between managing and leading?",
+      q: "What\'s the difference between managing and leading?",
       a: "Managing is about executing the plan: setting tasks, monitoring progress, and ensuring accountability. Leading is about creating direction, building capability, and inspiring commitment to something bigger. Great leaders do both, but AI can help you clarify which mode each situation requires."
     },
     {
-      q: "How do I handle a team member who isn't performing?",
-      a: "Start with curiosity, not judgment. Use AI to help you diagnose the root cause: is it capability (they don't know how), motivation (they don't want to), clarity (they don't understand what success looks like), or resources (they don't have what they need). Your intervention depends on the root cause."
+      q: "How do I handle a team member who isn\'t performing?",
+      a: "Start with curiosity, not judgment. Use AI to help you diagnose the root cause: is it capability (they don\'t know how), motivation (they don\'t want to), clarity (they don\'t understand what success looks like), or resources (they don\'t have what they need). Your intervention depends on the root cause."
     },
     {
       q: "How do I create psychological safety on my team?",
-      a: "Psychological safety grows when people see that it's safe to be vulnerable, admit mistakes, and ask questions. Model this yourself: admit what you don't know, acknowledge mistakes, ask for help, and respond to vulnerability without judgment. Use AI to audit your behaviors and team norms."
+      a: "Psychological safety grows when people see that it\'s safe to be vulnerable, admit mistakes, and ask questions. Model this yourself: admit what you don\'t know, acknowledge mistakes, ask for help, and respond to vulnerability without judgment. Use AI to audit your behaviors and team norms."
     },
     {
       q: "What metrics should I track as a leader?",
-      a: "Track outcomes (business results), process metrics (how work gets done), and people metrics (engagement, retention, development). Use AI to help you design a balanced scorecard that tells the story of what you're trying to achieve as a leader."
+      a: "Track outcomes (business results), process metrics (how work gets done), and people metrics (engagement, retention, development). Use AI to help you design a balanced scorecard that tells the story of what you\'re trying to achieve as a leader."
     },
     {
       q: "How do I handle conflict between team members?",
       a: "The most effective approach is to help people solve it themselves rather than solving it for them. Use AI to design a mediation conversation: meet separately first to understand each perspective, then facilitate a conversation focused on shared goals and solutions."
     },
     {
-      q: "How do I know if I'm a good leader?",
+      q: "How do I know if I\'m a good leader?",
       a: "Ask people who matter most: your team, your peers, and your boss. Use AI to design a feedback process that goes deeper than satisfaction surveys. Look for: do people grow under your leadership, do they trust you, do they deliver results, and do they stay?"
     },
     {
@@ -139,8 +139,8 @@ export default function LeadershipPromptsPage() {
       a: "Delegation is about transferring both the task and the ownership. Use AI to design clear expectations (what success looks like), regular check-ins (to catch problems early), and progressive autonomy (as people prove competence). Trust is built through proven capability, not blind faith."
     },
     {
-      q: "What should I do if I realize I'm not cut out for this leadership role?",
-      a: "That's a honest question worthy of real reflection. Use AI to assess what specifically feels misaligned: the authority, the pressure, the people aspect, the strategy work. Sometimes a different role is the answer. Sometimes developing a specific skill transforms how you feel. Get objective feedback before you decide."
+      q: "What should I do if I realize I\'m not cut out for this leadership role?",
+      a: "That\'s a honest question worthy of real reflection. Use AI to assess what specifically feels misaligned: the authority, the pressure, the people aspect, the strategy work. Sometimes a different role is the answer. Sometimes developing a specific skill transforms how you feel. Get objective feedback before you decide."
     }
   ];
 

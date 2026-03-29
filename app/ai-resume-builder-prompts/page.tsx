@@ -75,7 +75,7 @@ export default function ResumeBuilderPromptsPage() {
     "Draft a compelling LinkedIn headline for a product manager with experience at both FAANG companies and startups. Include keywords for personal branding and highlight career transition to AI/ML product space.",
     "Create a professional biography (300 words) for a thought leader in digital transformation, suitable for speaking engagements, conference websites, and LinkedIn. Include credentials, key achievements, and areas of expertise.",
     "Write an elevator pitch for a career changer moving from finance to product management. Emphasize transferable skills in data analysis, stakeholder management, and business strategy that apply to product roles.",
-    "Generate a portfolio introduction statement for a UX designer's portfolio website. Explain design philosophy, approach to problem-solving, and highlight specific projects that demonstrate impact on business metrics and user satisfaction.",
+    "Generate a portfolio introduction statement for a UX designer\'s portfolio website. Explain design philosophy, approach to problem-solving, and highlight specific projects that demonstrate impact on business metrics and user satisfaction.",
     "Develop a personal mission statement for a personal brand or career portfolio that reflects values of innovation, mentorship, and ethical leadership. Make it authentic, memorable, and relevant across industries.",
     "Create a professional testimonial request template for professionals to send to former managers and colleagues. Provide guidance on what to ask for and how to position the testimonials on LinkedIn or portfolio."
   ];
@@ -92,9 +92,9 @@ export default function ResumeBuilderPromptsPage() {
   const interviewPreparationPrompts = [
     "Prepare detailed STAR method responses to 5 common behavioral interview questions: Tell me about a time you failed, managed conflict, overcame a challenge, improved a process, and led a team. Use examples from my actual experience.",
     "Develop thoughtful questions to ask hiring managers during an interview that demonstrate knowledge of the company, understanding of the role, and strategic thinking. Include questions about team dynamics, company culture, and growth challenges.",
-    "Create a 2-minute pitch about myself for a product manager interview. Include my background, why I'm interested in the role, key accomplishments that prove capability, and what I'm looking for in my next opportunity.",
+    "Create a 2-minute pitch about myself for a product manager interview. Include my background, why I\'m interested in the role, key accomplishments that prove capability, and what I\'m looking for in my next opportunity.",
     "Generate case study interview responses for a strategy consultant role. Include framework for tackling ambiguous problems, breaking down market sizing questions, and demonstrating analytical and creative thinking.",
-    "Write interview preparation notes covering the company's business model, recent news, competitive landscape, and strategic priorities. Develop 3-5 thoughtful observations I could bring up to demonstrate genuine interest and business acumen.",
+    "Write interview preparation notes covering the company\'s business model, recent news, competitive landscape, and strategic priorities. Develop 3-5 thoughtful observations I could bring up to demonstrate genuine interest and business acumen.",
     "Develop responses to common difficult interview questions about gaps in employment, frequent job changes, or reasons for leaving previous roles. Frame narrative positively while being honest and demonstrating growth."
   ];
 

@@ -94,7 +94,7 @@ export default function AIFaceSwapPrompts() {
       answer: "Single static image: 15 minutes to an hour with quality tools if faces are well-prepared. Video face-swap: hours to days depending on duration, quality target, and compute power (GPU acceleration critical). High-quality results requiring post-processing refinement can add 30% to 100% to timeline. Batch processing multiple images reduces per-image time through optimization."
     },
     {
-      question: "What's the difference between 'fast' and 'quality' face-swapping?",
+      question: "What\'s the difference between 'fast' and 'quality' face-swapping?",
       answer: "Fast approaches (web-based tools, real-time models) prioritize speed over perfection, often resulting in visible artifacts, imperfect edges, or unnatural blending. Quality approaches (Deepfacelab, professional tools) require more compute and time but produce less-visible artifacts, better edge blending, and more convincing results. The trade-off is often: fast and 70% quality vs. slow and 95% quality. Professional contexts demand quality; social media often tolerates fast results."
     },
     {
@@ -103,7 +103,7 @@ export default function AIFaceSwapPrompts() {
     },
     {
       question: "Can face-swapping work with different skin tones?",
-      answer: "Yes, but it requires careful color matching and adjustment. The challenge isn't the swap itself, but ensuring the swapped face's color palette matches the target skin tone and lighting. This requires: color correction before swapping, post-swap color grading, and sometimes adjusting saturation and hue. Results can look natural if done carefully, but poorly executed swaps across different skin tones are more obvious because of color mismatch."
+      answer: "Yes, but it requires careful color matching and adjustment. The challenge isn\'t the swap itself, but ensuring the swapped face\'s color palette matches the target skin tone and lighting. This requires: color correction before swapping, post-swap color grading, and sometimes adjusting saturation and hue. Results can look natural if done carefully, but poorly executed swaps across different skin tones are more obvious because of color mismatch."
     },
     {
       question: "Is face-swapping in video harder than in images?",
@@ -111,15 +111,15 @@ export default function AIFaceSwapPrompts() {
     },
     {
       question: "How do I ensure a face-swap looks realistic?",
-      answer: "Realism checklist: (1) Face proportions match target reasonably well. (2) Lighting direction matches (shadows on same side). (3) Eye gaze and focus direction is natural. (4) Skin color and tone are consistent with target. (5) Expression is believable (not frozen or unnatural). (6) Hairline and edges blend smoothly. (7) No visible artifacts or double edges. (8) Ask: would someone be fooled in a quick glance? If yes, it's probably realistic enough for most uses."
+      answer: "Realism checklist: (1) Face proportions match target reasonably well. (2) Lighting direction matches (shadows on same side). (3) Eye gaze and focus direction is natural. (4) Skin color and tone are consistent with target. (5) Expression is believable (not frozen or unnatural). (6) Hairline and edges blend smoothly. (7) No visible artifacts or double edges. (8) Ask: would someone be fooled in a quick glance? If yes, it\'s probably realistic enough for most uses."
     },
     {
       question: "What ethical disclosure is required for face-swaps?",
-      answer: "Best practices vary by context: Social media (creative/entertainment) — disclose in caption or post that AI face-swapping was used. Professional/business contexts — transparent disclosure that content is manipulated. Legal/courtroom use — explicit authentication that it's AI-generated (may be legal requirement). Deepfakes intended to deceive — absolutely illegal and unethical in most jurisdictions. Always: get consent from people whose faces are being used, especially for realistic swaps. Some platforms require watermarking or metadata indicating AI origin."
+      answer: "Best practices vary by context: Social media (creative/entertainment) — disclose in caption or post that AI face-swapping was used. Professional/business contexts — transparent disclosure that content is manipulated. Legal/courtroom use — explicit authentication that it\'s AI-generated (may be legal requirement). Deepfakes intended to deceive — absolutely illegal and unethical in most jurisdictions. Always: get consent from people whose faces are being used, especially for realistic swaps. Some platforms require watermarking or metadata indicating AI origin."
     },
     {
       question: "How do I avoid detection as a face-swap or deepfake?",
-      answer: "This is an ethical concern. Deliberately evading detection to deceive is considered deepfake creation and is illegal in many jurisdictions. If your goal is creative, entertainment, or legitimate use, you should disclose the use of face-swapping rather than hide it. If you're concerned about detection for legitimate reasons (understanding vulnerabilities), study published detection research. The ethical approach is transparency, not evasion."
+      answer: "This is an ethical concern. Deliberately evading detection to deceive is considered deepfake creation and is illegal in many jurisdictions. If your goal is creative, entertainment, or legitimate use, you should disclose the use of face-swapping rather than hide it. If you\'re concerned about detection for legitimate reasons (understanding vulnerabilities), study published detection research. The ethical approach is transparency, not evasion."
     }
   ]
 
