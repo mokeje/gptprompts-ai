@@ -5,7 +5,7 @@ import { ArrowRight, ExternalLink, Check, ChevronLeft } from "lucide-react"
 import { allTools, getToolBySlug, getToolsByCategory, toolCategories } from "@/data/tools"
 
 interface Props {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export async function generateStaticParams() {
@@ -13,7 +13,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const tool = getToolBySlug(params.slug)
+  const { slug } = await params
+  const tool = getToolBySlug(slug)
   if (!tool) return { title: "Tool Not Found" }
 
   return {
@@ -52,8 +53,9 @@ const pricingBadge: Record<string, { label: string; color: string; bg: string; b
   },
 }
 
-export default function ToolPage({ params }: Props) {
-  const tool = getToolBySlug(params.slug)
+export default async function ToolPage({ params }: Props) {
+  const { slug } = await params
+  const tool = getToolBySlug(slug)
   if (!tool) notFound()
 
   const category = toolCategories.find((c) => c.id === tool.category)
