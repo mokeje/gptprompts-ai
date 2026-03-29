@@ -124,6 +124,12 @@ export function SiteHeader() {
                 AI Tools
               </Link>
               <Link
+                href="/compare"
+                className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-black rounded-md hover:bg-gray-50 transition-colors"
+              >
+                Compare
+              </Link>
+              <Link
                 href="/website-links"
                 className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-black rounded-md hover:bg-gray-50 transition-colors"
               >
@@ -173,6 +179,13 @@ export function SiteHeader() {
                 onClick={() => setMobileOpen(false)}
               >
                 AI Tools Directory
+              </Link>
+              <Link
+                href="/compare"
+                className="block px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-50"
+                onClick={() => setMobileOpen(false)}
+              >
+                Compare AI Tools
               </Link>
               <Link
                 href="/website-links"
