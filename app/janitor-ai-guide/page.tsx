@@ -3,9 +3,9 @@ import type { Metadata } from "next"
 import Link from "next/link"
 
 export const metadata: Metadata = {
-  title: "Janitor AI Guide: Complete Character Prompting & Chat Guide | GPTPrompts.AI",
+  title: "Janitor AI Guide 2026: Character Creation, Chat Tips & Roleplay Prompts",
   description:
-    "Master Janitor AI character creation and prompting. Learn how to create authentic AI characters, develop engaging conversations, and master character-based role-playing scenarios.",
+    "Learn how to use Janitor AI from scratch. Create AI characters, write better chat prompts, and get more engaging roleplay responses. Beginner-friendly with examples.",
 }
 
 export default function JanitorAIPage() {

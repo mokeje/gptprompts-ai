@@ -1,9 +1,9 @@
 import StableDiffusionClientPage from "./client-page"
 
 export const metadata = {
-  title: "Stable Diffusion Prompts Master Guide 2026: From Basic to Photorealism | GPTPrompts.AI",
+  title: "Stable Diffusion Guide 2026: Complete Prompts, Settings & SDXL Tutorial",
   description:
-    "Master Stable Diffusion with token weighting, negative prompting, and photorealism techniques. Complete guide to SDXL, lighting, composition, and professional workflows.",
+    "Master Stable Diffusion from scratch. Learn SDXL prompting, negative prompts, and photorealism techniques. Free step-by-step guide with copy-paste examples.",
 }
 
 export default function StableDiffusionPage() {

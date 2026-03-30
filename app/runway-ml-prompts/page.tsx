@@ -2,9 +2,9 @@ import Link from "next/link"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "AI Prompts for Runway ML: 80+ Text‑to‑Video & Image Ideas (Gen‑3/Gen‑4 Guide 2026)",
+  title: "Runway ML Prompts 2026: 80+ Copy-Paste Text-to-Video Prompts (Gen-3 & Gen-4)",
   description:
-    "Master Runway ML prompts with 80+ text-to-video and image templates for Gen-3/Gen-4. Learn camera language, composition, and cinematic techniques with copy-paste prompts.",
+    "Get 80+ copy-paste Runway ML prompts for Gen-3 and Gen-4 video. Covers camera movements, lighting, and cinematic techniques for professional-looking AI video creation.",
   keywords: "Runway ML prompts, text-to-video prompts, Gen-3 prompts, cinematic AI video",
 }
 

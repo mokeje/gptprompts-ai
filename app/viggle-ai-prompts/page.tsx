@@ -2,9 +2,9 @@ import type { Metadata } from "next"
 import ViggleAIPageClient from "./client-page"
 
 export const metadata: Metadata = {
-  title: "Viggle AI Prompts: The Ultimate Guide to AI Video Generation | GPTPrompts.AI",
+  title: "Viggle AI Prompts 2026: Best Motion Prompts to Animate Any Character",
   description:
-    "Master Viggle AI with advanced motion prompts, character consistency techniques, and professional-grade animation workflows. Learn JST-1 model optimization.",
+    "Discover the best Viggle AI prompts to animate any character with realistic motion. Copy-paste examples for dance, action sequences, and viral AI video creation.",
 }
 
 export default function ViggleAIPage() {
