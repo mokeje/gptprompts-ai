@@ -398,6 +398,7 @@ Be specific and reference actual files and directories. Do not give generic advi
               { label: "Lovable AI Prompts", href: "/lovable-ai-prompts" },
               { label: "BlackBox AI", href: "/blackbox-ai" },
               { label: "GitHub Copilot Prompts", href: "/github-copilot-prompts" },
+              { label: "Windsurf AI Prompts", href: "/windsurf-ai-prompts" },
               { label: "AI for Developers", href: "/ai-prompts-for-developers" },
             ].map(link => (
               <Link key={link.href} href={link.href} className="text-sm px-4 py-3 bg-[#1a1a1a] border border-[#2a2a2a] rounded-xl text-gray-300 hover:border-[#7C3AED]/40 hover:text-white transition-all text-center">

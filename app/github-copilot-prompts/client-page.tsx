@@ -279,6 +279,7 @@ export default function GitHubCopilotPromptsPage() {
             {[
               { name: 'ChatGPT Prompts', href: '/chatgpt-prompts' },
               { name: 'Cursor AI Prompts', href: '/cursor-ai-prompts' },
+              { name: 'Windsurf AI Prompts', href: '/windsurf-ai-prompts' },
               { name: 'Claude Prompts', href: '/claude-prompts' },
               { name: 'Grok AI Prompts', href: '/grok-ai-prompts' },
               { name: 'Google Gemini Prompts', href: '/google-gemini-prompts' },

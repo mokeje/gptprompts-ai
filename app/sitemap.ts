@@ -24,6 +24,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/perplexity-deep-research-prompts",
     "/custom-gpts-prompts",
     "/claude-projects-prompts",
+    "/gemini-gems-prompts",
+    "/windsurf-ai-prompts",
   ]
 
   const advancedAIPages = [
