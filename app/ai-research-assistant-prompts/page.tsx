@@ -228,67 +228,61 @@ export default function AIResearchAssistantPromptsPage() {
         </section>
 
         {/* Related Pages */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold mb-6">Explore Other Prompt Libraries</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <section className="border-t border-slate-700 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl font-bold text-slate-100 mb-8">Related Pages</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Link
-              href="/ai-translation-prompts"
-              className="border border-gray-800 rounded-lg p-4 hover:border-indigo-500/50 transition-colors hover:bg-gray-900"
+              href="/ai-summarizer-prompts"
+              className="p-4 border border-slate-700 rounded-lg hover:border-teal-500/50 transition-colors"
             >
-              <h3 className="font-semibold mb-2">Translation Prompts</h3>
-              <p className="text-sm text-gray-400">Master multilingual content and localization</p>
-            </Link>
-            <Link
-              href="/ai-web-builder-prompts"
-              className="border border-gray-800 rounded-lg p-4 hover:border-indigo-500/50 transition-colors hover:bg-gray-900"
-            >
-              <h3 className="font-semibold mb-2">Web Builder Prompts</h3>
-              <p className="text-sm text-gray-400">Generate websites and React components</p>
-            </Link>
-            <Link
-              href="/ai-writing-assistant-prompts"
-              className="border border-gray-800 rounded-lg p-4 hover:border-indigo-500/50 transition-colors hover:bg-gray-900"
-            >
-              <h3 className="font-semibold mb-2">Writing Assistant Prompts</h3>
-              <p className="text-sm text-gray-400">Improve content, editing, and brand voice</p>
-            </Link>
-            <Link
-              href="/ai-for-musicians-prompts"
-              className="border border-gray-800 rounded-lg p-4 hover:border-indigo-500/50 transition-colors hover:bg-gray-900"
-            >
-              <h3 className="font-semibold mb-2">Music Prompts</h3>
-              <p className="text-sm text-gray-400">Composition, production, and performance</p>
-            </Link>
-            <Link
-              href="/ai-for-gaming-prompts"
-              className="border border-gray-800 rounded-lg p-4 hover:border-indigo-500/50 transition-colors hover:bg-gray-900"
-            >
-              <h3 className="font-semibold mb-2">Gaming Prompts</h3>
-              <p className="text-sm text-gray-400">Strategy, character building, game design</p>
+              <p className="font-semibold text-slate-100">AI Summarizer Prompts</p>
             </Link>
             <Link
               href="/ai-study-prompts"
-              className="border border-gray-800 rounded-lg p-4 hover:border-indigo-500/50 transition-colors hover:bg-gray-900"
+              className="p-4 border border-slate-700 rounded-lg hover:border-teal-500/50 transition-colors"
             >
-              <h3 className="font-semibold mb-2">Study Prompts</h3>
-              <p className="text-sm text-gray-400">Learning, retention, and exam preparation</p>
+              <p className="font-semibold text-slate-100">AI Study Prompts</p>
             </Link>
             <Link
-              href="/ai-poem-generator-prompts"
-              className="border border-gray-800 rounded-lg p-4 hover:border-indigo-500/50 transition-colors hover:bg-gray-900"
+              href="/ai-question-answering-prompts"
+              className="p-4 border border-slate-700 rounded-lg hover:border-teal-500/50 transition-colors"
             >
-              <h3 className="font-semibold mb-2">Poetry Prompts</h3>
-              <p className="text-sm text-gray-400">Creative writing and verse techniques</p>
+              <p className="font-semibold text-slate-100">AI Question Answering Prompts</p>
             </Link>
             <Link
-              href="/ai-free-art-prompts"
-              className="border border-gray-800 rounded-lg p-4 hover:border-indigo-500/50 transition-colors hover:bg-gray-900"
+              href="/ai-writing-assistant-prompts"
+              className="p-4 border border-slate-700 rounded-lg hover:border-teal-500/50 transition-colors"
             >
-              <h3 className="font-semibold mb-2">Art Prompts</h3>
-              <p className="text-sm text-gray-400">Visual design and creative direction</p>
+              <p className="font-semibold text-slate-100">AI Writing Assistant Prompts</p>
+            </Link>
+            <Link
+              href="/ai-prompts-for-data-analysts"
+              className="p-4 border border-slate-700 rounded-lg hover:border-teal-500/50 transition-colors"
+            >
+              <p className="font-semibold text-slate-100">AI Prompts for Data Analysts</p>
+            </Link>
+            <Link
+              href="/ai-for-management-consulting-prompts"
+              className="p-4 border border-slate-700 rounded-lg hover:border-teal-500/50 transition-colors"
+            >
+              <p className="font-semibold text-slate-100">AI For Management Consulting Prompts</p>
+            </Link>
+            <Link
+              href="/ai-for-news-prompts"
+              className="p-4 border border-slate-700 rounded-lg hover:border-teal-500/50 transition-colors"
+            >
+              <p className="font-semibold text-slate-100">AI For News Prompts</p>
+            </Link>
+            <Link
+              href="/ai-text-generator-prompts"
+              className="p-4 border border-slate-700 rounded-lg hover:border-teal-500/50 transition-colors"
+            >
+              <p className="font-semibold text-slate-100">AI Text Generator Prompts</p>
             </Link>
           </div>
-        </section>
+        </div>
+      </section>
       </main>
 
       {/* JSON-LD Schema */}

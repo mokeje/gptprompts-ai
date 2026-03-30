@@ -317,15 +317,15 @@ export default function AIChatbotPromptsPage() {
     },
   ];
 
-  const relatedLinks = [
+    const relatedLinks = [
+    { label: 'AI Personal Assistant Prompts', href: '/ai-personal-assistant-prompts' },
+    { label: 'AI Chat Prompts', href: '/ai-chat-prompts' },
+    { label: 'AI Character Chat Prompts', href: '/ai-character-chat-prompts' },
     { label: 'AI Productivity Prompts', href: '/ai-productivity-prompts' },
-    { label: 'AI Search Engine Prompts', href: '/ai-search-engine-prompts' },
-    { label: 'AI Story Generator Prompts', href: '/ai-story-generator-prompts' },
-    { label: 'Bing AI Image Generator Prompts', href: '/bing-ai-image-generator-prompts' },
-    { label: 'Perchance AI Prompts', href: '/perchance-ai-prompts' },
-    { label: 'AI Prompts for Education', href: '/ai-prompts-for-education' },
     { label: 'AI Text Generator Prompts', href: '/ai-text-generator-prompts' },
-    { label: 'AI Homework Prompts', href: '/ai-homework-prompts' },
+    { label: 'AI Search Engine Prompts', href: '/ai-search-engine-prompts' },
+    { label: 'AI Translation Prompts', href: '/ai-translation-prompts' },
+    { label: 'ChatGPT Prompts', href: '/chatgpt-prompts' },
   ];
 
   const faqs = [

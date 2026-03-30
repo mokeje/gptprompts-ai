@@ -167,15 +167,15 @@ const AIStoryGeneratorPage = () => {
     }
   ];
 
-  const relatedPages = [
-    { title: 'AI Chatbot Prompts', href: '/ai-chatbot-prompts' },
-    { title: 'AI Productivity Prompts', href: '/ai-productivity-prompts' },
-    { title: 'AI Search Engine Prompts', href: '/ai-search-engine-prompts' },
-    { title: 'AI Text Generator Prompts', href: '/ai-text-generator-prompts' },
-    { title: 'AI Music Generator Prompts', href: '/ai-music-generator-prompts' },
-    { title: 'Bing AI Image Generator Prompts', href: '/bing-ai-image-generator-prompts' },
-    { title: 'AI Prompts for Education', href: '/ai-prompts-for-education' },
-    { title: 'Perchance AI Prompts', href: '/perchance-ai-prompts' }
+      const relatedPages = [
+    { title: 'Squibler AI Prompts', href: '/squibler-ai-prompts' },
+    { title: 'AI Writing Assistant Prompts', href: '/ai-writing-assistant-prompts' },
+    { title: 'AI Poem Generator Prompts', href: '/ai-poem-generator-prompts' },
+    { title: 'AI Character Chat Prompts', href: '/ai-character-chat-prompts' },
+    { title: 'ChatGPT Creative Writing', href: '/chatgpt-creative-writing' },
+    { title: 'Story Prompts', href: '/story-prompts' },
+    { title: 'AI Chat Prompts', href: '/ai-chat-prompts' },
+    { title: 'Perchance AI Prompts', href: '/perchance-ai-prompts' },
   ];
 
   return (

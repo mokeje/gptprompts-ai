@@ -167,15 +167,15 @@ const AIMusicGeneratorPromptsPage = () => {
     }
   ];
 
-  const relatedPages = [
-    { title: 'AI Chatbot Prompts', href: '/ai-chatbot-prompts' },
-    { title: 'AI Productivity Prompts', href: '/ai-productivity-prompts' },
-    { title: 'AI Search Engine Prompts', href: '/ai-search-engine-prompts' },
-    { title: 'AI Text Generator Prompts', href: '/ai-text-generator-prompts' },
-    { title: 'AI Story Generator Prompts', href: '/ai-story-generator-prompts' },
-    { title: 'Bing AI Image Generator Prompts', href: '/bing-ai-image-generator-prompts' },
-    { title: 'AI Prompts for Education', href: '/ai-prompts-for-education' },
-    { title: 'Perchance AI Prompts', href: '/perchance-ai-prompts' }
+    const relatedPages = [
+    { title: 'AI For Musicians Prompts', href: '/ai-for-musicians-prompts' },
+    { title: 'AI Video Generator Prompts', href: '/ai-video-generator-prompts' },
+    { title: 'Kapwing AI Prompts', href: '/kapwing-ai-prompts' },
+    { title: 'AI For Gaming Prompts', href: '/ai-for-gaming-prompts' },
+    { title: 'AI Free Art Prompts', href: '/ai-free-art-prompts' },
+    { title: 'AI Poem Generator Prompts', href: '/ai-poem-generator-prompts' },
+    { title: 'AI Headshot Prompts', href: '/ai-headshot-prompts' },
+    { title: 'AI Logo Generator Prompts', href: '/ai-logo-generator-prompts' },
   ];
 
   return (

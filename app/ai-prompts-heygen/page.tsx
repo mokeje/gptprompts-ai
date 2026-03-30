@@ -2,9 +2,9 @@ import Link from "next/link"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "AI Prompts for HeyGen: 80+ Avatar, Script & Motion Ideas (2026 Guide)",
+  title: "HeyGen Prompts 2026: 80+ Copy-Paste Scripts for AI Avatar Videos",
   description:
-    "Master HeyGen avatar videos with 80+ prompts for avatar looks, scripts, and motion. Learn best practices and professional templates.",
+    "Get 80+ HeyGen prompts for professional AI avatar videos. Covers scripts, avatar looks, voice styles, and motion templates for marketing, training, and social content.",
 }
 
 export default function HeyGenPromptsPage() {

@@ -4,9 +4,9 @@ import type { Metadata } from "next"
 import Link from "next/link"
 
 export const metadata: Metadata = {
-  title: "Prompt Engineering Jobs & Salary Guide 2026: The New Career Frontier | GPTPrompts.AI",
+  title: "Prompt Engineer Salary 2026: What They Earn ($95K-$450K+) and How to Get Hired",
   description:
-    "2026 salary benchmarks for prompt engineers: Entry-level ($95-120k) to Executive ($250-450k+). Skills, job market analysis, and career pathways.",
+    "2026 prompt engineer salary guide covering entry-level ($95-120K) to executive ($250-450K+). Includes required skills, top companies hiring, and the fastest path to landing a role.",
 }
 
 export default function PromptEngineeringJobsPage() {

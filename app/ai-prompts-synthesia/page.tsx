@@ -2,9 +2,9 @@ import Link from "next/link"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "AI Prompts for Synthesia: 80+ Script & Avatar Ideas for Pro AI Videos (2026 Guide)",
+  title: "Synthesia Prompts 2026: 80+ Copy-Paste Scripts for AI Avatar Videos",
   description:
-    "Master Synthesia AI avatar videos with 80+ script templates and ideas. Learn meta-prompts for marketing, training, and internal comms. Complete guide with best practices and examples.",
+    "Get 80+ Synthesia prompts for professional AI avatar videos. Scripts, avatar styles, and templates for marketing, training, educational content, and internal communications.",
   keywords: "Synthesia prompts, AI avatar videos, script prompts, video generation, Synthesia guide",
 }
 

@@ -2,9 +2,9 @@ import Link from "next/link"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "AI Prompts for Adobe Firefly: 120+ Text‑to‑Image Ideas for Stunning AI Art (2026 Guide)",
+  title: "Adobe Firefly Prompts 2026: 120+ Copy-Paste Prompts for AI Art & Images",
   description:
-    "Master Adobe Firefly with 120+ prompts for characters, products, logos, landscapes, posters, and experimental art. Complete guide with advanced techniques.",
+    "Get 120+ Adobe Firefly prompts for characters, landscapes, products, and logos. Copy-paste templates with style guides for stunning generative AI images in Creative Cloud.",
   keywords: "Adobe Firefly prompts, Firefly text-to-image, generative fill prompts, Creative Cloud AI",
 }
 

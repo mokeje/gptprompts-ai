@@ -167,15 +167,15 @@ const PerchanceAIPromptsPage = () => {
     }
   ];
 
-  const relatedPages = [
-    { title: 'AI Chatbot Prompts', href: '/ai-chatbot-prompts' },
-    { title: 'AI Productivity Prompts', href: '/ai-productivity-prompts' },
-    { title: 'AI Search Engine Prompts', href: '/ai-search-engine-prompts' },
-    { title: 'AI Text Generator Prompts', href: '/ai-text-generator-prompts' },
+      const relatedPages = [
     { title: 'AI Story Generator Prompts', href: '/ai-story-generator-prompts' },
-    { title: 'AI Music Generator Prompts', href: '/ai-music-generator-prompts' },
-    { title: 'AI Prompts for Education', href: '/ai-prompts-for-education' },
-    { title: 'Bing AI Image Generator Prompts', href: '/bing-ai-image-generator-prompts' }
+    { title: 'AI Character Chat Prompts', href: '/ai-character-chat-prompts' },
+    { title: 'AI Chat Prompts', href: '/ai-chat-prompts' },
+    { title: 'AI Writing Assistant Prompts', href: '/ai-writing-assistant-prompts' },
+    { title: 'AI For Gaming Prompts', href: '/ai-for-gaming-prompts' },
+    { title: 'AI Poem Generator Prompts', href: '/ai-poem-generator-prompts' },
+    { title: 'Squibler AI Prompts', href: '/squibler-ai-prompts' },
+    { title: 'AI Free Art Prompts', href: '/ai-free-art-prompts' },
   ];
 
   return (

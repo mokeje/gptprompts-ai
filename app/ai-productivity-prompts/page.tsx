@@ -279,15 +279,15 @@ export default function AIProductivityPromptsPage() {
     },
   ];
 
-  const relatedLinks = [
+    const relatedLinks = [
+    { label: 'AI Personal Assistant Prompts', href: '/ai-personal-assistant-prompts' },
     { label: 'AI Chatbot Prompts', href: '/ai-chatbot-prompts' },
-    { label: 'AI Search Engine Prompts', href: '/ai-search-engine-prompts' },
-    { label: 'AI Text Generator Prompts', href: '/ai-text-generator-prompts' },
-    { label: 'AI Prompts for Education', href: '/ai-prompts-for-education' },
-    { label: 'AI Story Generator Prompts', href: '/ai-story-generator-prompts' },
-    { label: 'AI Music Generator Prompts', href: '/ai-music-generator-prompts' },
-    { label: 'Bing AI Image Generator Prompts', href: '/bing-ai-image-generator-prompts' },
-    { label: 'Perchance AI Prompts', href: '/perchance-ai-prompts' },
+    { label: 'AI For Executives Prompts', href: '/ai-for-executives-prompts' },
+    { label: 'AI For Leadership Prompts', href: '/ai-for-leadership-prompts' },
+    { label: 'AI Summarizer Prompts', href: '/ai-summarizer-prompts' },
+    { label: 'AI Translation Prompts', href: '/ai-translation-prompts' },
+    { label: 'AI Writing Assistant Prompts', href: '/ai-writing-assistant-prompts' },
+    { label: 'ChatGPT Business Productivity', href: '/chatgpt-business-productivity' },
   ];
 
   return (

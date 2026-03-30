@@ -3,9 +3,9 @@ import type { Metadata } from "next"
 import Link from "next/link"
 
 export const metadata: Metadata = {
-  title: "Trending AI Photo Prompts 2026: Stay Ahead of the Visual Curve | GPTPrompts.AI",
+  title: "Trending AI Photo Prompts 2026: 100+ Viral Styles with Copy-Paste Prompts",
   description:
-    "Master 2026 AI photo trends. Discover the Nano Banana era, Imperfect by Design, and trending styles like Explorecore, Vaporwave, and Claymation. 100+ copy-paste prompts.",
+    "Discover the hottest AI photo prompts of 2026. 100+ copy-paste prompts for trending styles including Explorecore, Vaporwave, Claymation, and more. Updated for the latest trends.",
 }
 
 export default function TrendingPhotoPromptsPage() {

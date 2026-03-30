@@ -167,15 +167,15 @@ const BingAIImageGeneratorPage = () => {
     }
   ];
 
-  const relatedPages = [
-    { title: 'AI Chatbot Prompts', href: '/ai-chatbot-prompts' },
-    { title: 'AI Productivity Prompts', href: '/ai-productivity-prompts' },
-    { title: 'AI Search Engine Prompts', href: '/ai-search-engine-prompts' },
-    { title: 'AI Text Generator Prompts', href: '/ai-text-generator-prompts' },
-    { title: 'AI Story Generator Prompts', href: '/ai-story-generator-prompts' },
-    { title: 'AI Music Generator Prompts', href: '/ai-music-generator-prompts' },
-    { title: 'AI Prompts for Education', href: '/ai-prompts-for-education' },
-    { title: 'Perchance AI Prompts', href: '/perchance-ai-prompts' }
+    const relatedPages = [
+    { title: 'Craiyon AI Prompts', href: '/craiyon-ai-prompts' },
+    { title: 'AI Free Art Prompts', href: '/ai-free-art-prompts' },
+    { title: 'AI Headshot Prompts', href: '/ai-headshot-prompts' },
+    { title: 'AI Logo Generator Prompts', href: '/ai-logo-generator-prompts' },
+    { title: 'AI Image Upscaler Prompts', href: '/ai-image-upscaler-prompts' },
+    { title: 'AI Face Swap Prompts', href: '/ai-face-swap-prompts' },
+    { title: 'Midjourney Guide', href: '/midjourney-guide' },
+    { title: 'DALL-E 3 Prompts', href: '/dalle-3-prompts' },
   ];
 
   return (

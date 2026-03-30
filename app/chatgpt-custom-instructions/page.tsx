@@ -4,9 +4,9 @@ import type { Metadata } from "next"
 import Link from "next/link"
 
 export const metadata: Metadata = {
-  title: "ChatGPT Custom Instructions: Complete Guide to Persistent Prompts | GPTPrompts.AI",
+  title: "ChatGPT Custom Instructions Guide 2026: Setup, Templates & Examples",
   description:
-    "Master ChatGPT Custom Instructions for persistent, personalized responses. Complete setup guide with copy-paste templates for every use case.",
+    "Step-by-step guide to setting up ChatGPT Custom Instructions. Includes copy-paste templates for work, writing, coding, and more so you get better responses every time.",
 }
 
 export default function ChatGPTCustomInstructionsPage() {

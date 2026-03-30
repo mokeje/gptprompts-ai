@@ -167,15 +167,15 @@ const AIHomeworkPromptsPage = () => {
     }
   ];
 
-  const relatedPages = [
-    { title: 'AI Chatbot Prompts', href: '/ai-chatbot-prompts' },
-    { title: 'AI Productivity Prompts', href: '/ai-productivity-prompts' },
-    { title: 'AI Search Engine Prompts', href: '/ai-search-engine-prompts' },
-    { title: 'AI Text Generator Prompts', href: '/ai-text-generator-prompts' },
-    { title: 'AI Story Generator Prompts', href: '/ai-story-generator-prompts' },
-    { title: 'AI Music Generator Prompts', href: '/ai-music-generator-prompts' },
-    { title: 'Bing AI Image Generator Prompts', href: '/bing-ai-image-generator-prompts' },
-    { title: 'AI Prompts for Education', href: '/ai-prompts-for-education' }
+      const relatedPages = [
+    { title: 'AI Study Prompts', href: '/ai-study-prompts' },
+    { title: 'AI Prompts for Education', href: '/ai-prompts-for-education' },
+    { title: 'AI Prompts for Teachers', href: '/ai-prompts-for-teachers-tools' },
+    { title: 'Turnitin AI Prompts', href: '/turnitin-ai-prompts' },
+    { title: 'AI Question Answering Prompts', href: '/ai-question-answering-prompts' },
+    { title: 'AI Summarizer Prompts', href: '/ai-summarizer-prompts' },
+    { title: 'ChatGPT for Students', href: '/chatgpt-for-students' },
+    { title: 'AI Homework Helper', href: '/ai-homework-helper' },
   ];
 
   return (

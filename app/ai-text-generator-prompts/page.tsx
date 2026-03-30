@@ -167,15 +167,15 @@ const AITextGeneratorPromptsPage = () => {
     }
   ];
 
-  const relatedPages = [
+    const relatedPages = [
+    { title: 'AI Writing Assistant Prompts', href: '/ai-writing-assistant-prompts' },
+    { title: 'AI Summarizer Prompts', href: '/ai-summarizer-prompts' },
+    { title: 'Squibler AI Prompts', href: '/squibler-ai-prompts' },
+    { title: 'AI Translation Prompts', href: '/ai-translation-prompts' },
     { title: 'AI Chatbot Prompts', href: '/ai-chatbot-prompts' },
-    { title: 'AI Productivity Prompts', href: '/ai-productivity-prompts' },
-    { title: 'AI Search Engine Prompts', href: '/ai-search-engine-prompts' },
-    { title: 'AI Story Generator Prompts', href: '/ai-story-generator-prompts' },
-    { title: 'AI Music Generator Prompts', href: '/ai-music-generator-prompts' },
-    { title: 'AI Prompts for Education', href: '/ai-prompts-for-education' },
-    { title: 'Bing AI Image Generator Prompts', href: '/bing-ai-image-generator-prompts' },
-    { title: 'Perchance AI Prompts', href: '/perchance-ai-prompts' }
+    { title: 'AI Research Assistant Prompts', href: '/ai-research-assistant-prompts' },
+    { title: 'AI Content Detection Prompts', href: '/ai-content-detection-prompts' },
+    { title: 'ChatGPT Prompts', href: '/chatgpt-prompts' },
   ];
 
   return (

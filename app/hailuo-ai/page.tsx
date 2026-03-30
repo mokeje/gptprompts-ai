@@ -5,9 +5,9 @@ import type { Metadata } from "next"
 import Link from "next/link"
 
 export const metadata: Metadata = {
-  title: "Hailuo AI Video Generation: Advanced Prompting Guide | GPTPrompts.AI",
+  title: "Hailuo AI Prompts 2026: Complete Video Generation Guide (MiniMax AI)",
   description:
-    "Master Hailuo AI (MiniMax AI) with our comprehensive guide. Learn photorealistic video generation, advanced prompting, and ethical AI video creation techniques.",
+    "Master Hailuo AI video generation with copy-paste prompts and techniques. Learn camera movements, lighting, and advanced settings for photorealistic AI video results.",
 }
 
 export default function HailuoAIPage() {

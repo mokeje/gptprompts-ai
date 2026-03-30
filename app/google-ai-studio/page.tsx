@@ -3,9 +3,9 @@ import type { Metadata } from "next"
 import Link from "next/link"
 
 export const metadata: Metadata = {
-  title: "Google AI Studio Guide: AI Development Platform Tutorial | GPTPrompts.AI",
+  title: "Google AI Studio Guide 2026: Build AI Apps with Gemini (Free Tutorial)",
   description:
-    "Master Google AI Studio for AI development. Learn prompt engineering, multimodal inputs, code generation, API integration, and building production-ready AI applications.",
+    "Learn how to use Google AI Studio for free. Step-by-step guide covering prompt testing, multimodal inputs, API integration, and building your first Gemini-powered app.",
 }
 
 export default function GoogleAIStudioPage() {
