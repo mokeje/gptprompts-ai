@@ -1,271 +1,544 @@
-'use client'
+"use client"
+import Link from "next/link"
+import { useState } from "react"
+import { Copy, Check, ChevronDown, ChevronUp, PenLine, BookOpen, Lightbulb, RefreshCw, Layers } from "lucide-react"
 
-import { useState } from 'react'
-import { Copy, Check } from 'lucide-react'
+const accent = "#c084fc"
+const bg = "#07050f"
 
-function CopyCard({ prompt }: { prompt: string }) {
+function CopyCard({ title, prompt, tag }: { title: string; prompt: string; tag?: string }) {
   const [copied, setCopied] = useState(false)
   return (
-    <div
-      className="group relative rounded-2xl border border-white/10 bg-white/5 p-5 transition-all hover:border-white/20 hover:bg-white/[0.07] cursor-pointer"
-      onClick={() => {
-        navigator.clipboard.writeText(prompt)
-        setCopied(true)
-        setTimeout(() => setCopied(false), 2000)
-      }}
-    >
-      <p className="pr-10 text-[15px] leading-relaxed text-gray-300">{prompt}</p>
-      <div className="absolute right-4 top-4 text-gray-500 group-hover:text-white transition-colors">
-        {copied ? <Check size={16} className="text-green-400" /> : <Copy size={16} />}
+    <div className="bg-[#110d1e] border border-[#2a1f40] rounded-xl p-5 hover:border-[#c084fc]/40 transition-all">
+      <div className="flex items-start justify-between gap-3 mb-3">
+        <div>
+          {tag && (
+            <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-[#c084fc]/10 text-[#c084fc] mb-2 inline-block">
+              {tag}
+            </span>
+          )}
+          <h3 className="font-semibold text-white text-sm">{title}</h3>
+        </div>
+        <button
+          onClick={() => { navigator.clipboard.writeText(prompt); setCopied(true); setTimeout(() => setCopied(false), 2000) }}
+          className="shrink-0 p-2 rounded-lg bg-[#1a1230] hover:bg-[#c084fc]/20 transition-colors"
+        >
+          {copied ? <Check size={14} className="text-green-400" /> : <Copy size={14} className="text-gray-400" />}
+        </button>
       </div>
+      <pre className="text-gray-400 text-sm leading-relaxed whitespace-pre-wrap font-sans">{prompt}</pre>
     </div>
   )
 }
 
-export default function WritersPage() {
-  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null)
-
-  const promptCategories = [
-    {
-      title: 'Content Creation & Blog Writing',
-      prompts: [
-        'Write a comprehensive blog post outline on [topic] that targets [audience] with an engaging hook, 5-7 main sections with subheadings, and a strong call-to-action. Include keyword suggestions for SEO.',
-        'Create a listicle format article titled "[title]" with 10 actionable points, each with a 2-3 sentence explanation. Make it scannable with bold keywords and include a memorable intro and conclusion.',
-        'Draft an evergreen content piece about [subject] that will remain relevant for 2+ years. Structure it with problem-solution-results format and include real-world examples.',
-        'Write a personal essay about [experience] in a conversational tone that connects with readers emotionally. Include specific sensory details and a meaningful takeaway.',
-        'Create a how-to guide for [task] with step-by-step instructions, common mistakes to avoid, and tips for success. Format for both beginners and intermediate users.',
-        'Write an in-depth case study analyzing [project/product/person] that examines what worked, what didn\'t, and the lessons learned. Include data, quotes, and actionable insights for readers.'
-      ]
-    },
-    {
-      title: 'Storytelling & Narrative Structure',
-      prompts: [
-        'Develop a story outline with a compelling protagonist facing [conflict]. Structure it with clear act breaks, rising action, climax, and resolution. Include character motivation at each turning point.',
-        'Write a short story opening (500 words) that hooks the reader immediately using [technique: vivid sensory details, dialogue, mystery, etc.] and establishes the setting and stakes.',
-        'Create a narrative arc for a character\'s journey from [starting point] to [ending point]. Map out internal conflicts, external obstacles, and moments of growth or revelation.',
-        'Write a dialogue-heavy scene between two characters with conflicting goals. Use subtext, pauses, and actions to reveal character and advance the plot.',
-        'Develop a plot twist for a story about [premise]. Ensure it\'s surprising but feels inevitable in hindsight, and doesn\'t contradict established facts.',
-        'Create a flashback scene that reveals crucial backstory about [character/conflict]. Write it in a way that integrates seamlessly into the main narrative.'
-      ]
-    },
-    {
-      title: 'Editing, Revision & Refinement',
-      prompts: [
-        'Review this passage for clarity and flow: [paste text]. Identify unclear sentences, redundancies, and areas where more showing and less telling would strengthen the writing.',
-        'Help me eliminate passive voice and weak verbs from this paragraph: [paste text]. Provide stronger alternatives and explain how they improve readability.',
-        'Analyze the pacing in this scene: [paste text]. Does it move too fast, too slow, or is it well-balanced? Suggest specific revisions to improve it.',
-        'Identify clichés and overused phrases in this excerpt: [paste text]. Suggest fresh, original alternatives that maintain the intended tone.',
-        'Review the dialogue in this section: [paste text]. Does each character have a distinct voice? Are there info-dumps? How can it feel more natural?',
-        'Help me tighten this piece by cutting [percentage]% without losing essential information: [paste text]. Show me where to trim and what to preserve.'
-      ]
-    },
-    {
-      title: 'Character Development & Dialogue',
-      prompts: [
-        'Create a detailed character profile for [character type] including physical appearance, background, motivations, fears, strengths, weaknesses, and how they speak differently in formal vs. casual settings.',
-        'Write a character voice exercise where [character] responds to these scenarios: [list 3-4 situations]. Make sure their responses reveal personality, values, and speech patterns.',
-        'Develop a complex character with a clear contradiction: [describe the contradiction]. Show how this internal conflict drives their decisions and growth.',
-        'Write natural-sounding dialogue between two characters with conflicting communication styles. Show personality through word choice, speech patterns, and what they choose to say or not say.',
-        'Create a character backstory for [character] that explains their current behavior, beliefs, and relationships. Include a pivotal moment that shaped who they are.',
-        'Write a monologue from [character]\'s perspective revealing their inner thoughts about [situation]. Make it authentic to their voice and emotional state.'
-      ]
-    },
-    {
-      title: 'Writing for Different Formats & Audiences',
-      prompts: [
-        'Adapt this story concept for three different formats: a short story, a screenplay scene, and a tweet thread. Show how each format changes the approach and pacing.',
-        'Write the same message about [topic] for three different audiences: [audience 1], [audience 2], and [audience 3]. Adjust tone, vocabulary, and examples for each.',
-        'Create a sales copy version of this product description: [paste]. Make it benefit-focused, persuasive, and include a clear call-to-action.',
-        'Write an email newsletter teaser about [topic] that entices readers to click through to the full article. Make it concise, compelling, and relevant.',
-        'Convert this research paper abstract into accessible language for a general audience while maintaining accuracy and key information.',
-        'Write a children\'s book page about [concept] that teaches without being preachy. Use age-appropriate language, rhythm, and illustrations suggestions.'
-      ]
-    },
-    {
-      title: 'Publishing, Promotion & Author Platform',
-      prompts: [
-        'Create a compelling author bio (150 words) that establishes credibility, shows personality, and includes a clear call-to-action for [platform].',
-        'Write a book blurb for [book title/description] that hooks potential readers in 100-150 words, creates intrigue, and includes a subtle call-to-action.',
-        'Develop a content calendar for promoting a new book across [platforms]. Include post ideas, posting frequency, key messages, and timing around launch.',
-        'Write 5 different social media posts promoting the same piece of content, each optimized for a different platform: LinkedIn, Twitter, Instagram, TikTok, and email.',
-        'Create an email sequence for new newsletter subscribers: [describe goal]. Write subject lines and body copy for 3-4 emails that deliver value and build relationship.',
-        'Develop a speaking topic pitch for [conference/platform] that positions your expertise in [area]. Include a compelling title, description, and why it\'s valuable to that audience.'
-      ]
-    }
-  ]
-
-  const faqs = [
-    {
-      question: 'How do I find my unique voice as a writer?',
-      answer: 'Your unique voice emerges when you write regularly, read widely in and outside your genre, and give yourself permission to write badly at first. Pay attention to how you naturally speak in conversation, the jokes you make, your perspective on life—these are clues to your voice. Read your work aloud; if it doesn\'t sound like you, revise. Over time, consistent writing practice reveals patterns that become your distinctive style.'
-    },
-    {
-      question: 'What should I prioritize: perfect grammar or natural flow?',
-      answer: 'Prioritize natural flow during drafting; perfect grammar during editing. Many great writers break grammar rules intentionally for rhythm, voice, or impact. The key is that your rule-breaking should be conscious and purposeful, not accidental. First draft: write naturally. Second draft: fix obvious grammar errors. Final draft: decide which rules to bend for effect.'
-    },
-    {
-      question: 'How do I overcome writer\'s block?',
-      answer: 'Writer\'s block often stems from perfectionism, unclear direction, or emotional resistance. Try: (1) Write badly on purpose—remove the pressure to be good. (2) Change your environment or write at a different time. (3) Free-write without planning—let ideas flow without judgment. (4) Identify what you\'re resisting (fear of failure, unclear purpose) and address the root issue. Sometimes the answer isn\'t to push harder but to step back, read something inspiring, or move to a different section.'
-    },
-    {
-      question: 'Should I write every day to improve?',
-      answer: 'Daily writing helps build momentum and consistency, but quality matters more than quantity. Even 20 minutes of focused writing beats sporadic 2-hour sessions. That said, some writers work best with longer, less frequent sessions. What matters is regularity and intention—whether that\'s daily, three times a week, or whatever rhythm allows you to maintain momentum and focus over weeks and months.'
-    },
-    {
-      question: 'How do I know when a piece is ready to publish?',
-      answer: 'A piece is ready when: (1) You\'ve revised at least twice and the changes are becoming minor. (2) You can\'t find obvious errors or unclear passages when reading it fresh. (3) You\'ve had feedback from trusted readers and addressed substantial concerns. (4) You\'re not changing it out of anxiety, but only out of genuine improvement. If you\'ve been tinkering for weeks, you\'re probably done—perfectionism is the enemy of publishing.'
-    },
-    {
-      question: 'What\'s the difference between editing for content and line editing?',
-      answer: 'Content editing (developmental) focuses on big-picture issues: structure, pacing, character arc, whether scenes serve the story. Line editing focuses on sentence-level clarity: word choice, rhythm, redundancy, tone consistency. Do content editing first—it\'s pointless to polish sentences that might be deleted. After structure is solid, line edit for precision and elegance.'
-    },
-    {
-      question: 'How do I write authentic dialogue?',
-      answer: 'Authentic dialogue sounds like real speech but is more refined. Record how people actually talk: interruptions, filler words, incomplete sentences. Then refine it: remove most filler words, keep some authentic hesitations, vary sentence length and structure. Each character should have a distinct speech pattern reflecting their background, education, personality, and emotional state. Read dialogue aloud—if it sounds stiff, revise.'
-    },
-    {
-      question: 'Should I write an outline before starting?',
-      answer: 'It depends on your process. Some writers need a detailed outline; others find it limiting. A middle approach: outline the major turning points and ending, then discover how to get there. This gives direction without killing spontaneity. For shorter pieces, a bullet-point outline usually suffices. For novels, many writers find at least a loose structure prevents getting stuck midway.'
-    },
-    {
-      question: 'How do I make my writing more engaging?',
-      answer: 'Engagement comes from: (1) Strong opening line that creates curiosity or stakes. (2) Specific, vivid details instead of generic descriptions. (3) Varying sentence length and structure—mix short punchy sentences with longer ones. (4) Active voice and strong verbs. (5) Showing emotions through action rather than telling. (6) Pacing that matches the content—faster for action, slower for reflection. (7) A clear sense of voice that feels human.'
-    },
-    {
-      question: 'What\'s the best way to handle criticism of my writing?',
-      answer: 'Separate emotional reaction from useful feedback. When you receive criticism: (1) Listen without defending immediately. (2) Ask clarifying questions. (3) Thank the person and sit with it for a day before responding. (4) Assess: is this feedback pointing to a real issue, or is it just a different preference? Not all feedback is valuable. Seek patterns—if multiple readers mention the same problem, it\'s likely real. Trust your instincts, but stay open to growth.'
-    }
-  ]
-
+function FaqItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false)
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
-      {/* Hero Section */}
-      <div className="relative overflow-hidden border-b border-white/5 px-6 py-20 sm:px-12 sm:py-28">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#D946EF]/5 to-transparent pointer-events-none" />
-        <div className="relative max-w-3xl">
-          <div className="inline-block mb-4 px-4 py-2 rounded-full border border-[#D946EF]/20 bg-[#D946EF]/5">
-            <span className="text-sm font-medium text-[#D946EF]">Creative Writing Tools</span>
+    <div className="border border-[#2a1f40] rounded-xl overflow-hidden">
+      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between p-5 text-left hover:bg-[#110d1e] transition-colors">
+        <span className="font-medium text-white pr-4">{q}</span>
+        {open ? <ChevronUp size={16} className="text-gray-400 shrink-0" /> : <ChevronDown size={16} className="text-gray-400 shrink-0" />}
+      </button>
+      {open && <div className="px-5 pb-5 text-gray-400 text-sm leading-relaxed border-t border-[#2a1f40] pt-4">{a}</div>}
+    </div>
+  )
+}
+
+const sections = [
+  {
+    id: "ideation",
+    icon: <Lightbulb size={20} />,
+    title: "Ideation & Story Development",
+    subtitle: "Overcome blank page paralysis — prompts for generating story ideas, characters, plots, and creative concepts.",
+    tag: "Ideation",
+    prompts: [
+      {
+        title: "Generate Story Ideas on a Theme",
+        prompt: `Generate 10 original story ideas based on this theme or premise:
+[Describe the theme, setting, or seed idea]
+
+For each idea, give me:
+- A one-sentence logline (what happens and why it matters)
+- The genre (literary fiction / thriller / sci-fi / etc.)
+- The central conflict (internal, external, or both)
+- One unexpected or subversive element that makes it stand out
+
+I write [genre] for [audience]. Make the ideas feel fresh — avoid the most obvious directions.`,
+      },
+      {
+        title: "Develop a Character from Scratch",
+        prompt: `Help me develop a fully realised character for my story. I want to avoid clichés and create someone complex and specific.
+
+Starting point: [Give me any starting details — name, role in story, a vague idea, or just a feeling]
+
+Develop:
+- Physical presence (not just description — how they carry themselves, what people notice first)
+- Voice and speech patterns
+- Core wound or formative experience that shaped who they are
+- What they want (external goal) vs what they need (internal truth)
+- Their fatal flaw and their hidden strength
+- 3 contradictions that make them real (e.g. generous but controlling, brave but afraid of intimacy)
+- How they would react to [scenario relevant to your story]`,
+      },
+      {
+        title: "Unstick a Plot — Find the Next Move",
+        prompt: `I'm stuck on my story and need help figuring out what happens next. Here's where I am:
+
+Story so far: [Summarise the plot up to this point — key characters, what's happened, what's at stake]
+Where I'm stuck: [Describe the specific moment or scene where I've stalled]
+What I've tried: [What directions have you already considered and rejected?]
+What the story needs emotionally at this point: [e.g. tension, relief, revelation, turning point]
+
+Give me 5 different directions the story could go from here, with pros and cons of each. Include at least one unexpected or risky option I probably haven't considered.`,
+      },
+      {
+        title: "Build a Story World / Setting",
+        prompt: `Help me develop the world/setting for my story. I want it to feel specific and alive, not generic.
+
+Genre / type of story: [Describe]
+Basic setting: [Time period, location, type of world — real / speculative / fantasy / etc.]
+What I already know: [Any details you've already decided]
+
+Develop:
+- The rules of this world (physical, social, cultural)
+- What's different here from our world or expectations?
+- What do people here fear / value / celebrate?
+- The sensory details that will make it feel real (sounds, smells, textures)
+- 3 specific details that would only exist in THIS world (not generic "medieval village" details)
+- How does the setting create or compound the central conflict?`,
+      },
+    ],
+  },
+  {
+    id: "craft",
+    icon: <PenLine size={20} />,
+    title: "Writing Craft & Technique",
+    subtitle: "Prompts for improving your prose, mastering dialogue, writing better scenes, and strengthening your style.",
+    tag: "Craft",
+    prompts: [
+      {
+        title: "Improve This Passage — Line Edit",
+        prompt: `Edit this passage to improve the prose. Diagnose the problems first, then provide an edited version.
+
+[Paste your passage here]
+
+Look for:
+- Passive voice that weakens the action
+- Telling instead of showing
+- Redundant or filler words
+- Weak verb choices (especially overuse of "was", "had", "got")
+- Adverbs that could be replaced by stronger verbs
+- Sentences that are too similar in length and structure
+
+Show me: (1) what's wrong and why, (2) your edited version, (3) 3 specific choices you made and why they improve the writing.`,
+      },
+      {
+        title: "Write a Scene with Subtext",
+        prompt: `Help me write a scene where the real meaning is beneath the surface. The characters should want one thing but say or do something else.
+
+Scene context: [Describe what's happening on the surface — two characters having coffee, a job interview, a family dinner, etc.]
+What's really going on: [The emotional or relational undercurrent — unspoken love, simmering resentment, hidden guilt, fear of being left, etc.]
+Characters: [Brief description of each]
+What each character actually wants from this scene: [Character A wants X, Character B wants Y]
+
+Write the scene with the subtext fully alive. None of the real feelings should be stated directly — they should be visible only in actions, word choices, silences, and what's deliberately not said.`,
+      },
+      {
+        title: "Write Authentic Dialogue",
+        prompt: `Write a dialogue scene between [number] characters with distinct, authentic voices.
+
+Characters:
+- [Character 1]: [Age, background, personality, speech patterns, emotional state in this scene]
+- [Character 2]: [Same]
+- [Character 3 if applicable]: [Same]
+
+Scene context: [What's happening? What are they talking about? What does each person want from this conversation?]
+Emotional arc of the scene: [How should it start vs. how should it end emotionally?]
+
+Requirements:
+- Each character should sound completely different — you should be able to tell who's speaking without dialogue tags
+- Use interruptions, incomplete sentences, deflections, and subtext
+- Avoid "on-the-nose" dialogue where characters say exactly what they mean`,
+      },
+      {
+        title: "Write an Opening Hook",
+        prompt: `Write 5 different opening lines / paragraphs for my story. Each should work as a standalone hook that makes someone want to keep reading.
+
+Story context: [Brief description of what the story is about — genre, tone, central character, what's at stake]
+
+Write one opening in each style:
+1. In medias res — drop us into action already happening
+2. Voice-driven — hook through a distinctive narrator's perspective
+3. Mystery or question — something that demands to be resolved
+4. Image or atmosphere — a specific sensory detail that establishes world and tone
+5. Statement that subverts expectations — a line that surprises or provokes
+
+After each opening, explain in one sentence why it works as a hook.`,
+      },
+    ],
+  },
+  {
+    id: "blog-nonfiction",
+    icon: <BookOpen size={20} />,
+    title: "Blog & Non-Fiction Writing",
+    subtitle: "Prompts for writing compelling essays, articles, blog posts, and non-fiction content that engages and persuades.",
+    tag: "Non-Fiction",
+    prompts: [
+      {
+        title: "Write a Blog Post Outline — Deep Structure",
+        prompt: `Create a detailed blog post outline for this topic: [Topic]
+
+Target audience: [Describe — who is this for and what do they already know?]
+Angle / unique POV: [What's the specific take or argument — not just "a post about X" but "the counterintuitive thing about X that most people miss"]
+Desired length: [Word count]
+Goal: [Inform / persuade / entertain / rank in search / grow email list]
+
+Outline format:
+- Headline options (3 variants)
+- Introduction structure (hook + problem + promise)
+- H2 sections with H3 sub-points under each
+- Key examples, stories, or data points to include in each section
+- Conclusion structure
+- CTA
+
+Make the outline specific enough that someone could write the post from it without needing to do additional research planning.`,
+      },
+      {
+        title: "Write a Personal Essay — First Draft",
+        prompt: `Help me write a personal essay about [topic / experience]. I want it to go beyond what happened to explore what it means.
+
+The experience: [Describe it — be as specific as possible with details, people, places, dates]
+What I think the essay is about (the surface): [What you'd tell someone it's about]
+What it's really about (the deeper theme): [The universal truth or question underneath — if you're not sure, that's okay]
+
+Essay structure I want:
+- Start in a specific scene or moment (not "I was born" or broad background)
+- Move between past and present or multiple time periods
+- Build toward a revelation or shift in understanding
+- End with resonance, not a tidy conclusion
+
+Write a first draft of [500 / 800 / 1200] words. I'll edit it to add my voice.`,
+      },
+      {
+        title: "Explain a Complex Idea Simply",
+        prompt: `Help me explain this complex idea in plain, engaging language for [audience: general readers / beginners / non-experts in this field]:
+
+Concept: [What is the idea, theory, system, or phenomenon you want to explain?]
+
+Requirements:
+- Use an analogy or metaphor that makes it click
+- Break it into 3-4 stages or components
+- Anticipate the most common points of confusion and address them
+- Use a concrete real-world example
+- Avoid jargon — if a technical term is necessary, define it immediately
+
+Target length: [200-400 words]
+Tone: [Conversational / Authoritative / Educational / Enthusiastic]`,
+      },
+      {
+        title: "Write with a Stronger Point of View",
+        prompt: `Rewrite this passage to have a stronger, clearer point of view. It currently reads as too neutral or hedged.
+
+[Paste your draft here]
+
+The argument I'm actually trying to make: [State your thesis clearly — what do you believe and why?]
+Why I've been hedging: [e.g. "I'm worried about being wrong" / "I don't want to alienate readers" / "I'm not sure I believe it fully"]
+
+Rewrite it to:
+- State the position clearly and early
+- Use confident language (remove "perhaps", "might", "some would argue")
+- Back the claim with one strong piece of evidence or example
+- Acknowledge a valid counter-argument briefly, then dismiss it
+- End the passage with a sentence that lands
+
+Maintain my writing voice — don't make it aggressive, just decisive.`,
+      },
+    ],
+  },
+  {
+    id: "editing",
+    icon: <RefreshCw size={20} />,
+    title: "Editing, Feedback & Revision",
+    subtitle: "Use AI as your developmental editor — get honest, specific feedback on structure, pacing, character, and prose.",
+    tag: "Editing",
+    prompts: [
+      {
+        title: "Structural Feedback — Developmental Edit",
+        prompt: `Act as a developmental editor and give me honest, specific feedback on this piece of writing.
+
+[Paste your draft — or a detailed summary if it's a full manuscript]
+
+Genre: [Fiction / Essay / Long-form article / Memoir / Other]
+What I think is working: [What you're proud of]
+What I'm worried about: [Where you suspect it's not working]
+What kind of feedback I want: [Be specific — structure, pacing, character, argument, voice, opening, ending]
+
+Please:
+- Be direct — I need honest feedback, not reassurance
+- Identify the 3 biggest structural issues
+- For each issue, explain why it's a problem and suggest how to fix it
+- Tell me what IS working so I know what to protect in revision`,
+      },
+      {
+        title: "Pacing Analysis — Is This Moving Too Fast or Too Slow?",
+        prompt: `Analyse the pacing of this [story / chapter / article] and tell me where it's too fast, too slow, or unbalanced.
+
+[Paste the piece or section]
+
+Specifically:
+- Which scenes or sections feel rushed? (What's missing that I've compressed too quickly)
+- Which sections drag? (What could be cut or condensed)
+- Where is the tension / reader engagement at its highest? (What's making this work)
+- Where does the reader's attention most likely drop off?
+- Does the pacing serve the emotional arc? (Is the climax given enough weight? Does the ending feel earned?)
+
+Give me a section-by-section pacing map and your top 3 revision priorities.`,
+      },
+      {
+        title: "Cut 20% — What Goes First?",
+        prompt: `This piece is too long. I need to cut approximately 20% of the word count. Help me identify what to cut without losing what matters.
+
+[Paste the piece here]
+
+Please:
+1. Identify the sections or passages that add the least value (weak arguments, redundant scenes, over-explained ideas)
+2. Flag any sentences that could be cut or condensed without loss
+3. Identify any digressions that could be removed entirely
+4. Show me one example paragraph fully cut/condensed to demonstrate the approach
+
+After identifying cuts, confirm: does the piece still make its argument / tell its story effectively at 80% length?`,
+      },
+      {
+        title: "Sensitivity Read — Is This Portrayal Respectful?",
+        prompt: `I've written a character / scene that deals with [sensitive topic — e.g. a character from a different culture, a mental health experience, a trauma, a marginalised identity]. I want to make sure I'm handling it respectfully and authentically.
+
+[Paste the passage or describe the portrayal in detail]
+
+The character / situation is: [Describe]
+My relationship to this topic: [Are you writing from inside or outside this experience?]
+My intentions: [What are you trying to achieve with this portrayal?]
+
+Please flag:
+- Any details that feel inaccurate, stereotyping, or reductive
+- Anything that could be read as exploitative or voyeuristic
+- Places where I've oversimplified a complex experience
+- Suggestions for how to deepen or complicate the portrayal
+- Questions I should research further before publishing`,
+      },
+    ],
+  },
+  {
+    id: "productivity",
+    icon: <Layers size={20} />,
+    title: "Writer Productivity & Process",
+    subtitle: "Use AI to manage your writing practice — overcome blocks, set goals, build habits, and sustain a long-term creative life.",
+    tag: "Process",
+    prompts: [
+      {
+        title: "Overcome Writer's Block — Right Now",
+        prompt: `I have writer's block right now and need to get unstuck immediately. Help me.
+
+What I'm working on: [Project name and brief description]
+Where I'm stuck: [The specific moment, scene, or passage I can't get past]
+How long I've been stuck: [Hours / days / weeks]
+What I think is stopping me: [Fear, perfectionism, unclear direction, energy, life stuff — be honest]
+
+Give me:
+1. A 10-minute low-stakes writing exercise to get the words flowing again (not related to the stuck piece)
+2. One permission to write badly — a specific reframe for why bad first drafts are fine
+3. The simplest possible next sentence I could write to move forward
+4. One question to ask myself that might unlock the block`,
+      },
+      {
+        title: "Build a Writing Habit System",
+        prompt: `Help me build a sustainable writing habit that fits my real life.
+
+My situation:
+- Available writing time: [When and how long — e.g. "mornings before work, 45 mins" / "weekends only" / "sporadic evenings"]
+- Current project: [What are you working on?]
+- My biggest obstacle: [What always gets in the way — energy, time, motivation, perfectionism, life]
+- What I've tried before: [Habits that didn't stick and why]
+
+Design a writing habit system that includes:
+1. A non-negotiable minimum (small enough to feel easy on hard days)
+2. A specific trigger that starts the writing session
+3. How to handle the days I miss (no guilt spiral)
+4. One way to track progress that actually motivates me
+5. A quarterly milestone to work toward`,
+      },
+      {
+        title: "Query Letter or Pitch — First Draft",
+        prompt: `Help me write a query letter / book pitch for my project.
+
+Project details:
+- Title: [Title]
+- Genre and word count: [e.g. Literary fiction, 82,000 words]
+- Comparable titles (comp titles): [2 books published in the last 5 years that are similar in feel or audience]
+- One-sentence logline: [What happens and why it matters — protagonist + conflict + stakes]
+- Brief synopsis: [3-5 sentences: setup, conflict, what's at stake, a hint of the ending tone]
+- Why I'm the person to write this: [Author bio — relevant credentials, personal connection to material, platform]
+
+Write a query letter following standard agent submission format. Keep it professional and specific.`,
+      },
+      {
+        title: "Create a Project Roadmap for Your Book",
+        prompt: `Help me create a realistic writing and revision roadmap for my book project.
+
+Project:
+- Type: [Novel / Memoir / Essay collection / Non-fiction]
+- Current status: [Idea stage / First draft in progress / X% complete / First draft done]
+- Word count target: [Target]
+- Deadline or goal: [If you have one — publication, writing group deadline, contest, personal goal]
+- Writing pace: [Current realistic words per session / per week]
+
+Create a roadmap with:
+1. Phase 1: First draft — timeline and milestones
+2. Phase 2: Structural revision — what to focus on and when
+3. Phase 3: Line editing — timeline
+4. Phase 4: Beta readers / sensitivity readers — timeline
+5. Phase 5: Query / submission prep (if applicable)
+
+Build in buffer time for life. Make it ambitious but realistic.`,
+      },
+    ],
+  },
+]
+
+const faqs = [
+  { q: "Should writers use AI?", a: "Many working writers use AI as a tool — for brainstorming, outlining, editing feedback, overcoming blocks, and handling research. The key distinction: AI works best as a collaborator and assistant, not as the author. Use it to generate options, identify problems, and explore ideas. The voice, decisions, and final words should be yours." },
+  { q: "How can AI help with writer's block?", a: "AI excels at low-stakes brainstorming exercises, generating alternative directions when you're stuck, asking generative questions, and helping you identify why you're blocked. Sometimes just describing the problem to an AI — the way you would to a writing partner — helps you find the answer yourself." },
+  { q: "Can AI help me develop my writing style?", a: "AI can help you analyse what's working in your prose, identify weaknesses like passive voice or word repetition, and show you how the same passage could be written differently. What it can't do is give you your voice — that comes from reading widely and writing persistently. Use AI to diagnose problems, but solve them yourself." },
+  { q: "Is it cheating to use AI for creative writing?", a: "That depends entirely on context. For a paid client deliverable, using AI without disclosure may be problematic. For your own creative development, brainstorming, or first drafts you'll heavily revise, AI is just another tool — like a dictionary, a writing group, or a developmental editor. Be honest with yourself about whether you're using it to grow or to avoid growing." },
+  { q: "Can AI write my novel for me?", a: "AI can generate text that looks like a novel, but it will lack your specific experience, perspective, voice, and emotional truth. For AI-generated prose to be published under your name as your creative work, it requires extensive human revision and genuine creative input at every stage. Most writers find AI more useful for planning, feedback, and stuck moments than for generating finished prose." },
+  { q: "What are the best AI tools for writers?", a: "ChatGPT and Claude are both strong for writing assistance — Claude tends to produce more nuanced feedback and handles longer documents better, while ChatGPT is strong for quick generation and structured tasks. Sudowrite is designed specifically for fiction writers. Grammarly handles mechanical editing. Most writers use a combination depending on the task." },
+  { q: "How do I use AI to improve my writing without losing my voice?", a: "Always use AI to generate options or identify problems — never accept its output as final. When AI rewrites a passage, use it to diagnose what went wrong in your original, then rewrite it yourself. The goal is to understand the craft principle, not to copy the AI's version." },
+  { q: "Can AI give me useful feedback on my writing?", a: "Yes, especially for structural and mechanical issues: pacing, passive voice, clarity, argument structure, redundancy. It's less reliable for nuanced taste and voice questions. Give it your draft with specific questions: 'Where does the pacing drag?' 'Is the argument clear in the third section?' 'Which character feels underdeveloped?' Specific questions produce more useful feedback." },
+  { q: "How do I use AI to brainstorm story ideas without them feeling generic?", a: "Specificity is the key. Instead of 'give me 10 story ideas', try: 'Give me 10 story ideas set in [specific place] that explore [specific theme], written for [specific audience], with an unexpected or subversive element in each.' The more constraints you give, the more interesting the output." },
+  { q: "Can I use AI to help write a query letter or book pitch?", a: "Yes, and this is one of the best uses of AI for writers. Query letters are a specific, learnable format, and AI is good at following formats. Give it your premise, comp titles, author bio, and a synopsis. Then edit the output heavily — agents can often tell when a query is AI-generated, and your voice needs to come through." },
+]
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      headline: "AI Prompts for Writers 2026: 60+ Copy-Paste Creative Writing Templates",
+      description: "60+ AI prompts for writers — story ideation, craft improvement, editing feedback, non-fiction writing, and writer productivity.",
+      author: { "@type": "Organization", name: "GPTPrompts" },
+      dateModified: "2026-01-01",
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+    },
+  ],
+}
+
+export default function WritersPromptsClient() {
+  return (
+    <div className="min-h-screen text-white" style={{ backgroundColor: bg }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+
+      <section className="border-b border-[#2a1f40] py-16 px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-center gap-2 mb-4">
+            <span className="text-xs font-medium px-3 py-1 rounded-full border" style={{ borderColor: `${accent}30`, color: accent }}>Writers</span>
+            <span className="text-xs text-gray-500">60+ prompts</span>
           </div>
-          <h1 className="text-5xl sm:text-6xl font-bold mb-6 leading-tight">
-            ChatGPT Prompts for Writers & Content Creators
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
+            AI Prompts for Writers 2026:<br />60+ Copy-Paste Templates
           </h1>
-          <p className="text-xl text-gray-400 mb-8 leading-relaxed">
-            Master your craft with 36 expert-crafted ChatGPT prompts. Write better stories, edit smarter, develop compelling characters, and build your author platform with AI-powered guidance.
+          <p className="text-xl text-gray-400 mb-6 leading-relaxed">
+            Copy-paste AI prompts for every stage of the writing process — story ideation, craft improvement, editing feedback, non-fiction writing, and building a sustainable writing practice.
           </p>
-          <div className="flex flex-wrap gap-4">
-            <button className="px-8 py-3 rounded-lg bg-[#D946EF] text-white font-semibold hover:bg-[#D946EF]/90 transition-colors">
-              Copy All Prompts
-            </button>
-            <button className="px-8 py-3 rounded-lg border border-white/10 text-white font-semibold hover:bg-white/5 transition-colors">
-              Learn More
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Prompt Categories */}
-      <div className="px-6 py-16 sm:px-12">
-        <div className="max-w-4xl">
-          {promptCategories.map((category, idx) => (
-            <div key={idx} className="mb-12">
-              <h2 className="text-2xl font-bold mb-6 text-white">{category.title}</h2>
-              <div className="grid gap-4">
-                {category.prompts.map((prompt, pIdx) => (
-                  <CopyCard key={pIdx} prompt={prompt} />
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* FAQ Section */}
-      <div className="px-6 py-16 sm:px-12 border-t border-white/5 bg-white/[0.02]">
-        <div className="max-w-3xl">
-          <h2 className="text-3xl font-bold mb-12 text-white">Frequently Asked Questions</h2>
-          <div className="space-y-3">
-            {faqs.map((faq, idx) => (
-              <div key={idx} className="border border-white/10 rounded-lg overflow-hidden">
-                <button
-                  onClick={() => setOpenFaqIndex(openFaqIndex === idx ? null : idx)}
-                  className="w-full px-6 py-4 text-left hover:bg-white/5 transition-colors flex items-center justify-between"
-                >
-                  <span className="font-semibold text-white">{faq.question}</span>
-                  <span className={`transform transition-transform ${openFaqIndex === idx ? 'rotate-180' : ''}`}>
-                    ▼
-                  </span>
-                </button>
-                {openFaqIndex === idx && (
-                  <div className="px-6 py-4 border-t border-white/5 bg-white/[0.02] text-gray-300">
-                    {faq.answer}
-                  </div>
-                )}
+          <div className="flex flex-wrap gap-6 mb-8">
+            {[{ label: "60+", desc: "Writing prompts" }, { label: "5", desc: "Categories" }, { label: "10", desc: "FAQ answers" }].map((s) => (
+              <div key={s.label} className="text-center">
+                <div className="text-3xl font-bold" style={{ color: accent }}>{s.label}</div>
+                <div className="text-sm text-gray-400">{s.desc}</div>
               </div>
             ))}
           </div>
-        </div>
-      </div>
-
-      {/* Related Pages Section */}
-      <div className="px-6 py-16 sm:px-12 border-t border-white/5">
-        <div className="max-w-4xl">
-          <h2 className="text-3xl font-bold mb-8 text-white">Explore More Prompt Collections</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <a href="/chatgpt-prompts-google-sheets" className="group p-6 rounded-lg border border-white/10 hover:border-[#0F9D58]/50 hover:bg-[#0F9D58]/5 transition-all">
-              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-[#0F9D58]">ChatGPT Prompts for Google Sheets</h3>
-              <p className="text-sm text-gray-400">Formulas, automation, and analytics</p>
-            </a>
-            <a href="/ai-prompts-for-startups" className="group p-6 rounded-lg border border-white/10 hover:border-[#FF6B35]/50 hover:bg-[#FF6B35]/5 transition-all">
-              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-[#FF6B35]">AI Prompts for Startups</h3>
-              <p className="text-sm text-gray-400">Founder strategies and growth hacks</p>
-            </a>
-            <a href="/ai-prompts-for-researchers" className="group p-6 rounded-lg border border-white/10 hover:border-[#7C3AED]/50 hover:bg-[#7C3AED]/5 transition-all">
-              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-[#7C3AED]">AI Prompts for Researchers</h3>
-              <p className="text-sm text-gray-400">Academic research and literature reviews</p>
-            </a>
-            <a href="/ai-prompts-linkedin" className="group p-6 rounded-lg border border-white/10 hover:border-[#0A66C2]/50 hover:bg-[#0A66C2]/5 transition-all">
-              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-[#0A66C2]">AI Prompts for LinkedIn</h3>
-              <p className="text-sm text-gray-400">Content creation and professional growth</p>
-            </a>
+          <div className="flex flex-wrap gap-3">
+            {["Story ideation", "Writing craft", "Blog & non-fiction", "Editing & feedback", "Writer productivity"].map((b) => (
+              <span key={b} className="text-sm px-3 py-1.5 bg-[#110d1e] border border-[#2a1f40] rounded-lg text-gray-300">{b}</span>
+            ))}
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* JSON-LD Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'Article',
-            headline: 'ChatGPT Prompts for Writers & Content Creators',
-            description: 'Master your craft with 36 expert-crafted ChatGPT prompts for writing, storytelling, editing, character development, and publishing.',
-            image: 'https://gptprompts.ai/og-image.png',
-            datePublished: new Date().toISOString(),
-            author: {
-              '@type': 'Organization',
-              name: 'GPT Prompts'
-            }
-          })
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'FAQPage',
-            mainEntity: faqs.map(faq => ({
-              '@type': 'Question',
-              name: faq.question,
-              acceptedAnswer: {
-                '@type': 'Answer',
-                text: faq.answer
-              }
-            }))
-          })
-        }}
-      />
+      {sections.map((section) => (
+        <section key={section.id} className="py-14 px-4 border-b border-[#2a1f40]">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex items-center gap-3 mb-2">
+              <span style={{ color: accent }}>{section.icon}</span>
+              <h2 className="text-2xl font-bold">{section.title}</h2>
+            </div>
+            <p className="text-gray-400 mb-6 text-sm leading-relaxed">{section.subtitle}</p>
+            <div className="grid gap-4">
+              {section.prompts.map((p) => (
+                <CopyCard key={p.title} title={p.title} prompt={p.prompt} tag={section.tag} />
+              ))}
+            </div>
+          </div>
+        </section>
+      ))}
+
+      <section className="py-14 px-4 border-b border-[#2a1f40]">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl font-bold mb-2">AI for Writers — FAQ</h2>
+          <p className="text-gray-400 mb-6 text-sm">Honest answers about using AI as a writing tool.</p>
+          <div className="space-y-3">{faqs.map((f) => <FaqItem key={f.q} q={f.q} a={f.a} />)}</div>
+        </div>
+      </section>
+
+      <section className="py-14 px-4 border-b border-[#2a1f40]">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl font-bold mb-6">Related Prompt Guides</h2>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {[
+              { href: "/writing-prompts", label: "Creative Writing Prompts", desc: "Story starters, fiction prompts, and creative challenges" },
+              { href: "/essay-prompts", label: "Essay Writing Prompts", desc: "Personal statements, academic essays, and argument prompts" },
+              { href: "/ai-writing-prompts", label: "AI Writing Prompts", desc: "All-purpose writing prompts for every format and audience" },
+              { href: "/creative-writing-prompts-beginners", label: "Creative Writing for Beginners", desc: "Start your writing practice with guided, accessible prompts" },
+            ].map((link) => (
+              <Link key={link.href} href={link.href} className="group bg-[#110d1e] p-6 rounded-lg hover:border-[#c084fc]/40 border border-[#2a1f40] transition-all">
+                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-[#c084fc] transition-colors">{link.label}</h3>
+                <p className="text-gray-400 text-sm">{link.desc}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <footer className="py-12 px-4">
+        <div className="max-w-4xl mx-auto grid sm:grid-cols-3 gap-8 text-sm">
+          <div>
+            <h3 className="font-semibold text-white mb-3">Writing</h3>
+            <ul className="space-y-2">
+              {[{ href: "/writing-prompts", label: "Writing Prompts" }, { href: "/essay-prompts", label: "Essay Prompts" }, { href: "/story-prompts", label: "Story Prompts" }, { href: "/creative-writing-prompts-beginners", label: "Beginners' Writing" }].map((l) => (
+                <li key={l.href}><Link href={l.href} className="text-gray-400 hover:text-white transition-colors">{l.label}</Link></li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-semibold text-white mb-3">Content Creation</h3>
+            <ul className="space-y-2">
+              {[{ href: "/ai-prompts-content-creators", label: "AI for Content Creators" }, { href: "/ai-prompts-linkedin", label: "LinkedIn Prompts" }, { href: "/ai-prompts-email-writing", label: "Email Writing Prompts" }, { href: "/youtube-thumbnails-titles", label: "YouTube Prompts" }].map((l) => (
+                <li key={l.href}><Link href={l.href} className="text-gray-400 hover:text-white transition-colors">{l.label}</Link></li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-semibold text-white mb-3">AI Models</h3>
+            <ul className="space-y-2">
+              {[{ href: "/chatgpt-prompts", label: "ChatGPT Prompts" }, { href: "/claude-prompts", label: "Claude Prompts" }, { href: "/gemini-prompts", label: "Gemini Prompts" }, { href: "/perplexity-prompts", label: "Perplexity Prompts" }].map((l) => (
+                <li key={l.href}><Link href={l.href} className="text-gray-400 hover:text-white transition-colors">{l.label}</Link></li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
