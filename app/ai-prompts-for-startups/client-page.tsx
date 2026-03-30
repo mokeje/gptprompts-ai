@@ -1,252 +1,132 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { Copy, Check } from 'lucide-react'
+import { useState } from 'react';
+import { Copy, Check, ChevronDown, ChevronUp, Rocket, Target, TrendingUp, Users, Search, Map } from 'lucide-react';
 
-function CopyCard({ prompt }: { prompt: string }) {
-  const [copied, setCopied] = useState(false)
-  return (
-    <div
-      className="group relative rounded-2xl border border-white/10 bg-white/5 p-5 transition-all hover:border-white/20 hover:bg-white/[0.07] cursor-pointer"
-      onClick={() => {
-        navigator.clipboard.writeText(prompt)
-        setCopied(true)
-        setTimeout(() => setCopied(false), 2000)
-      }}
-    >
-      <p className="pr-10 text-[15px] leading-relaxed text-gray-300">{prompt}</p>
-      <div className="absolute right-4 top-4 text-gray-500 group-hover:text-white transition-colors">
-        {copied ? <Check size={16} className="text-green-400" /> : <Copy size={16} />}
-      </div>
-    </div>
-  )
+const accent = '#FF6B35';
+
+interface CopyCardProps {
+  title: string;
+  prompt: string;
+  tag: string;
 }
 
-export default function StartupsPage() {
-  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null)
+function CopyCard({ title, prompt, tag }: CopyCardProps) {
+  const [copied, setCopied] = useState(false);
 
-  const promptCategories = [
-    {
-      title: 'Fundraising & Pitch Strategy',
-      prompts: [
-        'Create a compelling pitch deck narrative that positions our [startup type] as solving a massive pain point in [industry]. Structure the story to emphasize market size, competitive advantage, and unit economics in a way that resonates with Series A investors.',
-        'Draft a detailed investor targeting strategy that identifies and prioritizes VCs who have previously backed similar startups in [industry]. Include warm introduction angles, differentiation messaging, and custom outreach email templates for each investor tier.',
-        'Write a financial projection model for the next 5 years that demonstrates clear path to profitability. Include realistic assumptions for customer acquisition cost, lifetime value, and churn rates based on comparable startups in [market segment].',
-        'Create a compelling "why now?" narrative that explains why your [product/service] is uniquely positioned to succeed in this market moment. Tie in market trends, technological maturity, and changing customer behavior.',
-        'Develop a detailed cap table and equity allocation strategy for the next funding round that balances founder dilution, employee incentive pools, and investor control terms.',
-        'Write investor update templates (monthly, quarterly) that communicate progress, challenges, and key metrics in a way that builds confidence and maintains momentum between funding rounds.'
-      ]
-    },
-    {
-      title: 'Product Launch & Go-to-Market',
-      prompts: [
-        'Create a comprehensive go-to-market plan for launching [product] that includes target customer persona, positioning strategy, pricing model, sales channels, and launch timeline with specific milestones.',
-        'Design a product launch campaign that generates buzz among [target audience]. Include PR strategy, influencer outreach, content calendar, and paid media strategy with budget allocation.',
-        'Develop a beta launch strategy that identifies and recruits 50-100 early adopters who can provide detailed feedback and become initial advocates. Include incentive structure and feedback collection mechanisms.',
-        'Write a pricing strategy framework that balances market positioning, cost structure, and willingness to pay. Include recommendations for tiered pricing, annual vs. monthly billing, and expansion revenue opportunities.',
-        'Create a landing page messaging strategy that compels visitors to sign up. Include headline variations, benefit statements, social proof elements, and call-to-action copy that emphasizes urgency.',
-        'Design a customer onboarding flow that reduces time-to-value and ensures users understand core features within their first session. Include email sequences, in-app guidance, and support touchpoints.'
-      ]
-    },
-    {
-      title: 'Customer Acquisition & Growth',
-      prompts: [
-        'Create a multi-channel customer acquisition strategy for [startup] that identifies 4-5 high-potential channels (content marketing, paid ads, partnerships, community, virality). Include CAC targets, conversion rates, and payback period for each channel.',
-        'Design a customer referral program that incentivizes existing users to invite their network. Include tiered rewards, viral mechanics, and clear communication strategy that drives 20-30% of new user acquisition.',
-        'Develop a retention and expansion strategy that increases customer lifetime value by 50%. Include upsell triggers, cross-sell opportunities, success metrics, and touchpoints throughout the customer journey.',
-        'Write a partnership and integration strategy that identifies 10+ potential partners who can distribute your product or increase switching costs. Include mutual value propositions and integration roadmap.',
-        'Create a content marketing strategy that positions your company as thought leader in [industry] while driving organic traffic. Include topic clusters, content types, SEO strategy, and publishing cadence.',
-        'Design a community-building strategy that turns customers into advocates. Include Discord/Slack channel management, user conference concept, user-generated content campaigns, and ambassador program.'
-      ]
-    },
-    {
-      title: 'Team Building & Operations',
-      prompts: [
-        'Create a hiring plan for the next 18 months that balances immediate skill gaps with long-term team composition. Include role descriptions, competencies, compensation ranges, and timeline for each hire.',
-        'Design an organizational structure and decision-making framework that scales from 10 to 50 people. Include clear roles, responsibilities, reporting lines, and escalation processes.',
-        'Develop a company culture and values framework that attracts and retains top talent. Include recruiting messaging, onboarding process, team rituals, and performance management approach.',
-        'Write an equity and compensation strategy that balances cash constraints with talent acquisition. Include salary benchmarks, stock option vesting schedules, and incentive structures by role.',
-        'Create a founder diligence and role-clarity document that defines each founder\'s responsibilities, decision rights, and conflict resolution mechanisms. Include exit, forced dilution, and vesting scenarios.',
-        'Design an operations and financial management system for a pre-Series A startup. Include monthly budget planning, burn rate monitoring, cash runway projections, and financial forecasting.'
-      ]
-    },
-    {
-      title: 'Market Research & Validation',
-      prompts: [
-        'Create a customer research plan that validates your core assumptions about problem severity, willingness to pay, and product-market fit. Include interview scripts, sample sizes, and decision criteria.',
-        'Design a competitive analysis framework that identifies direct and indirect competitors, their positioning, pricing, feature set, and go-to-market strategy. Identify white space opportunities.',
-        'Develop a market sizing strategy (top-down and bottom-up) that demonstrates a $1B+ TAM. Include analysis of market trends, growth rates, and your realistic capture assumptions.',
-        'Write a customer advisory board program that recruits 10-15 strategic customers to provide ongoing feedback on roadmap, pricing, and go-to-market decisions.',
-        'Create a survey strategy that gathers quantitative validation from your target market on willingness to pay, feature prioritization, and competitive differentiation.',
-        'Design a Jobs-to-be-Done analysis that uncovers the specific job your customer is trying to accomplish, their current alternatives, and where you can create unique value.'
-      ]
-    },
-    {
-      title: 'Scaling & Strategic Planning',
-      prompts: [
-        'Create a 12-month roadmap that balances product development, customer acquisition, and operational scaling. Include major milestones, resource allocation, and key results (OKRs) for each quarter.',
-        'Design a Series B strategy that outlines when, where, and how to raise your next round. Include valuation expectations, use of proceeds, and strategic initiatives to achieve Series B milestones.',
-        'Develop a geographic expansion strategy for [market]. Include market analysis, localization requirements, partner strategy, and phased rollout plan.',
-        'Write a product strategy that moves from "solve the core problem" to "build an ecosystem." Include add-ons, integrations, platforms, and multi-product positioning.',
-        'Create an M&A and partnership strategy that identifies 5-10 potential acquisition targets or strategic partners who can accelerate your growth or fill product gaps.',
-        'Design a long-term vision and strategy (3-5 years) that articulates how your startup will become a category leader and sustain competitive advantage.'
-      ]
-    }
-  ]
-
-  const faqs = [
-    {
-      question: 'How do I use these prompts with ChatGPT for my startup?',
-      answer: 'Copy a prompt directly and paste it into ChatGPT. Replace bracketed terms like [startup type], [industry], or [target audience] with your specific details. You can refine outputs by asking follow-up questions or requesting different perspectives. For complex tasks like financial modeling, ask ChatGPT to create templates or frameworks you can populate with your data.'
-    },
-    {
-      question: 'Can I customize these prompts for my specific startup stage or industry?',
-      answer: 'Absolutely. These prompts are frameworks. Modify them to fit your context — replace [startup type] with your actual product category, [industry] with your market, and [metrics] with your targets. The more specific you are, the better ChatGPT outputs will be. Most founders find it helpful to provide ChatGPT with context about their existing traction, team, and constraints.'
-    },
-    {
-      question: 'Which prompts should I prioritize if I\'m raising a seed round?',
-      answer: 'Focus on these categories in this order: Market Research & Validation (validate product-market fit), Fundraising & Pitch Strategy (create compelling narrative), Customer Acquisition (show traction), and Go-to-Market (demonstrate execution ability). Customer validation and early traction are far more valuable to seed investors than perfect financial projections.'
-    },
-    {
-      question: 'How do I create a realistic financial projection without historical data?',
-      answer: 'Use comparable startup benchmarks for your industry as anchors. Ask ChatGPT for typical CAC, LTV, churn, and unit economics for similar businesses. Build your projections backward: start with your target year-3 revenue, work backward through customer acquisition costs and volumes, then validate against your runway. Be conservative and show multiple scenarios.'
-    },
-    {
-      question: 'What metrics should I track as an early-stage founder to demonstrate traction?',
-      answer: 'Depends on your business model. For SaaS: MRR (monthly recurring revenue), churn, CAC payback period, and activation rate. For marketplaces: GMV, take rate, and retention. For consumer apps: DAU/MAU, retention cohorts, and viral coefficient. For any startup: month-over-month growth rate and unit economics (LTV > 3x CAC). Pick 3-5 metrics that best reflect your unit economics.'
-    },
-    {
-      question: 'How do I know if my product-market fit is strong enough to raise a Series A?',
-      answer: 'Signs of strong product-market fit: NPS > 50, retention cohorts show <5% monthly churn, customers asking for your product before you reach out, revenue growing 10%+ month-over-month, positive unit economics (LTV > 3x CAC), and waiting list or high free-to-paid conversion. Series A investors look for clear product-market fit, not explosive growth. If customers don\'t clearly need your product, no amount of marketing will fix it.'
-    },
-    {
-      question: 'What should I include in a monthly investor update?',
-      answer: 'Include: key metrics (MRR, revenue, customer count with % change), major milestone or shipping update, pipeline and forward momentum, key hire or team update, capital runway and burn rate, and one specific ask or decision needed from investors. Keep it to 1-2 pages. Be honest about challenges; investors expect them. Consistency and transparency build trust.'
-    },
-    {
-      question: 'How do I avoid common startup mistakes when building my go-to-market strategy?',
-      answer: 'Avoid: (1) building product before talking to customers, (2) targeting too broad an audience, (3) competing on price instead of value, (4) spreading resources across too many channels at once, (5) ignoring churn while chasing new customers, (6) hiring too aggressively before product-market fit. Focus on depth in one channel and one customer segment before expanding.'
-    },
-    {
-      question: 'Should I focus on product development or customer acquisition first?',
-      answer: 'Get initial customer validation and traction first. With 10-20 paying customers who genuinely love your product, you\'ll attract better talent, raise capital more easily, and make smarter product decisions. Early customers also provide ongoing feedback that shapes your roadmap. Build just enough product to validate core assumptions, then acquire and listen to customers, then build more.'
-    },
-    {
-      question: 'How do I structure my equity and compensation to compete with big tech for talent?',
-      answer: 'Offer a base salary slightly below market rate, competitive equity (0.1-1% depending on role and seniority), and a meaningful early-hire bonus. Be transparent about equity value, vesting schedules, and path to liquidity. Emphasize mission, impact, and growth opportunity. Early employees believe in the vision; late employees want proven traction. Hire people who thrive in ambiguity and want to build something meaningful.'
-    }
-  ]
+  const handleCopy = () => {
+    navigator.clipboard.writeText(prompt);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
-      {/* Hero Section */}
-      <div className="relative overflow-hidden border-b border-white/5 px-6 py-20 sm:px-12 sm:py-28">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FF6B35]/5 to-transparent pointer-events-none" />
-        <div className="relative max-w-3xl">
-          <div className="inline-block mb-4 px-4 py-2 rounded-full border border-[#FF6B35]/20 bg-[#FF6B35]/5">
-            <span className="text-sm font-medium text-[#FF6B35]">Startup Prompts</span>
-          </div>
-          <h1 className="text-5xl sm:text-6xl font-bold mb-6 leading-tight">
-            ChatGPT Prompts for Startups & Founders
-          </h1>
-          <p className="text-xl text-gray-400 mb-8 leading-relaxed">
-            Master fundraising, product launch, customer acquisition, and scaling. 36 expert prompts designed for founders navigating the startup journey from idea to Series A.
-          </p>
-          <div className="flex flex-wrap gap-4">
-            <button className="px-8 py-3 rounded-lg bg-[#FF6B35] text-black font-semibold hover:bg-[#FF6B35]/90 transition-colors">
-              Copy All Prompts
-            </button>
-            <button className="px-8 py-3 rounded-lg border border-white/10 text-white font-semibold hover:bg-white/5 transition-colors">
-              Learn More
-            </button>
-          </div>
-        </div>
+    <div className="mb-4 p-4 border rounded-lg border-[#2a1a0f] hover:border-[#FF6B35] transition-colors bg-[#0a0604]">
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-xs font-semibold uppercase tracking-wide" style={{ color: accent }}>{tag}</span>
       </div>
+      <p className="text-white text-sm font-medium mb-2">{title}</p>
+      <pre className="text-gray-400 text-sm mb-3 leading-relaxed whitespace-pre-wrap font-sans">{prompt}</pre>
+      <button
+        onClick={handleCopy}
+        className="inline-flex items-center gap-2 px-3 py-2 rounded text-sm font-medium transition-colors border"
+        style={{
+          color: copied ? accent : '#888',
+          borderColor: copied ? accent : '#333',
+        }}
+      >
+        {copied ? <><Check size={14} />Copied!</> : <><Copy size={14} />Copy</>}
+      </button>
+    </div>
+  );
+}
 
-      {/* Prompt Categories */}
-      <div className="px-6 py-16 sm:px-12">
-        <div className="max-w-4xl">
-          {promptCategories.map((category, idx) => (
-            <div key={idx} className="mb-12">
-              <h2 className="text-2xl font-bold mb-6 text-white">{category.title}</h2>
-              <div className="grid gap-4">
-                {category.prompts.map((prompt, pIdx) => (
-                  <CopyCard key={pIdx} prompt={prompt} />
-                ))}
-              </div>
-            </div>
-          ))}
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+function FAQ({ item }: { item: FAQItem }) {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <div className="mb-3 border border-[#2a1a0f] rounded-lg overflow-hidden hover:border-[#FF6B35] transition-colors">
+      <button
+        onClick={() => setExpanded(!expanded)}
+        className="w-full p-4 flex items-center justify-between bg-[#0a0604] hover:bg-[#110906] transition-colors"
+      >
+        <h3 className="font-semibold text-white text-left text-sm">{item.question}</h3>
+        {expanded
+          ? <ChevronUp size={18} style={{ color: accent }} className="flex-shrink-0" />
+          : <ChevronDown size={18} className="flex-shrink-0 text-gray-500" />}
+      </button>
+      {expanded && (
+        <div className="p-4 bg-[#060402] border-t border-[#2a1a0f] text-gray-300 text-sm leading-relaxed">
+          {item.answer}
         </div>
-      </div>
+      )}
+    </div>
+  );
+}
 
-      {/* FAQ Section */}
-      <div className="px-6 py-16 sm:px-12 border-t border-white/5 bg-white/[0.02]">
-        <div className="max-w-3xl">
-          <h2 className="text-3xl font-bold mb-12 text-white">Frequently Asked Questions</h2>
-          <div className="space-y-3">
-            {faqs.map((faq, idx) => (
-              <div key={idx} className="border border-white/10 rounded-lg overflow-hidden">
-                <button
-                  onClick={() => setOpenFaqIndex(openFaqIndex === idx ? null : idx)}
-                  className="w-full px-6 py-4 text-left hover:bg-white/5 transition-colors flex items-center justify-between"
-                >
-                  <span className="font-semibold text-white">{faq.question}</span>
-                  <span className={`transform transition-transform ${openFaqIndex === idx ? 'rotate-180' : ''}`}>
-                    ▼
-                  </span>
-                </button>
-                {openFaqIndex === idx && (
-                  <div className="px-6 py-4 border-t border-white/5 bg-white/[0.02] text-gray-300">
-                    {faq.answer}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+const faqItems: FAQItem[] = [
+  {
+    question: 'How should a first-time founder use AI to validate their startup idea?',
+    answer: 'Use AI to stress-test your assumptions before spending money. Ask it to steelman the strongest arguments against your idea, identify the 5 most likely reasons it fails, and generate a list of the assumptions you need to validate with real customers. Then use AI to help you design customer discovery interviews and analyse what you hear. AI is best as a sparring partner for thinking — not a substitute for talking to actual potential customers.',
+  },
+  {
+    question: 'What startup metrics should I track to prove traction for investors?',
+    answer: 'Focus on metrics that demonstrate product-market fit and unit economics. For SaaS: MRR growth rate, net revenue retention, CAC, and payback period. For marketplaces: GMV, take rate, and liquidity (fill rate). For consumer: DAU/MAU, D7/D30 retention, and viral coefficient. The universal metric is month-over-month growth rate — 15-20% MoM is typically what early-stage investors want to see. Choose 3-5 metrics that best reflect whether customers truly need your product.',
+  },
+  {
+    question: 'How do I use AI to prepare for investor meetings?',
+    answer: 'Use AI to anticipate and rehearse hard questions: paste your pitch deck outline and ask it to identify the 10 most challenging questions a skeptical investor would ask. Practice answering each one. Also ask AI to help you benchmark your metrics against comparable funded startups in your space, identify weaknesses in your financial model, and pressure-test your go-to-market assumptions. Going into an investor meeting having faced the hardest questions is more valuable than a polished deck.',
+  },
+  {
+    question: 'What\'s the right time for a startup to start hiring?',
+    answer: 'Hire when you have clear evidence of product-market fit and a repeatable process that needs more human capacity to scale — not before. Early hires should expand capacity on what\'s already working, not explore new directions. The most dangerous hire is a senior executive before PMF — they\'ll optimise the wrong things at high cost. The most valuable early hire is usually someone who can do things you can\'t, not duplicate what you can.',
+  },
+  {
+    question: 'How do I build a realistic financial model without a finance background?',
+    answer: 'Start with unit economics, not a revenue forecast. Build from the bottom up: how many customers do you need, what does it cost to acquire each one (CAC), how long do they stay (LTV), what\'s your gross margin? From there, build a monthly model for 24 months. Use AI to check your assumptions against benchmarks for your business model. The goal isn\'t precision — it\'s showing that you understand the levers and can achieve positive unit economics. Investors know early forecasts are fiction; they\'re evaluating your thinking.',
+  },
+  {
+    question: 'What should a startup pitch deck include for a seed round?',
+    answer: 'The essential slides: Problem (is it real and painful?), Solution (clear and differentiated), Market Size (credible TAM/SAM/SOM), Traction (evidence of PMF), Business Model (how you make money), Go-to-Market (how you acquire customers), Team (why you?), Ask (how much, for what milestones). Keep it to 10-12 slides. Lead with traction if you have it. Investors fund people and markets more than ideas — spend the most time on the team slide and making the problem viscerally real.',
+  },
+  {
+    question: 'How do I figure out the right pricing for my product?',
+    answer: 'Start by understanding willingness to pay — interview 20+ potential customers and ask them directly: "At what price would this be too expensive? At what price would you question the quality?" Use AI to model different pricing scenarios and their impact on margin, volume, and LTV/CAC ratio. For SaaS, price to value (what outcome do you deliver?) not cost-plus. Annual billing at a discount improves cashflow and reduces churn. Always test pricing iteratively — most founders undercharge at the start.',
+  },
+  {
+    question: 'What are the most common go-to-market mistakes early-stage startups make?',
+    answer: 'The biggest: trying to target everyone (no ICP), spreading acquisition budget across too many channels at once, building features instead of talking to customers, competing on price before establishing value, and ignoring churn while chasing new customers. The antidote is ruthless focus: pick one customer segment, one acquisition channel, one core use case — and go deep until you have proof before expanding. Depth beats breadth at the early stage.',
+  },
+  {
+    question: 'How should a startup founder use AI in their day-to-day work?',
+    answer: 'Most valuable use cases: first drafts of investor updates, sales emails, and job descriptions; market research and competitive analysis; stress-testing strategy and decisions; preparing for meetings by anticipating questions; financial model assumption checking; drafting board updates and OKRs. AI saves most time on structured writing tasks that require research. Don\'t use it to skip the thinking — use it to think faster and produce better outputs from your own thinking.',
+  },
+  {
+    question: 'When should a startup raise its next funding round?',
+    answer: 'Raise when you\'ve hit the milestones from your current round and have 6 months of runway left — not when you\'re desperate. For a seed-to-Series A raise, typical milestones: $1-2M ARR with strong growth, clear product-market fit (low churn, high NPS), repeatable customer acquisition, and unit economics trending toward profitability. Raise on strength, not necessity. The best time to raise is when you don\'t urgently need to — that\'s when you have the most leverage in negotiations.',
+  },
+];
 
-      {/* Related Pages Section */}
-      <div className="px-6 py-16 sm:px-12 border-t border-white/5">
-        <div className="max-w-4xl">
-          <h2 className="text-3xl font-bold mb-8 text-white">Explore More Prompt Collections</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <a href="/ai-prompts-linkedin" className="group p-6 rounded-lg border border-white/10 hover:border-[#0A66C2]/50 hover:bg-[#0A66C2]/5 transition-all">
-              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-[#0A66C2]">AI Prompts for LinkedIn</h3>
-              <p className="text-sm text-gray-400">Posts, profiles, and outreach strategies</p>
-            </a>
-            <a href="/chatgpt-prompts-google-sheets" className="group p-6 rounded-lg border border-white/10 hover:border-[#0F9D58]/50 hover:bg-[#0F9D58]/5 transition-all">
-              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-[#0F9D58]">ChatGPT Prompts for Google Sheets</h3>
-              <p className="text-sm text-gray-400">Formulas, automation, and analytics</p>
-            </a>
-            <a href="/ai-prompts-for-researchers" className="group p-6 rounded-lg border border-white/10 hover:border-[#7C3AED]/50 hover:bg-[#7C3AED]/5 transition-all">
-              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-[#7C3AED]">AI Prompts for Researchers</h3>
-              <p className="text-sm text-gray-400">Academic research and literature reviews</p>
-            </a>
-            <a href="/ai-prompts-for-writers" className="group p-6 rounded-lg border border-white/10 hover:border-[#D946EF]/50 hover:bg-[#D946EF]/5 transition-all">
-              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-[#D946EF]">AI Prompts for Writers</h3>
-              <p className="text-sm text-gray-400">Content creation and storytelling</p>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* JSON-LD Schema */}
+export default function AIPromptsForStartupsPage() {
+  return (
+    <div className="min-h-screen bg-[#060402]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'Article',
-            headline: 'ChatGPT Prompts for Startups & Founders',
-            description: 'Master startup success with 36 expert-crafted ChatGPT prompts for fundraising, product launch, customer acquisition, team building, and scaling.',
-            image: 'https://gptprompts.ai/og-image.png',
-            datePublished: new Date().toISOString(),
-            author: {
-              '@type': 'Organization',
-              name: 'GPT Prompts'
-            }
-          })
+            headline: 'AI Prompts for Startups & Founders: Fundraising, GTM, Growth & Strategy',
+            description: 'Expert AI prompts for startup founders covering fundraising and pitch strategy, go-to-market planning, customer acquisition, team building, market research, and scaling.',
+            image: 'https://gptprompts.ai/startups-og.jpg',
+            datePublished: '2026-03-28',
+            dateModified: '2026-03-28',
+            author: { '@type': 'Organization', name: 'GPT Prompts AI' },
+          }),
         }}
       />
       <script
@@ -255,17 +135,482 @@ export default function StartupsPage() {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'FAQPage',
-            mainEntity: faqs.map(faq => ({
+            mainEntity: faqItems.map((item) => ({
               '@type': 'Question',
-              name: faq.question,
-              acceptedAnswer: {
-                '@type': 'Answer',
-                text: faq.answer
-              }
-            }))
-          })
+              name: item.question,
+              acceptedAnswer: { '@type': 'Answer', text: item.answer },
+            })),
+          }),
         }}
       />
+
+      {/* Hero */}
+      <section className="border-b border-[#2a1a0f] py-12 px-6">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-center gap-3 mb-4">
+            <Rocket size={32} style={{ color: accent }} />
+            <h1 className="text-4xl font-bold text-white">AI Prompts for Startups</h1>
+          </div>
+          <p className="text-gray-400 text-lg mb-4">
+            Expert prompts for founders at every stage — fundraising, go-to-market, customer acquisition, team building, and scaling from idea to Series A.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {['Fundraising', 'Go-to-Market', 'Growth', 'Strategy'].map((tag) => (
+              <span key={tag} className="px-3 py-1 rounded-full text-sm font-medium border" style={{ borderColor: accent, color: accent }}>
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div className="max-w-4xl mx-auto px-6 py-12">
+
+        {/* Section 1: Fundraising */}
+        <section className="mb-12">
+          <div className="flex items-center gap-3 mb-6">
+            <Target size={26} style={{ color: accent }} />
+            <h2 className="text-2xl font-bold text-white">Fundraising & Pitch Strategy</h2>
+          </div>
+          <CopyCard
+            tag="Pitch Deck"
+            title="Seed round pitch narrative"
+            prompt={`Help me build a compelling narrative for my seed round pitch deck.
+Company: [company name]
+Problem: [problem you solve]
+Solution: [your product/service]
+Traction: [key metrics — users, revenue, growth rate]
+Team: [2-3 sentences on why this team]
+Ask: [$amount] to achieve [milestones]
+
+Create a narrative arc that flows across 10 slides. For each slide, give me: the one thing it must communicate, the key supporting point, and what a skeptical investor would challenge.`}
+          />
+          <CopyCard
+            tag="Investor Outreach"
+            title="Cold investor outreach email"
+            prompt={`Write a cold outreach email to a VC investor at [firm name] who has backed [relevant portfolio company].
+Context:
+- My startup: [description in one sentence]
+- Why them: [specific reason this investor is relevant]
+- Traction hook: [most impressive metric or milestone]
+- Ask: 20-minute intro call
+
+Keep it under 150 words. Lead with the traction hook. End with a clear, easy CTA. No buzzwords, no "disrupting", no "revolutionary".`}
+          />
+          <CopyCard
+            tag="Due Diligence"
+            title="Pre-empt investor due diligence questions"
+            prompt={`I'm preparing for a Series A investor due diligence call. My startup is in [industry], with [ARR], [growth rate], and [team size].
+Generate the 15 hardest questions a rigorous Series A investor would ask across:
+- Unit economics (CAC, LTV, payback period, gross margin)
+- Market size and competitive dynamics
+- Product and technical risks
+- Team gaps and key person dependency
+- Scalability of the go-to-market motion
+
+For each question, help me draft a strong, honest answer that acknowledges limitations while showing clear-eyed awareness.`}
+          />
+          <CopyCard
+            tag="Investor Update"
+            title="Monthly investor update template"
+            prompt={`Write a monthly investor update email template for a [stage] startup that covers:
+- KPIs this month (with MoM change): Revenue/MRR, Customer Count, Burn Rate, Runway
+- Top 3 wins this month (specific and concrete)
+- Top 2 challenges (honest — investors respect transparency)
+- What we need from investors (specific ask or introduction)
+- Focus for next month
+
+Keep it to 350 words maximum. Tone: confident but honest. Use headers for easy scanning. This should take the founder 20 minutes to fill in each month.`}
+          />
+        </section>
+
+        {/* Section 2: Go-to-Market */}
+        <section className="mb-12">
+          <div className="flex items-center gap-3 mb-6">
+            <Rocket size={26} style={{ color: accent }} />
+            <h2 className="text-2xl font-bold text-white">Product Launch & Go-to-Market</h2>
+          </div>
+          <CopyCard
+            tag="GTM Strategy"
+            title="ICP definition and channel strategy"
+            prompt={`Help me define my ideal customer profile (ICP) and match it to acquisition channels.
+Product: [brief description]
+Current customers (if any): [describe your best customers]
+Problem solved: [core problem]
+
+For each ICP candidate I describe, tell me:
+1. Whether this is a strong ICP (decision-making power, budget, pain severity)
+2. Which 2–3 acquisition channels match where this ICP hangs out
+3. What the hook/angle should be for this segment
+4. Red flags that this might not be the right primary ICP yet`}
+          />
+          <CopyCard
+            tag="Pricing"
+            title="Pricing model and packaging strategy"
+            prompt={`Help me design a pricing strategy for [product/service].
+Current situation: [free, freemium, or paid? any existing price points?]
+Target customers: [SMB / mid-market / enterprise]
+Core value delivered: [what outcome does your product create?]
+Competitors' pricing: [if known]
+
+Recommend:
+1. Pricing model (flat rate / per seat / usage-based / tiered / hybrid) with rationale
+2. 2-3 pricing tiers with names and what's included at each
+3. The one metric to price on that best correlates with value
+4. How to test and validate these price points before committing`}
+          />
+          <CopyCard
+            tag="Launch"
+            title="Product launch campaign plan"
+            prompt={`Create a 6-week product launch plan for [product] targeting [audience].
+Include for each week:
+- Primary objective
+- Key activities (content, outreach, paid, events)
+- Expected outcomes / success metrics
+- Owner (founder, marketing, sales)
+
+Also include:
+- Pre-launch: waitlist or beta strategy
+- Launch day: announcement sequence (social, email, PR, community)
+- Post-launch: early user feedback loop and iteration plan
+Prioritise activities by impact-to-effort ratio.`}
+          />
+          <CopyCard
+            tag="Positioning"
+            title="Positioning statement and messaging hierarchy"
+            prompt={`Write a positioning statement and messaging hierarchy for [product] targeting [audience].
+Category: [what category does your product belong to?]
+Target customer: [specific ICP]
+Key differentiator: [what do you do that no close competitor does as well?]
+Proof point: [one specific evidence point — metric, customer, case study]
+
+Deliverables:
+1. One-sentence positioning statement (for Geoffrey Moore's template: "For [customer] who [need], [product] is a [category] that [benefit], unlike [alternative] which [limitation]")
+2. Three-level messaging: headline (8 words), subheadline (20 words), expanded (50 words)
+3. The 3 objections this positioning might face and how to counter each`}
+          />
+        </section>
+
+        {/* Section 3: Growth */}
+        <section className="mb-12">
+          <div className="flex items-center gap-3 mb-6">
+            <TrendingUp size={26} style={{ color: accent }} />
+            <h2 className="text-2xl font-bold text-white">Customer Acquisition & Growth</h2>
+          </div>
+          <CopyCard
+            tag="Growth Strategy"
+            title="Multi-channel acquisition strategy"
+            prompt={`Design a customer acquisition strategy for [startup] with a budget of [$X/month].
+Business model: [SaaS / marketplace / consumer / B2B]
+ICP: [describe ideal customer]
+Stage: [pre-PMF / post-PMF / scaling]
+
+For each of the following channels, assess: likelihood of success for this business, expected CAC range, time to first results, and effort to set up: Content/SEO, Paid Social, Paid Search, Outbound Sales, Partnerships, Community, Virality/Referral.
+
+Then recommend a phased plan: what to do in months 1–3, 4–6, and 7–12, based on prioritising one channel deeply before expanding.`}
+          />
+          <CopyCard
+            tag="Retention"
+            title="Churn analysis and retention strategy"
+            prompt={`Help me build a retention strategy for [product].
+Current situation: [monthly churn rate, typical customer tenure, main reasons customers leave if known]
+Product type: [SaaS / subscription / marketplace]
+
+Provide:
+1. A framework for segmenting churned customers to find patterns
+2. The 3 most common root causes of churn for this business type and how to diagnose which applies to me
+3. An early warning system — which in-product behaviours predict churn 30 days before it happens?
+4. Intervention playbook: what to do for at-risk customers at 30/60/90 day marks
+5. One structural change that would most reduce churn long-term`}
+          />
+          <CopyCard
+            tag="Referral"
+            title="Referral programme design"
+            prompt={`Design a customer referral programme for [product] that drives [X% of new customers] within 3 months.
+Current customer base: [size and engagement level]
+Average deal value: [$ amount]
+Product type: [B2B / B2C]
+
+Include:
+- Reward structure for referrer and referee (and why this combination works)
+- The trigger moment — when to ask for a referral in the customer journey
+- The ask copy (email + in-app message)
+- How to make sharing frictionless
+- How to track and attribute referrals
+- One viral mechanic that could make this self-propagating`}
+          />
+          <CopyCard
+            tag="PLG"
+            title="Product-led growth motion design"
+            prompt={`Help me design a product-led growth (PLG) motion for [product].
+Current model: [sales-led / marketing-led / no current motion]
+Product type: [collaboration tool / analytics / dev tool / other]
+Potential free tier value: [what would make a free tier genuinely valuable?]
+
+Design:
+1. Free tier scope — what to include and crucially what to gate
+2. The natural expansion trigger (what makes users want to upgrade?)
+3. Viral/collaboration loop — how does using the product expose it to others?
+4. The "aha moment" — what must a new user experience in session 1?
+5. Onboarding sequence to get users to the aha moment in <10 minutes`}
+          />
+        </section>
+
+        {/* Section 4: Team Building */}
+        <section className="mb-12">
+          <div className="flex items-center gap-3 mb-6">
+            <Users size={26} style={{ color: accent }} />
+            <h2 className="text-2xl font-bold text-white">Team Building & Operations</h2>
+          </div>
+          <CopyCard
+            tag="Hiring"
+            title="First hires prioritisation framework"
+            prompt={`Help me decide who to hire first as a [stage: pre-seed / seed / Series A] startup.
+Current team: [founders and their skills]
+Immediate bottleneck: [what is slowing growth most right now?]
+6-month goal: [what milestone are you working toward?]
+
+For each potential first hire (engineer, designer, salesperson, marketer, ops):
+1. How much would this hire unlock growth given your specific bottleneck?
+2. What evidence do you need before this hire is justified?
+3. What's the risk of hiring this person too early?
+4. Could this be covered by a contractor or part-time hire first?
+
+Recommend my top 1-2 hires in priority order with rationale.`}
+          />
+          <CopyCard
+            tag="Culture"
+            title="Company values and culture document"
+            prompt={`Help me write a company values document for [startup name].
+Context: [what does your company do, what stage are you at, what's your mission?]
+Team size: [current headcount]
+The problem we want values to solve: [e.g., decision-making without founders in the room, hiring filter, handling disagreements]
+
+For each value you recommend:
+- Name (memorable, not generic)
+- What it means in practice (2-3 specific examples of the value in action)
+- What it explicitly does NOT mean (to prevent misinterpretation)
+- How you would test for this in a hiring interview
+
+Aim for 4-5 values max. Avoid "integrity", "excellence", and "customer-first" unless you can make them genuinely specific to your culture.`}
+          />
+          <CopyCard
+            tag="OKRs"
+            title="Quarterly OKR framework"
+            prompt={`Help me set OKRs for [startup name] for Q[X] [year].
+Stage: [pre-seed / seed / Series A]
+Previous quarter's results: [key outcomes]
+Company priority this quarter: [the one thing that matters most]
+
+For each of these 3 focus areas — [Area 1, Area 2, Area 3] — write:
+- One Objective (inspiring, qualitative, time-bound to the quarter)
+- 3 Key Results (measurable, specific, binary or quantifiable)
+- The one metric that, if achieved, would prove the objective was met
+
+Then: identify the top 3 dependencies or risks that could prevent us from hitting these OKRs.`}
+          />
+          <CopyCard
+            tag="Performance"
+            title="Performance review framework for early-stage teams"
+            prompt={`Design a lightweight performance review process for a startup with [X] employees at [stage].
+Constraints: founders have limited time, process must take <2 hours per employee per quarter, must be honest about performance without bureaucracy.
+
+Include:
+- The 3-4 dimensions to evaluate (relevant for a startup context)
+- A simple rating rubric that avoids grade inflation
+- Questions to guide the review conversation
+- How to handle the "this person is great but in the wrong role" scenario
+- How to document decisions about raises or equity refreshes
+- What NOT to include (to keep it lightweight)`}
+          />
+        </section>
+
+        {/* Section 5: Market Research */}
+        <section className="mb-12">
+          <div className="flex items-center gap-3 mb-6">
+            <Search size={26} style={{ color: accent }} />
+            <h2 className="text-2xl font-bold text-white">Market Research & Validation</h2>
+          </div>
+          <CopyCard
+            tag="Customer Discovery"
+            title="Customer discovery interview script"
+            prompt={`Write a customer discovery interview script for [startup] targeting [customer type].
+We are testing these assumptions:
+1. [Assumption 1 — e.g., "This customer type loses >3 hours/week on this problem"]
+2. [Assumption 2 — e.g., "They would pay $X/month to solve it"]
+3. [Assumption 3 — e.g., "They currently use [workaround] and are unhappy with it"]
+
+The script should:
+- Open with rapport-building (not selling)
+- Use open questions that expose truth rather than validate our assumptions
+- Include follow-up probes for the richest answers
+- End with a test of willingness to pay (without pitching)
+- Take 30-40 minutes total
+Include 5 things NOT to say during a customer discovery interview.`}
+          />
+          <CopyCard
+            tag="Competitive Analysis"
+            title="Deep competitive landscape analysis"
+            prompt={`Conduct a competitive analysis for [startup] in the [market] space.
+Competitors to analyse: [list 4-6 direct and indirect competitors]
+
+For each competitor, cover:
+- Positioning and target customer
+- Pricing model and price points (if known)
+- Key strengths (what they do genuinely well)
+- Key weaknesses or gaps
+- Recent moves (funding, product launches, partnerships)
+
+Then synthesise:
+- The positioning white space none of them own
+- The segment that is most underserved
+- The most defensible differentiator available to us
+- The competitor most likely to move against us first and how`}
+          />
+          <CopyCard
+            tag="Market Sizing"
+            title="Bottom-up and top-down market sizing"
+            prompt={`Help me size the market for [product/service] credibly for an investor deck.
+Product description: [what it does, who buys it, at what price]
+Geography: [target market — US, EU, global]
+
+Provide both approaches:
+Top-down: total market (cite source) → apply segment filters → realistic addressable market
+Bottom-up: number of qualifying companies/consumers × penetration assumption × price point = SAM
+
+For each approach:
+- Walk through the calculation step by step
+- Identify the assumptions that have the most impact on the result
+- Suggest where to find data to validate each assumption
+- Give me a range (conservative to optimistic) rather than a single number`}
+          />
+          <CopyCard
+            tag="PMF Testing"
+            title="Product-market fit measurement framework"
+            prompt={`Help me design a framework to measure product-market fit for [product].
+Stage: [beta / early customers / post-launch]
+Current user base: [size and how they were acquired]
+
+Include:
+1. The Sean Ellis / Superhuman PMF survey (40% "very disappointed" benchmark) — adapted for my product
+2. Retention metrics that indicate strong PMF for this business model
+3. NPS interpretation: what score range indicates strong enough PMF to scale?
+4. Qualitative signals — what would customers say that would prove PMF?
+5. The single most honest test of whether we have PMF yet: [proposed question or metric]
+
+Also: what would have to be true for us to be scaling prematurely?`}
+          />
+        </section>
+
+        {/* Section 6: Scaling */}
+        <section className="mb-12">
+          <div className="flex items-center gap-3 mb-6">
+            <Map size={26} style={{ color: accent }} />
+            <h2 className="text-2xl font-bold text-white">Scaling & Strategic Planning</h2>
+          </div>
+          <CopyCard
+            tag="Roadmap"
+            title="12-month product and growth roadmap"
+            prompt={`Create a 12-month roadmap for [startup] that balances product development and customer growth.
+Current state: [ARR/users, stage, key strengths]
+Goal in 12 months: [target state — ARR, customers, team size]
+Key constraints: [budget, team size, technical debt, other]
+
+For each quarter, define:
+- Primary theme (one-sentence focus)
+- Top 2 product milestones
+- Top 2 growth/commercial milestones
+- Key hire or resource decision
+- Success metric for the quarter
+- Dependencies or risks
+
+Then: identify the 3 assumptions this roadmap depends on being true.`}
+          />
+          <CopyCard
+            tag="Expansion"
+            title="Geographic or segment expansion strategy"
+            prompt={`We're considering expanding [into a new geography / to a new customer segment]. Current market: [describe]. Proposed expansion: [describe].
+Analyse:
+1. Market attractiveness: size, growth rate, competitive intensity, regulatory complexity
+2. Expansion readiness: do we have PMF strong enough to justify expansion?
+3. Localisation requirements: what needs to change (product, pricing, team, partnerships)?
+4. Entry strategy: direct, partnership, or acquisition?
+5. Resource requirements and expected timeline to profitability in the new market
+6. The biggest risk in this expansion and how to mitigate it
+
+Recommend: go / no-go / wait 6 months, with the one piece of evidence that would change your recommendation.`}
+          />
+          <CopyCard
+            tag="Strategy"
+            title="Annual strategy and planning session facilitation"
+            prompt={`Help me design an annual planning session for a [stage] startup with [team size] people.
+Duration: [half-day / full day]
+Goal: align the team on priorities for next year and set OKRs
+
+Design an agenda that covers:
+- Retrospective: what worked, what didn't, what surprised us this year
+- Market review: how has the competitive landscape changed?
+- Strategic choices: what are we committing to and what are we saying no to?
+- OKR setting for the year and Q1
+- Team and resource planning
+- Communication: how we'll share the plan with the full team
+
+Include facilitation questions and exercises for each section. Identify the most important decision the team must make during the session.`}
+          />
+          <CopyCard
+            tag="M&A"
+            title="Acquisition or partnership evaluation"
+            prompt={`Help me evaluate whether to [acquire / partner with] [company/opportunity].
+Context: [brief description of the target company and what they do]
+Our rationale: [why are we considering this?]
+Alternative: [what happens if we don't do this deal?]
+
+Evaluate across:
+1. Strategic fit: does this accelerate our core strategy or distract from it?
+2. Financial terms: what's a reasonable valuation range and why?
+3. Integration complexity: what would it actually take to integrate people, product, and customers?
+4. Risk profile: what are the top 5 risks, and which is deal-breaking?
+5. Timing: why now? What changes if we wait 6-12 months?
+
+Recommendation: pursue / pass / negotiate harder on [specific term], with the one question we must answer before deciding.`}
+          />
+        </section>
+
+        {/* FAQ */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold text-white mb-6">Frequently Asked Questions</h2>
+          <div>
+            {faqItems.map((item, i) => (
+              <FAQ key={i} item={item} />
+            ))}
+          </div>
+        </section>
+
+        {/* Related Pages */}
+        <section className="border-t border-[#2a1a0f] pt-8">
+          <h3 className="text-lg font-semibold text-white mb-4">Related Prompts</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {[
+              { name: 'AI Prompts for LinkedIn', href: '/ai-prompts-linkedin' },
+              { name: 'AI Prompts for Email Writing', href: '/ai-prompts-email-writing' },
+              { name: 'ChatGPT Prompts for Google Sheets', href: '/chatgpt-prompts-google-sheets' },
+              { name: 'AI Prompts for Marketers', href: '/ai-prompts-for-marketers' },
+              { name: 'AI Prompts for Data Analysts', href: '/ai-prompts-for-data-analysts' },
+              { name: 'ChatGPT Prompts for Business', href: '/chatgpt-prompts-for-business' },
+              { name: 'AI Agent Prompts', href: '/ai-agent-prompts' },
+              { name: 'Perplexity AI Prompts', href: '/perplexity-ai-prompts' },
+            ].map((link, i) => (
+              <a
+                key={i}
+                href={link.href}
+                className="px-4 py-3 rounded border border-[#2a1a0f] text-gray-300 hover:border-[#FF6B35] hover:text-[#FF6B35] transition-colors text-sm font-medium"
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
+        </section>
+      </div>
     </div>
-  )
+  );
 }
