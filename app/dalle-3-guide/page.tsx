@@ -2,9 +2,9 @@ import type { Metadata } from "next"
 import ClientPage from "./client"
 
 export const metadata: Metadata = {
-  title: "DALL-E 3 Prompt Guide 2026: Master Visual Storytelling with Precision | GPTPrompts.AI",
+  title: "DALL-E 3 Prompts 2026: 60+ Copy-Paste Examples for Stunning AI Images",
   description:
-    "Complete DALL-E 3 guide with Director's Chair framework, descriptive narrative techniques, spatial composition, and the 4 pillars of mastery.",
+    "Get 60+ copy-paste DALL-E 3 prompts for portraits, landscapes, product shots, art styles, and experimental concepts. Master OpenAI's image generator with proven prompt formulas.",
 }
 
 export default function DALLE3Page() {

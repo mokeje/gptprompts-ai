@@ -230,6 +230,14 @@ export default function AIAgentPromptsPage() {
               <h3 className="text-lg font-bold text-white group-hover:text-[#EA4335] transition-colors mb-2">Email Writing</h3>
               <p className="text-gray-400 text-sm">Prompts for crafting professional and engaging emails</p>
             </Link>
+            <Link href="/gpt-4-5-prompts" className="group bg-gray-800 p-6 rounded-lg hover:border-[#10A37F] border border-gray-700 transition-all">
+              <h3 className="text-lg font-bold text-white group-hover:text-[#10A37F] transition-colors mb-2">GPT-4.5 Prompts</h3>
+              <p className="text-gray-400 text-sm">Expert prompts for OpenAI&apos;s most advanced model</p>
+            </Link>
+            <Link href="/perplexity-deep-research-prompts" className="group bg-gray-800 p-6 rounded-lg hover:border-[#20b2aa] border border-gray-700 transition-all">
+              <h3 className="text-lg font-bold text-white group-hover:text-[#20b2aa] transition-colors mb-2">Perplexity Deep Research</h3>
+              <p className="text-gray-400 text-sm">AI research prompts with live web sources</p>
+            </Link>
           </div>
         </div>
       </div>

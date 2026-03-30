@@ -20,6 +20,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/chatgpt-o3-prompts",
     "/capcut-ai-prompts",
     "/veo-3-prompts",
+    "/gpt-4-5-prompts",
+    "/perplexity-deep-research-prompts",
   ]
 
   const advancedAIPages = [

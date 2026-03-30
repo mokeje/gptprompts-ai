@@ -217,6 +217,11 @@ export default function GPTOOneGuidePage() {
                 </Link>
               </li>
               <li>
+                <Link href="/gpt-4-5-prompts" className="hover:text-[#8b5cf6]">
+                  GPT-4.5 Prompts
+                </Link>
+              </li>
+              <li>
                 <Link href="/prompt-engineering-fundamentals" className="hover:text-[#8b5cf6]">
                   Fundamentals
                 </Link>

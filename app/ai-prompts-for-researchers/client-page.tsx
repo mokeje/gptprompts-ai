@@ -227,6 +227,14 @@ export default function ResearchersPage() {
               <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-[#D946EF]">AI Prompts for Writers</h3>
               <p className="text-sm text-gray-400">Content creation and storytelling</p>
             </a>
+            <a href="/perplexity-deep-research-prompts" className="group p-6 rounded-lg border border-white/10 hover:border-[#20b2aa]/50 hover:bg-[#20b2aa]/5 transition-all">
+              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-[#20b2aa]">Perplexity Deep Research Prompts</h3>
+              <p className="text-sm text-gray-400">AI-powered research with cited live sources</p>
+            </a>
+            <a href="/gpt-4-5-prompts" className="group p-6 rounded-lg border border-white/10 hover:border-[#10a37f]/50 hover:bg-[#10a37f]/5 transition-all">
+              <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-[#10a37f]">GPT-4.5 Prompts</h3>
+              <p className="text-sm text-gray-400">OpenAI's most advanced model for complex analysis</p>
+            </a>
           </div>
         </div>
       </div>

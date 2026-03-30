@@ -435,6 +435,14 @@ Challenge my causal reasoning:
               <h3 className="font-bold text-white group-hover:text-[#10A937] transition-colors">Gemini Advanced</h3>
               <p className="text-gray-400 mt-2">Google&apos;s top-tier reasoning model</p>
             </Link>
+            <Link href="/gpt-4-5-prompts" className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg p-6 hover:border-[#10A937] transition-colors group">
+              <h3 className="font-bold text-white group-hover:text-[#10A937] transition-colors">GPT-4.5 Prompts</h3>
+              <p className="text-gray-400 mt-2">OpenAI&apos;s most advanced language model</p>
+            </Link>
+            <Link href="/perplexity-deep-research-prompts" className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg p-6 hover:border-[#10A937] transition-colors group">
+              <h3 className="font-bold text-white group-hover:text-[#10A937] transition-colors">Perplexity Deep Research</h3>
+              <p className="text-gray-400 mt-2">AI-powered research with live web sources</p>
+            </Link>
           </div>
         </section>
       </main>
