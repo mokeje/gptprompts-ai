@@ -169,6 +169,7 @@ const SoraPromptsPage = () => {
   ];
 
   const relatedPages = [
+    { title: 'Veo 3 Prompts', href: '/veo-3-prompts', color: '#4285F4' },
     { title: 'OpenAI Codex Prompts', href: '/openai-codex-prompts', color: '#10A37F' },
     { title: 'AI Agent Prompts', href: '/ai-agent-prompts', color: '#8B5CF6' },
     { title: 'Gemini Advanced Prompts', href: '/gemini-advanced-prompts', color: '#4285F4' },

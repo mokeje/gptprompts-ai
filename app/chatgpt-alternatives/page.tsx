@@ -75,7 +75,7 @@ const tools = [
     weaknesses: ["Requires technical setup for local use", "Slightly behind frontier models", "No official consumer product (yet)"],
     pricing: "Free (open source) or via Meta AI app",
     verdict: "Llama 3.3 70B competes seriously with GPT-4-level models. If you're a developer who wants to run AI locally with no data sent to any company, Llama is the only real option. Meta AI (on Instagram/WhatsApp) makes it accessible to non-developers.",
-    promptGuide: "/llama-3-prompts",
+    promptGuide: "/meta-ai-prompts",
   },
   {
     name: "Microsoft Copilot",

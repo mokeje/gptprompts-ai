@@ -269,10 +269,31 @@ export default function RunwayMLPage() {
             <h2 className="text-2xl font-bold mb-4 text-foreground">Related Resources</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Link
+                href="/veo-3-prompts"
+                className="p-4 bg-secondary/30 rounded-lg hover:bg-secondary/50 transition-colors"
+              >
+                <p className="font-semibold text-foreground mb-1">Veo 3 Prompts</p>
+                <p className="text-sm text-muted-foreground">Google&apos;s most advanced AI video generator</p>
+              </Link>
+              <Link
+                href="/sora-prompts"
+                className="p-4 bg-secondary/30 rounded-lg hover:bg-secondary/50 transition-colors"
+              >
+                <p className="font-semibold text-foreground mb-1">Sora Prompts</p>
+                <p className="text-sm text-muted-foreground">OpenAI&apos;s text-to-video model prompts</p>
+              </Link>
+              <Link
+                href="/kling-ai-prompts"
+                className="p-4 bg-secondary/30 rounded-lg hover:bg-secondary/50 transition-colors"
+              >
+                <p className="font-semibold text-foreground mb-1">Kling AI Prompts</p>
+                <p className="text-sm text-muted-foreground">Realistic AI video generation prompts</p>
+              </Link>
+              <Link
                 href="/website-links"
                 className="p-4 bg-secondary/30 rounded-lg hover:bg-secondary/50 transition-colors"
               >
-                <p className="font-semibold text-foreground mb-1">Prompts Library</p>
+                <p className="font-semibold text-foreground mb-1">All Prompt Guides</p>
                 <p className="text-sm text-muted-foreground">Browse all AI video and image prompting guides</p>
               </Link>
             </div>

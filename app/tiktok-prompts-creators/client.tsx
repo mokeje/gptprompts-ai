@@ -177,6 +177,9 @@ export default function TikTokPromptsCreatorsClient() {
               <Link href="/chatgpt-gemini-content-creators" className="text-blue-600 hover:underline">
                 → ChatGPT & Gemini for Content Creators
               </Link>
+              <Link href="/capcut-ai-prompts" className="text-blue-600 hover:underline">
+                → CapCut AI Prompts & Video Scripts
+              </Link>
             </div>
           </div>
         </div>

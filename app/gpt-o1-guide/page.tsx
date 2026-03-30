@@ -202,6 +202,11 @@ export default function GPTOOneGuidePage() {
             <h4 className="font-bold mb-4">Advanced AI Models</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
+                <Link href="/chatgpt-o3-prompts" className="hover:text-[#8b5cf6]">
+                  ChatGPT o3
+                </Link>
+              </li>
+              <li>
                 <Link href="/chatgpt-prompts" className="hover:text-[#8b5cf6]">
                   ChatGPT
                 </Link>
