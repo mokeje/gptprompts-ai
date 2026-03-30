@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import Page from "./client-page"
+import TeachersToolsPage from "./client-page"
 
 export const metadata: Metadata = {
   title: "AI Prompts for Teachers Tools 2026: Expert Templates",
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
-  return <Page />
+  return <TeachersToolsPage />
 }
