@@ -269,6 +269,16 @@ Claude creates ready-to-view visualization.`}
                 </Link>
               </li>
               <li>
+                <Link href="/claude-projects-prompts" className="hover:text-emerald-600">
+                  Claude Projects Prompts
+                </Link>
+              </li>
+              <li>
+                <Link href="/custom-gpts-prompts" className="hover:text-emerald-600">
+                  Custom GPTs Prompts
+                </Link>
+              </li>
+              <li>
                 <Link href="/chatgpt-code-generation" className="hover:text-emerald-600">
                   Code Generation
                 </Link>

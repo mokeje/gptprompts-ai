@@ -258,12 +258,12 @@ export default function ChatGPTPage() {
             <h4 className="text-xs font-bold uppercase tracking-[0.2em] opacity-40">AI Tools & Professions</h4>
             <ul className="space-y-5 text-sm font-medium">
               {[
+                { label: "Custom GPTs Prompts", href: "/custom-gpts-prompts" },
+                { label: "Claude Projects Prompts", href: "/claude-projects-prompts" },
                 { label: "Cursor AI Prompts", href: "/cursor-ai-prompts" },
                 { label: "GitHub Copilot", href: "/github-copilot-prompts" },
                 { label: "AI for Marketers", href: "/ai-prompts-for-marketers" },
                 { label: "AI for Developers", href: "/ai-prompts-for-developers" },
-                { label: "AI for Data Analysts", href: "/ai-prompts-for-data-analysts" },
-                { label: "ChatGPT for Excel", href: "/chatgpt-prompts-excel" },
               ].map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="hover:text-primary transition-colors opacity-80 hover:opacity-100">

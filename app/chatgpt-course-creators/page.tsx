@@ -1,13 +1,13 @@
 import ChatGPTCourseCreatorsClient from "./client"
 
 export const metadata = {
-  title: "ChatGPT Prompts for Course Creators: Outlines, Lessons & Launch Emails",
+  title: "ChatGPT Prompts for Course Creators 2026: 60+ Copy-Paste Templates",
   description:
-    "ChatGPT prompts for course creators speed up outlining, lesson scripting, worksheets, and launch emails without turning your program into generic AI fluff.",
+    "Get 60+ copy-paste ChatGPT prompts for online course creators. Expert templates for course validation, curriculum design, lesson scripting, launch emails, and student onboarding.",
   openGraph: {
-    title: "ChatGPT Prompts for Course Creators: Outlines, Lessons & Launch Emails",
+    title: "ChatGPT Prompts for Course Creators 2026: 60+ Copy-Paste Templates",
     description:
-      "ChatGPT prompts for course creators speed up outlining, lesson scripting, worksheets, and launch emails without turning your program into generic AI fluff.",
+      "Get 60+ copy-paste ChatGPT prompts for online course creators. Expert templates for course validation, curriculum design, lesson scripting, launch emails, and student onboarding.",
   },
 }
 

@@ -238,6 +238,14 @@ export default function AIAgentPromptsPage() {
               <h3 className="text-lg font-bold text-white group-hover:text-[#20b2aa] transition-colors mb-2">Perplexity Deep Research</h3>
               <p className="text-gray-400 text-sm">AI research prompts with live web sources</p>
             </Link>
+            <Link href="/custom-gpts-prompts" className="group bg-gray-800 p-6 rounded-lg hover:border-[#ab68ff] border border-gray-700 transition-all">
+              <h3 className="text-lg font-bold text-white group-hover:text-[#ab68ff] transition-colors mb-2">Custom GPTs Prompts</h3>
+              <p className="text-gray-400 text-sm">System prompts and templates for building powerful Custom GPTs</p>
+            </Link>
+            <Link href="/claude-projects-prompts" className="group bg-gray-800 p-6 rounded-lg hover:border-[#cc785c] border border-gray-700 transition-all">
+              <h3 className="text-lg font-bold text-white group-hover:text-[#cc785c] transition-colors mb-2">Claude Projects Prompts</h3>
+              <p className="text-gray-400 text-sm">Project instructions and templates for Claude.ai Projects</p>
+            </Link>
           </div>
         </div>
       </div>

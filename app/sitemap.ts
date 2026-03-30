@@ -22,6 +22,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/veo-3-prompts",
     "/gpt-4-5-prompts",
     "/perplexity-deep-research-prompts",
+    "/custom-gpts-prompts",
+    "/claude-projects-prompts",
   ]
 
   const advancedAIPages = [
