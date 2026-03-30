@@ -16,6 +16,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/midjourney-prompts",
     "/stable-diffusion-prompts",
     "/kimi-ai-prompts",
+    "/meta-ai-prompts",
+    "/chatgpt-o3-prompts",
+    "/capcut-ai-prompts",
+    "/veo-3-prompts",
   ]
 
   const advancedAIPages = [
