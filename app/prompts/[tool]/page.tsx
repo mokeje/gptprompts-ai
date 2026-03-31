@@ -118,10 +118,7 @@ export default async function ToolHubPage({ params }: Props) {
                   key={p.usecaseSlug}
                   href={`/prompts/${p.toolSlug}/${p.usecaseSlug}`}
                   className="flex flex-col justify-between rounded-xl border p-5 transition-all group hover:shadow-lg"
-                  style={{ borderColor: "#2a2a3a", background: "#0d0d14" }}}
-                  onMouseLeave={(e) => {
-                    ;(e.currentTarget as HTMLElement).style.borderColor = "#2a2a3a"
-                  }}
+                  style={{ borderColor: "#2a2a3a", background: "#0d0d14" }}
                 >
                   <div>
                     <h3 className="text-white font-semibold text-sm mb-1 group-hover:text-white">
