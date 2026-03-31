@@ -486,12 +486,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/squibler-ai-prompts",
     "/ai-summarizer-prompts",
     "/ai-for-management-consulting-prompts",
+
+    // Dynamic Prompt Pages — /prompts/[tool]/[usecase]
+    "/prompts",
+    "/prompts/chatgpt",
+    "/prompts/chatgpt/resume",
+    "/prompts/chatgpt/cover-letter",
+    "/prompts/chatgpt/email-writing",
   ]
 
   return allPages.map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified,
     changeFrequency: "weekly",
-    priority: route === "" ? 1 : 0.8,
+    priority: route === "" ? 1 : route.startsWith("/prompts/") ? 0.9 : 0.8,
   }))
 }

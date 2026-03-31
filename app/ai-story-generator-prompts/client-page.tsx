@@ -1,274 +1,621 @@
 'use client';
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { Copy, Check, ChevronDown, ChevronUp, BookOpen, Sparkles, Users, Zap, Lightbulb } from 'lucide-react';
+import { useState } from 'react';
+import { Copy, Check, ChevronDown, ChevronUp, BookOpen, User, Map, Wand2, MessageSquare, Layers } from 'lucide-react';
 
-const AIStoryGeneratorPage = () => {
-  const [copiedId, setCopiedId] = useState<string | null>(null);
-  const [openFaqId, setOpenFaqId] = useState<number | null>(null);
+const accent = '#8B5CF6';
+const borderCol = '#1a0a2e';
+const bgDark = '#040308';
 
-  const handleCopyPrompt = async (id: string, text: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopiedId(id);
-      setTimeout(() => setCopiedId(null), 2000);
-    } catch (err) {
-      console.error('Failed to copy:', err);
-    }
+const CopyCard = ({ title, prompt, tag }: { title: string; prompt: string; tag: string }) => {
+  const [copied, setCopied] = useState(false);
+  const handleCopy = () => {
+    navigator.clipboard.writeText(prompt);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+  return (
+    <div className="rounded-lg border p-5 transition-colors" style={{ borderColor: borderCol, background: bgDark }} onMouseEnter={e => (e.currentTarget.style.borderColor = `${accent}60`)} onMouseLeave={e => (e.currentTarget.style.borderColor = borderCol)}>
+      <div className="flex items-start justify-between gap-3 mb-3">
+        <div>
+          <span className="text-xs font-medium px-2 py-0.5 rounded-full border" style={{ borderColor: `${accent}40`, color: accent }}>{tag}</span>
+          <h3 className="text-white font-semibold mt-1">{title}</h3>
+        </div>
+        <button onClick={handleCopy} className="shrink-0 text-gray-400 transition-colors">
+          {copied ? <Check size={16} /> : <Copy size={16} />}
+        </button>
+      </div>
+      <pre className="whitespace-pre-wrap font-sans text-sm text-gray-300 leading-relaxed">{prompt}</pre>
+    </div>
+  );
+};
+
+const FAQ = ({ item }: { item: { question: string; answer: string } }) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="rounded-lg overflow-hidden border" style={{ borderColor: borderCol }}>
+      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between px-5 py-4 text-left" style={{ background: bgDark }}>
+        <span className="font-medium text-white pr-4">{item.question}</span>
+        {open ? <ChevronUp size={18} style={{ color: accent }} /> : <ChevronDown size={18} className="text-gray-400" />}
+      </button>
+      {open && <div className="px-5 pb-4 text-sm text-gray-400 leading-relaxed" style={{ background: bgDark }}>{item.answer}</div>}
+    </div>
+  );
+};
+
+const sections = [
+  {
+    title: 'Story Concepts & Opening Hooks',
+    icon: BookOpen,
+    description: 'Generate compelling story concepts, high-concept premises, and opening lines that immediately pull readers into your narrative.',
+    prompts: [
+      {
+        tag: 'Concept',
+        title: 'High-Concept Story Premise Generator',
+        prompt: `Generate 5 original high-concept story premises for [GENRE]:
+
+For each premise provide:
+1. The one-sentence logline (X meets Y in a world where Z)
+2. The central conflict (what does the protagonist want vs. what stands in the way?)
+3. The emotional core (what universal human experience does this story explore?)
+4. The unique hook (what makes this story unlike anything readers have seen?)
+5. Potential title (evocative and memorable)
+
+Constraints:
+- Each premise should be distinct in tone and setting
+- At least one should have a twist on a familiar premise
+- At least one should be set in an unexpected time period or location
+- Avoid clichés unless subverting them deliberately
+
+Genre: [FANTASY / SCI-FI / THRILLER / ROMANCE / LITERARY FICTION / HORROR / etc.]`,
+      },
+      {
+        tag: 'Opening',
+        title: 'Story Opening Hook Generator',
+        prompt: `Write 5 different opening paragraphs for a story with this premise:
+[DESCRIBE YOUR STORY PREMISE IN 2-3 SENTENCES]
+
+Each opening should use a different technique:
+1. In medias res — drop us into the middle of action
+2. Character voice — establish a distinctive first-person narrator immediately
+3. World-building hook — make the world so strange or compelling we must know more
+4. Atmospheric — mood and setting before plot
+5. Philosophical — an observation or question that frames the whole story
+
+For each opening, write 100-150 words and note:
+- What technique is used and why it works for this story
+- What question it plants in the reader's mind
+- The emotional tone it establishes`,
+      },
+      {
+        tag: 'Concept',
+        title: 'Genre Mashup Story Concept',
+        prompt: `Create a story concept that combines these two genres in an unexpected way:
+Genre 1: [GENRE A — e.g., "cosy mystery"]
+Genre 2: [GENRE B — e.g., "solarpunk sci-fi"]
+
+Generate a concept that:
+1. Takes the core pleasures of Genre A seriously (what readers love about it)
+2. Takes the core pleasures of Genre B seriously (what readers love about it)
+3. Creates a setting or premise where both genres feel organic — not forced
+4. Introduces a protagonist who belongs in both worlds
+5. Identifies the central conflict that can only happen at this genre intersection
+
+Deliver:
+- Story title and 50-word pitch
+- 3-paragraph synopsis covering beginning, middle, and end
+- The tone/voice recommendation
+- Comparable works (books or films) for readers to understand the feel`,
+      },
+    ],
+  },
+  {
+    title: 'Character Development',
+    icon: User,
+    description: 'Create fully-realised characters with depth, contradictions, compelling backstories, and authentic motivations.',
+    prompts: [
+      {
+        tag: 'Character',
+        title: 'Deep Character Profile Generator',
+        prompt: `Create a comprehensive character profile for my story:
+
+Story context: [GENRE AND BRIEF PREMISE]
+Character role: [PROTAGONIST / ANTAGONIST / SUPPORTING CHARACTER]
+Gender, age, approximate appearance: [OPTIONAL — LEAVE BLANK FOR AI TO DECIDE]
+
+Generate a complete character profile covering:
+1. Name and its significance or backstory
+2. Core desire (what they want more than anything)
+3. Core fear (what they are most afraid of)
+4. Fatal flaw (the weakness that will create the central conflict)
+5. Backstory (the formative events that created this person — focus on wounds and turning points)
+6. Contradictions (the tensions within this character that make them interesting)
+7. Relationships (key people in their life and the dynamic with each)
+8. Voice and speech patterns (how they talk, distinctive phrases, what they never say)
+9. Arc potential (how should this character change by the story's end?)
+10. Dark secret (something they have never told anyone)`,
+      },
+      {
+        tag: 'Antagonist',
+        title: 'Compelling Villain Creator',
+        prompt: `Create a villain/antagonist for my story who is genuinely compelling:
+Genre: [GENRE]
+Story theme: [WHAT YOUR STORY IS ABOUT THEMATICALLY]
+Protagonist: [BRIEF DESCRIPTION OF YOUR MAIN CHARACTER]
+
+The villain should:
+1. Have a coherent worldview — their actions make sense from their own perspective
+2. Share something in common with the protagonist (a mirror or dark reflection)
+3. Have understandable motivations even if their methods are wrong
+4. Represent the thematic "argument" opposite to the protagonist's
+
+Provide:
+- Character name and role in the story
+- Core belief that drives all their actions
+- Origin story: what happened to make them this way?
+- Their "lie" — the false belief at the heart of their villainy
+- Why they believe they are the hero of their own story
+- Three scenes that would show their full complexity to the reader`,
+      },
+      {
+        tag: 'Arc',
+        title: 'Character Arc Planner',
+        prompt: `Plan a complete character arc for [CHARACTER NAME] across my story:
+Genre and length: [GENRE] — [NOVEL / SHORT STORY / SERIES]
+Current state at story start: [WHO IS THIS CHARACTER NOW — BELIEFS, FLAWS, WOUNDS]
+Desired state at story end: [WHO SHOULD THEY BECOME]
+Key theme: [WHAT DOES THIS ARC ILLUSTRATE THEMATICALLY]
+
+Map the arc with these beats:
+1. Opening state: who they are, what they believe, what they are hiding from
+2. The inciting wound: what past trauma or wound drives current behaviour
+3. First crack: the moment their worldview is first challenged
+4. Midpoint shift: what forces them to confront their truth at the story's middle
+5. Dark night of the soul: their lowest point and what it costs them
+6. Breakthrough: the moment of genuine internal change
+7. New state: who they are at the end — what has changed and what remains the same`,
+      },
+    ],
+  },
+  {
+    title: 'Plot Structure & Conflict',
+    icon: Layers,
+    description: 'Map out compelling plot structures, escalating conflict sequences, and story arcs that keep readers turning pages.',
+    prompts: [
+      {
+        tag: 'Plot',
+        title: 'Three-Act Structure Outline',
+        prompt: `Create a three-act story outline for:
+Premise: [YOUR STORY CONCEPT]
+Protagonist: [BRIEF CHARACTER DESCRIPTION]
+Genre: [GENRE]
+Theme: [WHAT THE STORY IS ABOUT AT ITS CORE]
+
+Outline with story beats:
+ACT ONE (Setup — 25% of story):
+- Opening image and world establishment
+- Protagonist introduction in their ordinary world
+- Inciting incident (what disrupts the ordinary)
+- Protagonist's refusal or hesitation
+- First plot point: the point of no return
+
+ACT TWO (Confrontation — 50% of story):
+- New world/situation — protagonist is out of their element
+- Rising complications and escalating stakes
+- Midpoint reversal (something changes the game)
+- All is lost moment — the worst thing happens
+- Dark night of the soul
+
+ACT THREE (Resolution — 25% of story):
+- The breakthrough — protagonist finds their solution
+- Climax — the final confrontation
+- Resolution — aftermath and new equilibrium
+- Closing image (mirror or contrast to opening)`,
+      },
+      {
+        tag: 'Conflict',
+        title: 'Conflict Escalation Sequence',
+        prompt: `Design an escalating conflict sequence for my story:
+Story premise: [DESCRIBE YOUR STORY]
+Protagonist's goal: [WHAT THEY WANT]
+Main obstacle: [WHO OR WHAT STANDS IN THEIR WAY]
+Genre: [GENRE]
+
+Create a 10-step conflict escalation:
+Steps 1-3: LOW STAKES — early obstacles that introduce conflict but feel manageable
+Steps 4-6: MEDIUM STAKES — obstacles that force real sacrifice and difficult choices
+Steps 7-8: HIGH STAKES — the protagonist loses something they cannot get back
+Step 9: CRISIS — the worst possible moment, everything seems lost
+Step 10: RESOLUTION — how the conflict is finally resolved (victory, defeat, or bittersweet)
+
+For each step: describe the specific obstacle, what it costs the protagonist, and how it raises the stakes for the next step.`,
+      },
+      {
+        tag: 'Subplot',
+        title: 'Subplot Weaver',
+        prompt: `Design 2-3 subplots that weave with my main story:
+Main plot: [DESCRIBE YOUR MAIN STORY IN 2-3 SENTENCES]
+Main character: [BRIEF DESCRIPTION]
+Theme: [STORY'S CENTRAL THEME]
+
+For each subplot:
+1. Introduce a subplot involving [secondary character, relationship, or parallel situation]
+2. Explain how it connects to the main theme (should comment on or complicate the theme)
+3. Map 4 key subplot beats that intersect with the main plot
+4. Describe how the subplot resolves — ideally in a way that amplifies the main plot's climax
+5. Explain what this subplot reveals about the protagonist that the main plot cannot show
+
+Ensure subplots do not overshadow the main plot but enrich it meaningfully.`,
+      },
+    ],
+  },
+  {
+    title: 'World Building & Setting',
+    icon: Map,
+    description: 'Construct rich, detailed fictional worlds with history, culture, geography, rules, and atmosphere.',
+    prompts: [
+      {
+        tag: 'Fantasy World',
+        title: 'Fantasy World Builder',
+        prompt: `Build a detailed fantasy world for my story:
+Story type: [EPIC FANTASY / DARK FANTASY / PORTAL FANTASY / LOW FANTASY]
+Tone: [GRIMDARK / HOPEFUL / WHIMSICAL / MYTHIC]
+Inspirations: [LIST ANY REAL-WORLD CULTURES, MYTHOLOGIES, OR WORLDS THAT INSPIRE YOU]
+
+Design the world across these dimensions:
+1. Geography: the physical landscape (continents, climate zones, notable landmarks)
+2. History: 3-4 key historical events that shaped the current world
+3. Power structures: who rules and how (political systems, factions, conflicts)
+4. Magic system: how magic works, its rules, costs, and who can use it
+5. Culture and society: how ordinary people live, social hierarchies, beliefs
+6. Religion and mythology: what people believe and worship, creation myths
+7. Economy: how trade works, what is scarce, what is valuable
+8. The central conflict of this world: the tension that your story emerges from`,
+      },
+      {
+        tag: 'Setting',
+        title: 'Atmospheric Setting Description',
+        prompt: `Write a vivid atmospheric description of [SETTING NAME]:
+Setting type: [CITY / VILLAGE / FOREST / SPACE STATION / UNDERWATER KINGDOM / etc.]
+Mood: [THREATENING / MYSTERIOUS / WELCOMING / DECAYING / ELECTRIC / SACRED]
+Time of day: [DAWN / MIDDAY / DUSK / NIGHT]
+Season or weather: [SPECIFY]
+POV character's emotional state: [HOW ARE THEY FEELING AS THEY ENTER THIS SPACE]
+
+Write a 200-300 word setting description that:
+- Engages all 5 senses (sight, sound, smell, touch, taste where relevant)
+- Reveals something about the world beyond just physical description
+- Reflects the POV character's emotional state through selective detail
+- Plants 1-2 intriguing details that could become plot-relevant later
+- Uses specific nouns (not "a tree" — "a gnarled oak") and active, unusual verbs`,
+      },
+      {
+        tag: 'Sci-Fi World',
+        title: 'Science Fiction World Builder',
+        prompt: `Design a science fiction world for my story:
+Sub-genre: [SPACE OPERA / CYBERPUNK / SOLARPUNK / HARD SCI-FI / DYSTOPIA / BIOPUNK]
+Time period: [NEAR FUTURE / FAR FUTURE / ALTERNATE HISTORY]
+Central technology: [WHAT TECHNOLOGY DEFINES THIS WORLD]
+
+Build the world across these elements:
+1. The central technological development and its social consequences
+2. Political landscape: what governments, corporations, or factions hold power?
+3. Social stratification: who benefits from the technology and who is left behind?
+4. Daily life for ordinary people (not the heroes — what is Tuesday like?)
+5. The central crisis or tension threatening this world
+6. The specific place(s) where the story takes place (with distinct atmosphere)
+7. One element that makes this world feel lived-in and specific
+8. The unique threat or wonder this world offers that no other setting provides`,
+      },
+    ],
+  },
+  {
+    title: 'Dialogue & Voice',
+    icon: MessageSquare,
+    description: 'Write authentic, character-specific dialogue, develop distinct narrative voices, and craft meaningful conversations that advance story.',
+    prompts: [
+      {
+        tag: 'Dialogue',
+        title: 'Subtext-Rich Dialogue Scene',
+        prompt: `Write a dialogue scene between two characters where what they say is not what they mean:
+
+Characters:
+Character A: [NAME, ROLE, EMOTIONAL STATE IN THIS SCENE]
+Character B: [NAME, ROLE, EMOTIONAL STATE IN THIS SCENE]
+
+What they really want from this conversation:
+Character A really wants: [TRUE WANT]
+Character B really wants: [TRUE WANT]
+
+Topic they are ostensibly discussing: [SURFACE TOPIC — e.g., "planning a dinner party"]
+The real tension: [WHAT THIS CONVERSATION IS ACTUALLY ABOUT]
+
+Write a 300-400 word dialogue scene where:
+- Neither character says what they really feel
+- The subtext is readable but not stated
+- At least one beat of near-confession that is deflected
+- The scene ends without the real issue resolved
+- Each character has a distinct voice (different vocabulary, sentence length, emotional register)`,
+      },
+      {
+        tag: 'Voice',
+        title: 'Narrative Voice Developer',
+        prompt: `Develop a distinctive narrative voice for my story's protagonist:
+Character: [BRIEF DESCRIPTION — age, background, personality, worldview]
+Genre: [GENRE]
+Tense: [PAST / PRESENT]
+Person: [FIRST PERSON / THIRD PERSON LIMITED / THIRD OMNISCIENT]
+Tone: [DARKLY HUMOROUS / LYRICAL / MATTER-OF-FACT / UNRELIABLE / EARNEST]
+
+Write three 150-word sample passages of this voice:
+1. Describing an ordinary, mundane moment (morning routine or commute)
+2. Describing something beautiful or emotionally moving
+3. Describing something frightening or confusing
+
+For each: highlight specific word choices, sentence structures, and rhythms that define this voice
+After the three passages, provide a "voice guide" — 5 rules for maintaining this voice consistently`,
+      },
+      {
+        tag: 'Conflict',
+        title: 'Argument Scene with Character Revelation',
+        prompt: `Write an argument scene that reveals character:
+Who is arguing: [CHARACTER A] vs. [CHARACTER B]
+Relationship: [HOW THEY KNOW EACH OTHER]
+Surface cause of argument: [WHAT THE ARGUMENT IS OSTENSIBLY ABOUT]
+Deeper cause: [THE REAL ISSUE UNDERNEATH]
+What each character reveals under pressure:
+- Character A reveals: [A TRUTH OR FLAW OR FEAR]
+- Character B reveals: [A TRUTH OR FLAW OR FEAR]
+Stakes: [WHAT IS AT RISK IF THIS ARGUMENT GOES BADLY]
+
+Write a 400-500 word argument scene where:
+- The argument escalates in 3 stages (simmering, open conflict, breaking point)
+- Each character says something they cannot take back
+- The scene ends in a way that changes their relationship permanently
+- Physical action and setting detail ground the emotional intensity`,
+      },
+    ],
+  },
+  {
+    title: 'Genre-Specific Storytelling',
+    icon: Wand2,
+    description: 'Tailored story prompts for fantasy, thriller, romance, horror, literary fiction, and other specific genres with genre-appropriate techniques.',
+    prompts: [
+      {
+        tag: 'Thriller',
+        title: 'Thriller Scene with Rising Dread',
+        prompt: `Write a thriller scene that builds dread and tension:
+Setting: [WHERE THIS SCENE TAKES PLACE]
+Protagonist: [WHO WE FOLLOW]
+Threat: [WHAT THE PROTAGONIST FEARS IS HAPPENING]
+What the protagonist knows: [LIMITED INFORMATION THEY HAVE]
+What we (the reader) suspect: [THE BROADER THREATENING PICTURE]
+
+Write a 400-word scene that:
+- Starts in apparent safety that slowly feels wrong
+- Uses physical sensations to build dread (cold, sounds, smells)
+- Employs pacing — short urgent sentences as tension rises
+- Includes one moment of false relief that makes things worse
+- Ends on a cliffhanger or revelation that escalates the threat
+- Uses what is NOT shown as much as what is shown
+
+Avoid: gore for shock value, stating emotions outright ("she felt afraid") — show them instead.`,
+      },
+      {
+        tag: 'Romance',
+        title: 'Romance Tension Builder Scene',
+        prompt: `Write a romantic tension scene between two characters who have not yet admitted their feelings:
+Character 1: [NAME, BRIEF DESCRIPTION]
+Character 2: [NAME, BRIEF DESCRIPTION]
+Relationship status: [HOW THEY KNOW EACH OTHER — rivals, friends, strangers, exes]
+Setting: [WHERE THIS SCENE TAKES PLACE]
+The obstacle preventing them from acting on their feelings: [WHAT KEEPS THEM APART]
+
+Write a 350-400 word scene with:
+- Charged physical awareness (every small movement noticed)
+- A moment of almost-confession that is interrupted or redirected
+- Conflicting internal monologue (what they want vs. what they allow themselves to show)
+- Environmental or incidental mirroring (setting reflects internal state)
+- A closing image or beat that leaves both characters — and the reader — wanting more
+
+Tone: [SLOW BURN / PLAYFUL BANTER / ANGSTY / SWEET]`,
+      },
+      {
+        tag: 'Literary',
+        title: 'Literary Fiction Quiet Moment',
+        prompt: `Write a quiet, literary fiction scene focused on interiority and observation:
+Character: [WHO WE FOLLOW]
+Setting: [AN ORDINARY PLACE — kitchen, waiting room, garden, bus stop]
+Surface activity: [WHAT THEY ARE PHYSICALLY DOING — mundane task]
+Internal experience: [WHAT THEY ARE THINKING OR FEELING BENEATH THE SURFACE]
+Theme the scene should quietly explore: [E.g., "the passage of time", "loneliness in family", "small freedoms"]
+
+Write a 300-350 word scene where:
+- Nothing dramatic happens externally
+- The prose does the emotional heavy lifting
+- Specific, sensory detail grounds abstract feeling
+- One small, precise observation illuminates something universal
+- The ending contains an unspoken realisation rather than a plot turn
+Style: evocative, spare, precise — influences: Raymond Carver, Alice Munro, Kazuo Ishiguro`,
+      },
+    ],
+  },
+];
+
+const faqs = [
+  {
+    question: 'What is the best AI story generator?',
+    answer: 'The best AI story generators in 2025 include ChatGPT (GPT-4o) for versatile long-form storytelling and plot development, Claude for nuanced literary fiction and character depth, Sudowrite for dedicated creative fiction tools (beat sheets, story bibles, prose improvement), NovelAI for genre fiction and anime-style narratives, and AI Dungeon for interactive collaborative storytelling. The best choice depends on your genre, how much control you want, and whether you prefer a tool built specifically for fiction.',
+  },
+  {
+    question: 'How do I write good prompts for AI story generators?',
+    answer: 'The most effective story generator prompts include: genre and tone, character description with core desire and flaw, setting with specific atmosphere, the central conflict, emotional core (what universal experience the story explores), and reference works for style. The more specific context you give — particularly around character psychology and emotional stakes — the more resonant and original the AI output will be. Avoid generic prompts like "write a fantasy story" and instead provide the specific premise.',
+  },
+  {
+    question: 'Can AI write a complete novel?',
+    answer: 'AI can generate substantial amounts of novel-length text, but a complete, coherent, emotionally resonant novel still requires significant human authorial involvement. AI is excellent for: generating drafts quickly, overcoming writer\'s block, developing plot structures and character arcs, writing specific scenes, and editing existing prose. Most AI-assisted novels use the author as the creative director — planning, prompting, editing, and revising — rather than simply accepting raw AI output as the final product.',
+  },
+  {
+    question: 'What story structures work best with AI generators?',
+    answer: 'AI story generators respond well to clearly defined story structures because they provide scaffolding for the output. The Three-Act Structure (Setup, Confrontation, Resolution), Save the Cat beat sheet, and the Hero\'s Journey are all effective frameworks to reference in your prompts. When you specify the structure explicitly — "this is the Act 2 midpoint scene where X happens" — AI generators produce more purposeful, structurally coherent output than open-ended generation.',
+  },
+  {
+    question: 'How do I maintain consistency in AI-generated stories?',
+    answer: 'Consistency is one of the main challenges with AI story generation. Best practices include: maintaining a "story bible" document with character profiles, world-building rules, and plot notes that you paste into each session; using the same AI session for related scenes where possible; explicitly referencing earlier events in your prompts ("continuing from where X happened in Chapter 3"); and doing a consistency editing pass as a dedicated revision stage. Some tools like Sudowrite have built-in consistency checking features.',
+  },
+  {
+    question: 'Can AI help me overcome writer\'s block?',
+    answer: 'Yes — this is one of the most practical applications of AI story generators. Techniques that work well: asking for 5 different ways a scene could go (then choosing one), generating character backstory you had not planned (which often unlocks new directions), asking the AI to identify what feels "stuck" about a scene and suggest alternatives, using AI to write a rough placeholder draft that you then rewrite in your own voice, and asking for "what would happen if X character did the opposite of what they normally would".',
+  },
+  {
+    question: 'Are AI-generated stories copyright protected?',
+    answer: 'The copyright status of AI-generated content is still being defined by courts and legislation worldwide. As of 2025, in most jurisdictions purely AI-generated text without sufficient human creative input is not copyrightable. However, stories where a human author provides substantial creative direction, editing, and original contributions may qualify for copyright protection covering those human-authored elements. If you plan to publish AI-assisted work commercially, consult a publishing lawyer and check the terms of service of the specific AI tool you are using.',
+  },
+  {
+    question: 'What genres are AI story generators best at?',
+    answer: 'AI story generators tend to perform best at: genre fiction with established conventions (fantasy, science fiction, romance, thriller), fan fiction, short-form stories, horror, and adventure. They can struggle more with highly literary, experimental, or minimalist fiction that relies on subtle stylistic nuance. They are also strong at generating plot mechanics, world-building details, and action sequences, but may produce flatter emotional resonance in quiet, character-driven literary scenes — which typically benefit most from human revision.',
+  },
+  {
+    question: 'How long should my story prompts be?',
+    answer: 'For AI story generators, longer and more specific prompts generally produce better output — up to a point. A good story prompt is typically 100-300 words for a scene, providing: the genre and tone, character descriptions with specific psychological detail, the setting, what happens in the scene and why it matters to the story, the emotional state of the POV character, and any specific stylistic notes. Ultra-short prompts ("write a fantasy story about a hero") produce generic results. Ultra-long prompts with contradictory instructions can confuse the output.',
+  },
+  {
+    question: 'Should I use first-person or third-person for AI story generation?',
+    answer: 'Both work well, with some differences: first-person narration tends to produce stronger, more distinctive voice and interiority — the AI commits to a persona. Third-person limited is versatile and often easier to maintain consistency with across a longer work. Third-person omniscient can feel old-fashioned in AI output if not carefully directed. Specify your choice explicitly in the prompt. If you are experimenting, generate the same scene in both perspectives and choose the one that resonates more with your story\'s needs.',
+  },
+];
+
+export default function AIStoryGeneratorPromptsPage() {
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: 'Best AI Story Generator Prompts — Characters, Plot & World Building',
+    description: 'Copy-ready prompts for AI story generators. Character development, plot structure, world building, dialogue, and genre-specific storytelling techniques.',
+    author: { '@type': 'Organization', name: 'GPTPrompts.AI' },
+  };
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(f => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
   };
 
-  const CopyCard = ({ id, prompt }: { id: string; prompt: string }) => (
-    <div className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg p-4 hover:border-indigo-500/50 transition-colors">
-      <p className="text-gray-200 text-sm mb-3 leading-relaxed">{prompt}</p>
-      <button
-        onClick={() => handleCopyPrompt(id, prompt)}
-        className="inline-flex items-center gap-2 px-3 py-2 bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-400 rounded text-sm transition-colors"
-      >
-        {copiedId === id ? (
-          <>
-            <Check size={16} />
-            Copied
-          </>
-        ) : (
-          <>
-            <Copy size={16} />
-            Copy
-          </>
-        )}
-      </button>
-    </div>
-  );
-
-  const FAQItem = ({ id, question, answer }: { id: number; question: string; answer: string }) => (
-    <div className="border border-[#2a2a2a] rounded-lg overflow-hidden">
-      <button
-        onClick={() => setOpenFaqId(openFaqId === id ? null : id)}
-        className="w-full px-4 py-4 flex items-center justify-between bg-[#1a1a1a] hover:bg-[#242424] transition-colors"
-      >
-        <h3 className="text-sm font-semibold text-gray-100">{question}</h3>
-        {openFaqId === id ? (
-          <ChevronUp size={18} className="text-indigo-400 flex-shrink-0" />
-        ) : (
-          <ChevronDown size={18} className="text-gray-400 flex-shrink-0" />
-        )}
-      </button>
-      {openFaqId === id && (
-        <div className="px-4 py-4 bg-[#0a0a0a] border-t border-[#2a2a2a] text-sm text-gray-300 leading-relaxed">
-          {answer}
-        </div>
-      )}
-    </div>
-  );
-
-  const sections = [
-    {
-      title: 'Fantasy & Magical Worlds',
-      icon: Sparkles,
-      prompts: [
-        'Write a 2000-word epic fantasy story about a young warrior who discovers they are the last surviving member of an ancient magical bloodline, set in a richly detailed world with multiple kingdoms, political intrigue, and a looming threat that only their hidden powers can defeat. Include detailed world-building with unique magic systems, compelling supporting characters, and a narrative arc that builds to a climactic confrontation.',
-        'Create a dark fantasy tale spanning 1500 words following a morally grey anti-hero attempting to prevent the resurrection of an ancient evil that they accidentally awakened. Include internal conflict, complex motivations, detailed descriptions of magical artifacts, and a twist ending that challenges reader expectations about good and evil.',
-        'Write a whimsical magical academy story set in a hidden world where students learn to master elemental magic. Develop colorful characters with distinct personalities, detailed classroom scenes and magical lessons, competitive magical trials, friendships and rivalries, and a subplot involving mysterious magical corruption threatening the academy.',
-        'Compose a 1800-word tale of a reluctant mage bound by an ancient curse who must journey through enchanted forests, treacherous mountains, and magical cities to break the curse before it consumes them. Include rich sensory descriptions of magical locations, encounters with magical creatures and beings, and gradual character growth and realization.',
-        'Create a story about a woman who discovers she is secretly a dragon in human form, living in a modern city unaware of her heritage and powers. Write internal awakening moments as she discovers her true nature, conflicts between human life and dragon instincts, connections to other hidden dragons, and exploration of identity and belonging.',
-        'Write an intricate tale of interdimensional travelers visiting parallel magical worlds where different versions of themselves exist, each with alternate magical abilities and life choices. Explore philosophical themes about choice and destiny, feature richly imagined parallel worlds with unique magic systems, and create emotional moments of connection between alternate selves.'
-      ]
-    },
-    {
-      title: 'Science Fiction & Future Worlds',
-      icon: Zap,
-      prompts: [
-        'Write a 2000-word science fiction story set 200 years in the future where Earth is governed by AI systems, featuring a protagonist discovering evidence that their reality is simulated. Include detailed near-future world-building, exploration of consciousness and reality, relationships with both humans and AI characters, and philosophical questions about the nature of existence.',
-        'Create a tale about the first human to make contact with a sentient alien civilization, navigating the challenges of communication, cultural misunderstanding, and potential conflict between two species. Develop realistic dialogue showing gradual understanding, alien perspectives and motivations, political complications on Earth, and a resolution that expands human consciousness.',
-        'Write a cyberpunk noir story set in a mega-city where a hacker discovers a conspiracy embedded in the global AI network that controls society. Include gritty urban descriptions, detailed hacking sequences and technical plot points, morally complex supporting characters, corporate intrigue, and a climax involving choices about truth versus comfortable lies.',
-        'Compose a tale about a colony ship heading to a distant habitable planet where the generation that started the journey has died and current colonists have never known Earth. Explore identity and purpose, conflict between those who revere Earth and those who embrace their new world, technological challenges with failing ship systems, and discovery that changes their understanding of their mission.',
-        'Create a story involving time travelers from the future attempting to prevent a catastrophic event in the past, discovering that changing history has unintended consequences that reshape reality. Include time travel paradoxes and logic, multiple timelines and realities, moral dilemmas about changing history, and complex explanations of causality.',
-        'Write a tale of humanity learning that an asteroid impact will destroy Earth in ten years, focusing on how different people process this knowledge and choose to spend their remaining time. Explore diverse perspectives from different social classes, intimate character relationships deepening under existential threat, societal changes in response to impending doom, and finding meaning in limited time.'
-      ]
-    },
-    {
-      title: 'Mystery & Thriller',
-      icon: BookOpen,
-      prompts: [
-        'Write a 2000-word mystery story where a detective must solve a decades-old cold case while uncovering a web of family secrets, corruption, and concealed identities that implicates powerful people. Include logical puzzle elements with fair clues for readers, complex character backstories that gradually emerge, atmospheric descriptions of investigation locations, and a satisfying resolution with unexpected twists.',
-        'Create a psychological thriller about a person who discovers they have lost an entire year of memories with no explanation, and as they search for answers they realize people close to them may be hiding something sinister. Include unreliable narration where readers question what is real, tense interpersonal dynamics, gradually unfolding reveals about the missing time, and an ending that reframes earlier events.',
-        'Write a heist-style story where a team must pull off an impossible theft while outwitting both competitors and authorities, with each character possessing unique skills and secrets. Develop detailed heist planning and execution sequences, complex character relationships and hidden agendas within the team, high stakes and mounting tension, and a clever twist involving the true objective of the heist.',
-        'Compose a tale of a missing person investigation that leads the protagonist into a hidden society operating beneath their city, discovering that nothing about their previous understanding of the world is true. Include atmospheric descriptions of hidden locations, gradual revelations about a secret world, personal stakes that deepen the mystery, and a climax involving difficult choices about knowledge and truth.',
-        'Create a murder mystery set during a single night in an isolated mansion where ten strangers are snowed in and one dies under impossible circumstances. Include detailed characterizations of each suspect, complex motivations and secrets, logical puzzle elements allowing readers to piece together clues, unreliable perspectives, and an ending with both the killer revealed and larger truth about why they were all gathered.',
-        'Write a conspiracy thriller where a ordinary person stumbles upon evidence of a vast hidden network and must stay alive while uncovering the truth and deciding whether to expose it. Include escalating danger and narrow escapes, complex conspiracy with surprising scope and connections, an investigation that becomes increasingly personal, and a resolution about responsibility and the cost of truth.'
-      ]
-    },
-    {
-      title: 'Character-Driven & Literary Fiction',
-      icon: Users,
-      prompts: [
-        'Write a 1800-word character study following a woman returning to her small hometown after 20 years to discover how her absence and return affects the lives of people who remember her, exploring themes of identity, regret, and second chances. Develop intricate characterizations of multiple people whose lives intersected with hers, show how memory and perception differ across characters, include emotional moments of recognition and revelation, and create a nuanced resolution without easy answers.',
-        'Create a story about two estranged siblings reconnecting at a family funeral and being forced to spend a week together, uncovering the misunderstandings and hurts that divided them while discovering who they have become as adults. Include rich internal monologues showing how each sibling remembers shared history differently, tense and tender moments of connection, exploration of family patterns and inherited trauma, and gradual understanding and healing.',
-        'Write a tale of an older person reflecting on pivotal decisions in their life, showing through interconnected scenes how small choices accumulated into the life they have lived, exploring regret, acceptance, and unexpected grace. Include vivid scenes from different life periods, internal reflection on why they made particular choices, recognition of roads not taken, and a poignant resolution about meaning and legacy.',
-        'Compose a story exploring the friendship between two very different people whose connection deepens through shared vulnerability, including moments of profound understanding, conflicts rooted in their differences, and growth that comes from truly knowing another person. Develop authentic dialogue that reveals character and builds intimacy, show how friendship becomes a mirror for self-discovery, include both humor and emotional depth, and create a resolution that honors the complexity of human connection.',
-        'Create a narrative about someone experiencing a life transition (empty nest, career change, loss, aging) and their journey toward understanding that their worth is not tied to external circumstances. Include realistic portrayal of grief or loss, moments of depression or searching, connections with unexpected people, gradual shifts in perspective, and a meaningful resolution about internal versus external definitions of identity.',
-        'Write a story told through interconnected perspectives where each character reveals a different facet of a shared event, showing how individual experience creates different truths, and exploring themes of empathy and understanding. Include distinct narrative voices for each perspective, scenes that are retold from different viewpoints with new significance, gradual revelation of complete picture, and a resolution that acknowledges multiple truths can coexist.'
-      ]
-    },
-    {
-      title: 'Genre Blends & Experimental Stories',
-      icon: Lightbulb,
-      prompts: [
-        'Write a paranormal romance where a living person falls in love with a ghost trapped between worlds, exploring themes of love transcending death, acceptance, and letting go. Include atmospheric haunted settings with detailed sensory descriptions, emotional vulnerability and intimacy between lovers separated by existence itself, exploration of why the ghost remains bound to the world, and a bittersweet resolution about sacrifice and love.',
-        'Create a historical fantasy set during a real historical period where magic secretly shaped known events, featuring a protagonist discovering the hidden magical history behind documented occurrences. Include accurate historical details woven with magical elements, real historical figures as characters with secret magical involvement, alternate explanations for historical mysteries rooted in magic, and a personal story connected to larger historical events.',
-        'Write a dystopian coming-of-age story where a teenager grows into consciousness within a controlled society, gradually understanding the truth about their world and choosing between safety and freedom. Include the protagonist\'s emotional journey from innocent acceptance to questioning, depictions of how control is maintained through subtle means, mentorship or guidance from those already aware, and a climactic moment where the protagonist must make an irreversible choice.',
-        'Compose a story blending magical realism with contemporary life where unexplainable magical events occur in the modern world without formal acknowledgment, and the protagonist must navigate a world where nobody else seems to notice the magic. Include ordinary settings and routines disrupted by magical occurrences, isolation that comes from witnessing what others deny, gradual discovery of others who perceive the magic, and a unique perspective on coexistence of two worlds.',
-        'Create a reverse-chronological story told backwards from climax to origin, revealing how a seemingly simple situation developed through accumulated small moments and decisions. Include the emotional impact of moving backward through time, gradual revelation of causality running opposite to normal understanding, repeated scenes shown from different emotional contexts, and a final scene that reframes everything that came before.',
-        'Write a story exploring the subjective experience of time, where different sections are experienced at different temporal speeds, jumps, or loops, challenging linear narrative while maintaining emotional coherence. Include sections where time moves quickly through major events, sections dwelling on single moments in detail, repetition that reveals new meaning, temporal disorientation that mirrors the protagonist\'s experience, and a resolution that validates the non-linear journey.'
-      ]
-    }
-  ];
-
-  const faqs = [
-    {
-      question: 'How can I use these prompts to develop my own creative writing?',
-      answer: 'Use these prompts as starting points rather than rigid templates. Read a prompt fully, then set it aside and write from your own inspired direction. Consider the core elements (setting, character challenge, thematic question) and develop them in your unique voice and style. Combine elements from multiple prompts to create something entirely new. Use them to practice specific techniques like world-building, character development, or pacing.'
-    },
-    {
-      question: 'How do I adapt these prompts for different story lengths?',
-      answer: 'The prompts are designed for short stories (1500-2000 words). For longer works, expand the scope: add subplots, develop supporting characters more fully, explore themes more deeply, add multiple complications before resolution. For flash fiction (under 1000 words), narrow focus to a single moment or decision, remove subplots, concentrate on emotional core. For novels, use a prompt as the foundation and build entire character arcs, multiple intersecting plot lines, and complex world-building around it.'
-    },
-    {
-      question: 'What should I do if I get stuck while writing a story?',
-      answer: 'Try writing the scene from a different character\'s perspective, jump to a different part of the story, or write what happens immediately after the current scene. Sometimes stepping away and reading your draft fresh helps identify what is missing. Consider what your protagonist wants most in that moment and write toward satisfying or thwarting that desire. If structural issues emerge, outline the remaining story beats before continuing.'
-    },
-    {
-      question: 'How do I ensure my story has a satisfying ending?',
-      answer: 'Your ending should resolve the central conflict or question posed by the story while revealing something about the protagonist or world that was not apparent at the start. Avoid endings that feel unearned or disconnected from the story. Plant details and hints throughout that make the ending feel inevitable in retrospect. Consider what emotional note you want readers to experience and structure your final scenes to deliver that. Test your ending by asking: does this answer the story\'s central question?'
-    },
-    {
-      question: 'How do I develop compelling characters from these prompts?',
-      answer: 'Begin with the character\'s goal and the obstacle preventing them from achieving it. Give them a specific, vivid detail that makes them real (a mannerism, fear, memory, contradiction). Show their personality through how they make decisions and interact with others. Include flaws that create conflict rather than just obstacles. Develop characters by revealing them through action and dialogue rather than explanation. Most importantly, make readers care about their journey.'
-    },
-    {
-      question: 'What is the difference between plot-driven and character-driven stories?',
-      answer: 'Plot-driven stories prioritize external events and what happens next, keeping readers engaged through mystery and escalating stakes. Character-driven stories prioritize internal change and emotional truth, keeping readers engaged through understanding the protagonist\'s journey. Most compelling stories blend both. Use prompts with clear external conflicts for plot-driven practice, and character-study prompts for internal development. Many of these prompts work well when you emphasize character response to plot events.'
-    },
-    {
-      question: 'How much world-building detail should I include?',
-      answer: 'Include only world-building details that matter to your specific story and characters. Avoid lengthy exposition or detailed explanations of how a magical system works unless the story requires understanding. Reveal world details through the protagonist\'s perspective and discovery rather than authorial explanation. In fantasy and science fiction prompts, weave world-building into scenes and dialogue naturally. Readers care more about how the world affects your character than encyclopedic detail.'
-    },
-    {
-      question: 'How do I choose between different prompts?',
-      answer: 'Select prompts based on what excites you or what you want to practice. If you want to develop world-building skills, choose fantasy or science fiction prompts. If you want to deepen characterization, choose literary fiction or character-driven prompts. If you want to practice plot structure and pacing, choose mystery or thriller prompts. Your enthusiasm for a premise will fuel better writing than selecting what seems easy or impressive.'
-    },
-    {
-      question: 'Should I always follow the prompt exactly as written?',
-      answer: 'Think of prompts as inspiration rather than instruction manuals. If a prompt sparks a different idea or direction, follow that inspiration. Change character ages, genders, relationships, or backgrounds if it serves your vision. Modify time periods, settings, or stakes. The prompt\'s purpose is to launch your creativity, not constrain it. Your unique take on a premise is more valuable than faithful adherence to the original wording.'
-    },
-    {
-      question: 'How do I balance showing versus telling in story writing?',
-      answer: 'Show rather than tell emotions and character traits through specific actions, details, and dialogue. Instead of telling readers "she was nervous," show trembling hands or a missed beat in conversation. Include concrete sensory details that let readers experience scenes rather than summarize them. However, some telling is necessary for pacing and efficiency. Use telling for less important information and show for emotionally significant moments. Read your draft and identify moments where you summarized instead of dramatizing, then revise those scenes.'
-    }
-  ];
-
-      const relatedPages = [
-    { title: 'Squibler AI Prompts', href: '/squibler-ai-prompts' },
-    { title: 'AI Writing Assistant Prompts', href: '/ai-writing-assistant-prompts' },
-    { title: 'AI Poem Generator Prompts', href: '/ai-poem-generator-prompts' },
-    { title: 'AI Character Chat Prompts', href: '/ai-character-chat-prompts' },
-    { title: 'ChatGPT Creative Writing', href: '/chatgpt-creative-writing' },
-    { title: 'Story Prompts', href: '/story-prompts' },
-    { title: 'AI Chat Prompts', href: '/ai-chat-prompts' },
-    { title: 'Perchance AI Prompts', href: '/perchance-ai-prompts' },
-  ];
-
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-gray-100">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'Article',
-            headline: 'AI Story Generator Prompts',
-            description: 'A comprehensive collection of detailed prompts designed to inspire creative storytelling across fantasy, science fiction, mystery, literary fiction, and experimental narrative forms.',
-            datePublished: '2026-03-29',
-            dateModified: '2026-03-29'
-          })
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'FAQPage',
-            mainEntity: faqs.map(faq => ({
-              '@type': 'Question',
-              name: faq.question,
-              acceptedAnswer: {
-                '@type': 'Answer',
-                text: faq.answer
-              }
-            }))
-          })
-        }}
-      />
+    <div className="min-h-screen text-white" style={{ background: '#030207' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <div className="max-w-4xl mx-auto px-6 py-16">
 
-      <div className="max-w-4xl mx-auto px-4 py-16">
-        <div className="mb-12">
-          <div className="flex items-center gap-3 mb-4">
-            <BookOpen size={32} className="text-indigo-400" />
-            <h1 className="text-4xl font-bold text-gray-100">AI Story Generator Prompts</h1>
+        {/* Hero */}
+        <div className="mb-14 text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium border mb-4" style={{ borderColor: `${accent}40`, color: accent, background: `${accent}10` }}>
+            <BookOpen size={12} /> AI Story Generation
           </div>
-          <p className="text-gray-400 text-lg">
-            Unlock your creativity with our carefully crafted story prompts designed for writers of all levels. From epic fantasy adventures to intimate character studies, these detailed prompts help you generate compelling narratives with depth, emotional resonance, and engaging plots.
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">AI Story Generator Prompts</h1>
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            Copy-ready prompts for generating characters, plots, worlds, dialogue, and complete stories across every genre.
           </p>
         </div>
 
-        {sections.map((section, sectionIdx) => {
+        {/* Sections */}
+        {sections.map((section) => {
           const Icon = section.icon;
           return (
-            <div key={sectionIdx} className="mb-12">
-              <div className="flex items-center gap-2 mb-6">
-                <Icon size={24} className="text-indigo-400" />
-                <h2 className="text-2xl font-semibold text-gray-100">{section.title}</h2>
+            <div key={section.title} className="mb-12">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="p-2 rounded-lg" style={{ background: `${accent}15` }}>
+                  <Icon size={18} style={{ color: accent }} />
+                </div>
+                <h2 className="text-xl font-bold text-white">{section.title}</h2>
               </div>
+              <p className="text-gray-400 text-sm mb-5 ml-11">{section.description}</p>
               <div className="grid gap-4">
-                {section.prompts.map((prompt, promptIdx) => (
-                  <CopyCard
-                    key={`${sectionIdx}-${promptIdx}`}
-                    id={`prompt-${sectionIdx}-${promptIdx}`}
-                    prompt={prompt}
-                  />
-                ))}
+                {section.prompts.map(p => <CopyCard key={p.title} {...p} />)}
               </div>
             </div>
           );
         })}
 
-        <div className="mt-16 mb-12">
-          <h2 className="text-2xl font-semibold text-gray-100 mb-6">Frequently Asked Questions</h2>
-          <div className="space-y-3">
-            {faqs.map((faq, idx) => (
-              <FAQItem key={idx} id={idx} question={faq.question} answer={faq.answer} />
+        {/* Reference: Story Structure Frameworks */}
+        <div className="mb-12">
+          <h2 className="text-xl font-bold text-white mb-2">Story Structure Frameworks</h2>
+          <p className="text-gray-400 text-sm mb-5">Reference these frameworks in your AI story prompts for structurally coherent narratives.</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            {[
+              { name: "Hero's Journey", structure: '12 stages from ordinary world to return with elixir', best: 'Epic fantasy, adventure, coming-of-age' },
+              { name: '3-Act Structure', structure: 'Setup (25%), Confrontation (50%), Resolution (25%)', best: 'Most genres — universal and flexible' },
+              { name: '5-Act Structure', structure: 'Exposition, Rising Action, Climax, Falling Action, Denouement', best: 'Drama, literary fiction, stage adaptations' },
+              { name: "Freytag's Pyramid", structure: 'Introduction → Rising Action → Climax → Falling Action → Catastrophe', best: 'Tragedy and classical drama' },
+              { name: 'Save the Cat', structure: '15 beats including Fun & Games, Dark Night of the Soul, Finale', best: 'Screenwriting, commercial fiction, thriller' },
+              { name: "Virgin's Promise", structure: 'Heroine\'s inner journey: dependent world → secret world → cost of conformity → kingdom in chaos → wounding → rescue → return', best: 'Romance, coming-of-age, female-led stories' },
+            ].map(fw => (
+              <div key={fw.name} className="rounded-lg border p-4" style={{ borderColor: borderCol, background: bgDark }}>
+                <div className="font-semibold text-white mb-1">{fw.name}</div>
+                <div className="text-xs text-gray-400 mb-2">{fw.structure}</div>
+                <div className="text-xs font-medium" style={{ color: accent }}>Best for: {fw.best}</div>
+              </div>
             ))}
           </div>
         </div>
 
-        <div className="mt-16">
-          <h2 className="text-2xl font-semibold text-gray-100 mb-6">Related Pages</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {relatedPages.map((page, idx) => (
-              <Link
-                key={idx}
-                href={page.href}
-                className="block px-4 py-3 bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg hover:border-indigo-500/50 hover:bg-[#1a1a1a] transition-colors text-indigo-400"
-              >
-                {page.title}
-              </Link>
+        {/* Prompt Formula */}
+        <div className="mb-12 rounded-lg border p-6" style={{ borderColor: borderCol, background: bgDark }}>
+          <h2 className="text-lg font-bold text-white mb-1">Story Generator Prompt Formula</h2>
+          <p className="text-gray-400 text-sm mb-4">Use this template for consistently strong AI story generation results.</p>
+          <pre className="text-sm leading-relaxed font-mono p-4 rounded-lg overflow-x-auto" style={{ background: '#08030f', color: '#8B5CF6' }}>{`[GENRE] + [TONE/ATMOSPHERE]
+[PROTAGONIST]: [NAME], wants [DESIRE], fears [FEAR], flaw: [FATAL FLAW]
+[ANTAGONIST or OBSTACLE]: what blocks the protagonist and why
+[SETTING]: [SPECIFIC PLACE + TIME + ATMOSPHERE]
+[CENTRAL CONFLICT]: protagonist wants X but Y stands in the way
+[EMOTIONAL CORE]: what universal human experience does this explore?
+[STORY STRUCTURE]: which framework to follow (3-Act, Hero's Journey, etc.)
+[STYLE REFERENCE]: write in the style of [AUTHOR] or with the feel of [FILM/BOOK]
+[SPECIFIC SCENE]: if generating a scene, describe its exact position in the story
+[WORD COUNT]: [SHORT — 500 words / MEDIUM — 1500 words / CHAPTER — 3000 words]
+
+Example:
+"Dark fantasy, Gothic tone. Protagonist: Mara, wants to resurrect her sister,
+fears she has already become the monster she hunts. Setting: a fog-bound
+harbour city in an industrial age. Conflict: the ritual requires a life.
+Emotional core: grief and the refusal to let go. 3-Act structure.
+Style: V.E. Schwab meets Sarah Waters. Opening scene, 800 words."`}</pre>
+        </div>
+
+        {/* FAQ */}
+        <div className="mb-12">
+          <h2 className="text-xl font-bold text-white mb-5">Frequently Asked Questions</h2>
+          <div className="flex flex-col gap-3">
+            {faqs.map(item => <FAQ key={item.question} item={item} />)}
+          </div>
+        </div>
+
+        {/* Related Pages */}
+        <div>
+          <h2 className="text-lg font-bold text-white mb-4">Related Prompt Guides</h2>
+          <div className="flex flex-wrap gap-2">
+            {[
+              { label: 'AI Text Generator Prompts', href: '/ai-text-generator-prompts' },
+              { label: 'AI Music Generator Prompts', href: '/ai-music-generator-prompts' },
+              { label: 'Perchance AI Prompts', href: '/perchance-ai-prompts' },
+              { label: 'ChatGPT Prompts Content Writing', href: '/chatgpt-prompts-content-writing' },
+              { label: 'AI Prompts for Education', href: '/ai-prompts-for-education' },
+              { label: 'Luma AI Prompts', href: '/luma-ai-prompts' },
+              { label: 'Ideogram AI Prompts', href: '/ideogram-ai-prompts' },
+              { label: 'Bing AI Image Generator Prompts', href: '/bing-ai-image-generator-prompts' },
+            ].map(link => (
+              <a key={link.href} href={link.href} className="text-sm px-3 py-1.5 rounded-full border transition-colors" style={{ borderColor: borderCol, color: '#9ca3af' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = `${accent}50`; (e.currentTarget as HTMLAnchorElement).style.color = accent; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.borderColor = borderCol; (e.currentTarget as HTMLAnchorElement).style.color = '#9ca3af'; }}>
+                {link.label}
+              </a>
             ))}
           </div>
         </div>
+
       </div>
     </div>
   );
-};
-
-export default AIStoryGeneratorPage;
+}
